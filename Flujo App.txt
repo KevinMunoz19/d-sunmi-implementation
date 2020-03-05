@@ -1,0 +1,22 @@
+Se carga el view Init.js
+Al presionar el boton "Ingresar a la Aplicacion" de invoca la accion login (view Login.js)
+En login.js al presionar el boton "Iniciar Sesion" se invoca el onPress Handler handlerSend
+La constante login utiliza utils/useApi.js
+  Si la respuesta es nula, se despliega mensaje "error de peticion"
+  Si la respuesta no es nula, se realiza otra comparacion
+    Si el codigo de respuesta en null, se crea el usuario con funcion setUser(de useUser.js).
+      Si el parametro userInfo.contact_name es null, se invoca la accion welcome, (1)
+      Si el parametro userInfo.confirm_contract es null, se invoca la accion contract, (2)
+      En otro caso, se invoca la accion home. (3)
+    Si el codigo de respuesta es distinto de null, se despliega mensaje "Usuario o Clave Invalida"
+
+
+(1) Welcome (pantalla con mensaje de inicio, boton "comenzar")
+Si el ususario es null, invocar accion Login
+Si users.contact_name es igual a null, cambiar la propiedad setLogin a false
+Si users.confirm_contract es igual a null, invocar la accion contract
+En otro caso, invocar la accion home
+Si se presiona el boton "Comenzar", se invoca el onPress Handler, invocando la accion firstTimeForm
+
+
+Boton de pago con tarjeta se gener en archivo Dte.js

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/@react-native-community/async-storage/android/@react-native-community_async-storage.iml" filepath="$PROJECT_DIR$/../node_modules/@react-native-community/async-storage/android/@react-native-community_async-storage.iml" group="digifactBeta/@react-native-community_async-storage" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="digifactBeta/app" />
+      <module fileurl="file://$PROJECT_DIR$/digifactBeta.iml" filepath="$PROJECT_DIR$/digifactBeta.iml" group="digifactBeta" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-document-picker/android/react-native-document-picker.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-document-picker/android/react-native-document-picker.iml" group="digifactBeta/react-native-document-picker" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-image-picker/android/react-native-image-picker.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-image-picker/android/react-native-image-picker.iml" group="digifactBeta/react-native-image-picker" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-pdf/android/react-native-pdf.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-pdf/android/react-native-pdf.iml" group="digifactBeta/react-native-pdf" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-sqlite-storage/platforms/android/react-native-sqlite-storage.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-sqlite-storage/platforms/android/react-native-sqlite-storage.iml" group="digifactBeta/react-native-sqlite-storage" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-vector-icons/android/react-native-vector-icons.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android/react-native-vector-icons.iml" group="digifactBeta/react-native-vector-icons" />
+      <module fileurl="file://$PROJECT_DIR$/../node_modules/rn-fetch-blob/android/rn-fetch-blob.iml" filepath="$PROJECT_DIR$/../node_modules/rn-fetch-blob/android/rn-fetch-blob.iml" group="digifactBeta/rn-fetch-blob" />
+    </modules>
+  </component>
+</project>

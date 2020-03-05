@@ -1,0 +1,7 @@
+
+
+Dte.js
+  invokes
+    generateString(products,client,cf,iva,email,user, res, err) on useDte.js
+    invokes sendBill (xmlString,nit,token,res, err)
+      invokes saveDTte
