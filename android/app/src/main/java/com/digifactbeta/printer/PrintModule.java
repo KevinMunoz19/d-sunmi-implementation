@@ -13,6 +13,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
+
 //import com.digifact.printer.model.Cupon;
 //import com.digifact.printer.model.EncabezadoItem;
 //import com.digifact.printer.model.FooterItem;
@@ -51,6 +52,10 @@ public class PrintModule extends ReactContextBaseJavaModule{
             0xffff, 0xfeff, 0xfdff, 0xfcff, 0xfbff, 0xfaff};
 
     private int[] width;
+    private int[] widthTitles;
+    private int[] widthDouble;
+    private int[] widthItems;
+    private int[] widthSeparation;
     private int[] align;
 
 
@@ -117,10 +122,15 @@ public class PrintModule extends ReactContextBaseJavaModule{
     //public void print(String response) {
     public void print(String response, String usuario, String items) {
 
-        Bitmap logo = BitmapFactory.decodeResource(getReactApplicationContext().getResources(),R.drawable.qrcode);
+        //Bitmap logo = BitmapFactory.decodeResource(getReactApplicationContext().getResources(),R.drawable.qrcode);
         if (woyouService != null) {
             width = new int[]{22, 32, 19, 27};
+            widthTitles = new int[]{10, 80, 5, 5};
             align = new int[]{0, 0, 0, 2};
+            widthDouble = new int[]{5, 75, 10, 10};
+            widthSeparation = new int[]{25, 25, 25, 25};
+            widthItems =  new int[]{15, 30, 40, 15};
+            //new int[]{25, 56, 14, 5}
 
 
             try {
@@ -148,7 +158,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
                     JSONObject newobjectusuario = new JSONObject(jsonstringusuario);
                     JSONObject newobjectitems = new JSONObject(jsonstringitems);
 
-
+                    //String statusDocumento = newobject.getString("status");
 
                     // String vars to store data from json object related to document emitter
                     String nombreComercio = newobjectusuario.getString("name");
@@ -163,11 +173,12 @@ public class PrintModule extends ReactContextBaseJavaModule{
                     String numeroSerie = newobject.getString("serie");
                     String numeroTotal = newobject.getString("amount");
                     String fechaEmision = newobject.getString("date");
+                    String strDatosCliente = "Datos Cliente";
                     String nitCliente = newobject.getString("receiver_nit");
-                    //String statusDocumento = newobject.getString("status");
+
                     String nombreCliente = newobject.getString("receiver_name");
                     // String vars to store data from json object related to items
-                    //String nombreItems = newobjectitems.getString("price");
+                    String strDetalleVenta = "Detalle Venta";
                     // String vars to store data from json object related to certifier
                     String nombreCertificador = "Cyber Espacio";
                     String nombreCertificador2 = "Sociedad Anonima";
@@ -177,51 +188,63 @@ public class PrintModule extends ReactContextBaseJavaModule{
                     //woyouService.printBitmap(logo,null);
                     woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
                     woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
-
                     woyouService.sendRAWData(boldOff(), null);
-                    woyouService.printColumnsString(new String[]{" ",nombreComercio , " ", " "},new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"",direccionComercio , "", ""}, new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","NIT: "+nitComercio, "", ""}, new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","Telefono: "+telefonoComercio, "", ""}, new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{" ",nombreComercio , " ", " "},widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"",direccionComercio , "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"","NIT: "+nitComercio, "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    //woyouService.printColumnsString(new String[]{"","Telefono: "+telefonoComercio, "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.sendRAWData(boldOn(), null);
+                    woyouService.printColumnsString(new String[]{"---------","---------" , "---------", "---------"}, widthSeparation, align, null);
                     woyouService.printColumnsString(new String[]{"",tipoDocumentoTributario , "", ""}, new int[]{25, 56, 14, 5}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"",strFactura , "", ""}, new int[]{20, 65, 5, 15}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","Serie: "+numeroSerie , "", ""}, new int[]{20, 50, 20, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","Numero: "+numeroDocumento , "", ""}, new int[]{20, 50, 20, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","No. Autorizacion:","", ""}, new int[]{20, 50, 20, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"",numeroAutorizacion , "", ""}, new int[]{20, 60, 10, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","Fecha Emision: ", "", ""}, new int[]{20, 60, 10, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"",fechaEmision , "", ""}, new int[]{20, 60, 10, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
-                    woyouService.printColumnsString(new String[]{"","Nombre: "+nombreCliente , "", ""}, new int[]{20, 50, 20, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","NIT: "+nitCliente , "", ""}, new int[]{20, 50, 20, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","Total Compra: Q"+numeroTotal , "", ""}, new int[]{20, 50, 20, 10}, new int[]{0, 0, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
-                    woyouService.printColumnsString(new String[]{" ","Datos Certificador" , " ", " "},new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{" ",nombreCertificador , " ", " "},new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{" ",nombreCertificador2 , " ", " "},new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{" ","NIT: "+nitCertificador , " ", " "},new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"",direccionCertificador , "", ""}, new int[]{20, 65, 5, 10}, new int[]{0, 1, 0, 0}, null);
-                    woyouService.printColumnsString(new String[]{"","Cantidad" , "Descripcion", "Precio"}, new int[]{5, 32, 43, 20}, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"---------","---------" , "---------", "---------"}, widthSeparation, align, null);
+                    woyouService.printColumnsString(new String[]{"",strFactura , "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.sendRAWData(boldOff(), null);
+                    woyouService.printColumnsString(new String[]{"","Serie: "+numeroSerie , "", ""}, widthDouble, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"","Numero: "+numeroDocumento , "", ""}, widthDouble, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"","No. Autorizacion:","", ""}, widthDouble, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"",numeroAutorizacion , "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"","Fecha Emision: ", "", ""}, widthDouble, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"",fechaEmision , "", ""}, widthTitles, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"---------","---------" , "---------", "---------"}, widthSeparation, align, null);
+                    woyouService.sendRAWData(boldOn(), null);
+                    woyouService.printColumnsString(new String[]{"",strDatosCliente , "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.sendRAWData(boldOff(), null);
+                    woyouService.printColumnsString(new String[]{"","Nombre: "+nombreCliente , "", ""}, widthDouble, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"","NIT: "+nitCliente , "", ""}, widthDouble, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"---------","---------" , "---------", "---------"}, widthSeparation, align, null);
+                    woyouService.sendRAWData(boldOn(), null);
+                    woyouService.printColumnsString(new String[]{"",strDetalleVenta , "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.sendRAWData(boldOff(), null);
+                    //woyouService.printColumnsString(new String[]{"","Cantidad" , "Descripcion", "Precio"}, new int[]{5, 32, 43, 20}, new int[]{0, 0, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"Cant." , "Desc.", "SubTotal","Total"}, widthItems, new int[]{0, 0, 0, 0}, null);
+
                     for (int i=0; i < strs.length; i++) {
                         if (strs[i] != null && strs[i].length() > 0 && strs[i].charAt(strs[i].length() - 1) == ',') {
                             strs[i] = strs[i].substring(0,strs[i].length() - 1);
                         }
-
-
                         JSONObject item = new JSONObject(strs[i]);
                         String precioItem = item.getString("price");
                         String nombreItem = item.getString("name");
                         String cantidadItem = item.getString("quantity");
-
-
-
-                        woyouService.printColumnsString(new String[]{"",cantidadItem , nombreItem, "Q"+precioItem }, new int[]{5, 32, 43, 20}, new int[]{0, 0, 0, 1}, null);
+                        int precio = Integer.parseInt(precioItem);
+                        int cantidad = Integer.parseInt(cantidadItem);
+                        int precioTotal = precio * cantidad;
+                        String subTotal = String.valueOf(precioTotal);
+                        woyouService.printColumnsString(new String[]{cantidadItem , nombreItem, "Q"+precioItem ,"Q"+subTotal}, widthItems, new int[]{1, 0, 1, 1}, null);
                     }
-
+                    woyouService.printColumnsString(new String[]{"","" , "Total Compra: ", "Q"+numeroTotal}, widthItems, new int[]{0, 0, 0, 1}, null);
+                    woyouService.printColumnsString(new String[]{"---------","---------" , "---------", "---------"}, widthSeparation, align, null);
+                    woyouService.sendRAWData(boldOn(), null);
+                    woyouService.printColumnsString(new String[]{" ","Datos Certificador" , " ", " "},widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.sendRAWData(boldOff(), null);
+                    woyouService.printColumnsString(new String[]{" ",nombreCertificador , " ", " "},widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{" ",nombreCertificador2 , " ", " "},widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{" ","NIT: "+nitCertificador , " ", " "},widthTitles, new int[]{0, 1, 0, 0}, null);
+                    woyouService.printColumnsString(new String[]{"",direccionCertificador , "", ""}, widthTitles, new int[]{0, 1, 0, 0}, null);
                     woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
-                    //woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
-                    //woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
-                    //woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
+                    woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
+                    woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
+                    woyouService.printColumnsString(new String[]{" "," " , "", ""}, width, align, null);
 
                 }
                 catch (JSONException err){

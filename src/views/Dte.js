@@ -84,17 +84,19 @@ const Dte = () =>{
 	const [pdfSource,setPdfSource] = useState(null);
 	const [loading,setLoading] = useState(false);
 
+
+
+
+	const [visibleButton,setVisibleButton] = useState(false);
+
+
+
+	const [userSend,setUserSend] = useState();
+	const [productsSend,setProductsSend] = useState([]);
+
 	const {select} = DB();
-
-	//const {getLastDte} = useLastDte();
 	const [documento,setDocumento] = useState([]);
-
-	//const [dteList,setDteList] = useState([]);
-
 	const {getBill} = useApi();
-
-
-
 
 
 	const radioProps = [
@@ -106,17 +108,6 @@ const Dte = () =>{
 		{label:'12%  ',value:12},
 		{label:'Exento',value:0}
 	]
-
-
-
-	useEffect(()=>{
-			var query = `select * from dte where id=(select max(id) from dte)`;
-			select(query,[],(ldoc)=>{
-					setDocumento(ldoc);
-			})
-	})
-
-
 
 
 
@@ -150,6 +141,8 @@ const Dte = () =>{
 		setNit(client.nit);
 		setClient(client);
 	}
+
+
 
 
 	const findClient = (nit)=>{
@@ -194,6 +187,7 @@ const Dte = () =>{
 
 	const onGenerate = ()=>{
 		setLoading(true);
+
 		if (user) {
 			if (email.trim().length > 0 ? validateEmail(email) : true){
 				if (products.length > 0) {
@@ -207,6 +201,8 @@ const Dte = () =>{
 								setLoading(false);
 								Alert.alert(`Ocurrio un error generando el documento, por favor intete luego`);
 							});
+							setProductsSend(products);
+							setUserSend(user);
 						}else{
 							setLoading(false);
 							Alert.alert('Verifica los datos!', 'El iva debe ser 0 o 12%.');
@@ -235,8 +231,19 @@ const Dte = () =>{
 
 	const onClosePdf = ()=>{
 		setPdfModalVisible(false);
+		var query = `select * from dte where id=(select max(id) from dte)`;
+		select(query,[],(ldoc)=>{
+				setDocumento(ldoc);
+		})
+
+		setVisibleButton(true);
 
 		//Actions.home();
+	}
+
+	const onPrint = () => {
+		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend));
+		Actions.home();
 	}
 
 
@@ -471,14 +478,14 @@ const Dte = () =>{
 
 
 
-					<View style={styles.generateBillButtonContainer}>
-						<TouchableOpacity
-						onPress={ () =>{
-							//onGenerate
-							Linking.openURL('app://digifact')
-							//Linking.sendIntent('text':"hello world")
 
-						}}
+
+
+
+					<View style={styles.generateBillButtonContainer}>
+					{visibleButton &&
+						<TouchableOpacity
+							onPress={onPrint}
 							style={styles.actionButton}>
 							<Icon
 								name="add"
@@ -486,22 +493,11 @@ const Dte = () =>{
 								size={50}
 								style={styles.icon}
 							/>
-							<Text >Pago Con Tarjeta</Text>
+							<Text >Imprimir Factura</Text>
 						</TouchableOpacity>
+					}
 					</View>
 
-
-					<View>
-						<Sw style = {styles.javaBtn} isTurnedOn={true} />
-					</View>
-
-					<View>
-						<Button
-							
-            	onPress={() => printer.print(JSON.stringify(documento),JSON.stringify(user),JSON.stringify(products))}
-            	title='Start example activity'
-          	/>
-					</View>
 
 				</View>
 			</ScrollView>
