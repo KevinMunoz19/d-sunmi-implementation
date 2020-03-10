@@ -41,7 +41,6 @@ const useApi = ()=>{
             }
         }).then(response=>{
             console.log("login old response");
-            console.log(response)
             return response.json();
         }).then(response=>{
             res();
@@ -208,14 +207,142 @@ const useApi = ()=>{
         })
     }
 
+    const getRequestor = (nit, name, cb, requestor, rej)=>{
+      console.log("requestor entry");
+        loginOld({username:null,password:null},()=>{
+            fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+                method:'POST',
+                body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                      xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soap:Body>
+                          <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                            <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                            <Transaction>EXEC_STORED_PROC</Transaction>
+                            <Country>GT</Country>
+                            <Entity>000000123456</Entity>
+                            <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                            <UserName>GT.0000001234565.RESTLET</UserName>
+                            <Data1>Account_Status_1</Data1>
+                            <Data2>000035355913</Data2>
+                            <Data3></Data3>
+                          </RequestTransaction>
+                        </soap:Body>
+                      </soap:Envelope>`,
+                headers: {
+                    'Content-Type': 'text/xml',
+                }
+            }).then(response => response.text())
+            .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+            .then(data => {
+                if( data.getElementsByTagName("ResponseData1")[0].firstChild.data ==1) {
+                    cb(data.getElementsByTagName("TaxID")[0].firstChild.data);
+                    name(data.getElementsByTagName("Name")[0].firstChild.data);
+                    requestor(data.getElementsByTagName("RequestorGUID")[0].firstChild.data);
+                    console.log("requestor response successfull");
+                    console.log(cb);
+                    console.log(name);
+                    console.log(requestor);
+                }else{
+                    rej('No se Puede Obtener el Requestor');
+                }
+                console.log("requestor response");
+
+            })
+            .catch(err=>{
+                console.log(err);
+                rej(500);
+            })
+        })
+    }
+
+
+    const getInfo = (nit, name, calle, direccion, zona,frases,afiliacion,zipcode, rej)=>{
+      console.log("info entry");
+        loginOld({username:null,password:null},()=>{
+            fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+                method:'POST',
+                body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                      xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soap:Body>
+                          <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                            <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                            <Transaction>EXEC_STORED_PROC</Transaction>
+                            <Country>GT</Country>
+                            <Entity>000000123456</Entity>
+                            <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                            <UserName>GT.000000123456.RESTLET</UserName>
+                            <Data1>PLANILLACC_GetInfoFiscalFELFORM</Data1>
+                            <Data2>NIT|${nit}</Data2>
+                            <Data3></Data3>
+                          </RequestTransaction>
+                        </soap:Body>
+                      </soap:Envelope>`,
+                headers: {
+                    'Content-Type': 'text/xml',
+                }
+            }).then(response => response.text())
+            .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+            .then(data => {
+                if( data.getElementsByTagName("ResponseData1")[0].firstChild.data ==1) {
+                    name(data.getElementsByTagName("Nom")[0].firstChild.data);
+                    calle(data.getElementsByTagName("Ca")[0].firstChild.data);
+                    direccion(data.getElementsByTagName("NC")[0].firstChild.data);
+                    zona(data.getElementsByTagName("zon")[0].firstChild.data);
+                    frases(data.getElementsByTagName("FRASES")[0].firstChild.data);
+                    //frases(data.getElementsByTagName("FRASES")[0].firstChild.data);
+                    afiliacion(data.getElementsByTagName("AfiliacionIVA")[0].firstChild.data);
+                    zipcode(data.getElementsByTagName("ESTCODPOSTAL")[0].firstChild.data);
+                    //console.log("info response successfull");
+                }else{
+                    rej('No se Puede Obtener info de el emisor');
+                }
+                //console.log("info response");
+
+            })
+            .catch(err=>{
+                console.log(err);
+                rej(500);
+            })
+        })
+    }
+
+
+
+    function PadLeft(value, length) {
+			return (value.toString().length < length) ? PadLeft("0" + value, length) :
+			value;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return {
        login,
        sendBill,
        getBill,
        validateNit,
+       getRequestor,
        //validateNitNuevo,
-       cancelBill
+       cancelBill,
+       getInfo
 	};
 }
 

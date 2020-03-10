@@ -23,11 +23,30 @@ import IosHeader from '../components/IosHeader';
 
 const Client = ({id,client,action,onSelect}) =>{
 	const {inputs,setInputs, handleInputChange, handleSubmit} = useClientForm();
-	const {validateNit} = useApi();
+	const {validateNit, getRequestor, getInfo} = useApi();
 	const [nit,setNit] = useState();
 	const [isNit,setIsNit]=useState(false);
 	const [loading,setLoading]=useState(false);
 	const [kValue,setKValue] = useState(false);
+
+
+
+	const [requestor,setRequestor] = useState('');
+	const [taxId,setTaxId] = useState('');
+
+	const [calle,setCalle] = useState('');
+	const [direccion,setDireccion] = useState('');
+	const [colonia,setColonia] = useState('');
+	const [zona,setZona] = useState('');
+	const [frases,setFrases] = useState('');
+	const [afiliacion,setAfiliacion] = useState('');
+
+	const [nn,setNn] = useState('');
+
+
+
+
+
 
 
 
@@ -78,6 +97,9 @@ const Client = ({id,client,action,onSelect}) =>{
 			}
 			setLoading(false);
 		});
+
+
+
 	}
 
 

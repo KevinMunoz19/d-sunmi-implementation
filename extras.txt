@@ -1,0 +1,186 @@
+getInfoIssuer(taxId, requestor, (c)=>{
+  setCalle(c.toString())
+}, (d)=>{
+  setDireccion(d.toString());
+},
+(col)=>{
+  setColonia(col.toString());
+},
+(zon)=>{
+  setZona(zon.toString());
+},
+(fr)=>{
+  setFrases(fr.toString());
+},
+(af)=>{
+  setAfiliacion(af.toString());
+},
+(err)=>{
+  handleInputChange('name',err);
+  if(err==200){
+    Alert.alert('Error de conexion');
+  }else{
+    Alert.alert(err);
+  }
+  setLoading(false);
+});
+
+
+
+getRequestor(nit,(name)=>{
+  setLoading(false);
+  handleInputChange('name',name.toString());
+  setNn(name.toString());
+  //handleInputChange('name',name);
+  setIsNit(true);
+}, (tax)=>{
+  setTaxId(tax.toString());
+},
+(req)=>{
+  setRequestor(req.toString());
+}, (err)=>{
+  handleInputChange('name',err);
+  if(err==200){
+    Alert.alert('Error de conexion');
+  }else{
+    Alert.alert(err);
+  }
+  setLoading(false);
+});
+
+
+
+
+
+
+
+
+getInfo(nit, (c)=>{
+  setCalle(c.toString())
+}, (d)=>{
+  setDireccion(d.toString());
+},
+(col)=>{
+  setColonia(col.toString());
+},
+(zon)=>{
+  setZona(zon.toString());
+},
+(fr)=>{
+  setFrases(fr.toString());
+},
+(af)=>{
+  setAfiliacion(af.toString());
+},
+(err)=>{
+  handleInputChange('name',err);
+  if(err==200){
+    Alert.alert('Error de conexion');
+  }else{
+    Alert.alert(err);
+  }
+  setLoading(false);
+});
+
+
+const getInfo = (nit, calle, rej)=>{
+//const getInfo = (nit, calle, direccion, colonia, zona, frases, afiliacioniva, rej)=>{
+  //${PadLeft(nit,12)}
+  console.log("info issuer entry");
+    loginOld({username:null,password:null},()=>{
+        fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+        //fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            method:'POST',
+            body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                    <soap:Body>
+                      <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                        <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                        <Transaction>EXEC_STORED_PROC</Transaction>
+                        <Country>GT</Country>
+                        <Entity>000035355913</Entity>
+                        <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                        <UserName>GT.000035355913.RESTLET</UserName>
+                        <Data1>PLANILLACC_GetInfoFiscalFELFORM</Data1>
+                        <Data2>NIT|35355913</Data2>
+                        <Data3></Data3>
+                      </RequestTransaction>
+                    </soap:Body>
+                  </soap:Envelope>`,
+            headers: {
+                'Content-Type': 'text/xml',
+            }
+        }).then(response => response.text())
+        .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+        .then(data => {
+            if( data.getElementsByTagName("ResponseData1")[0].firstChild.data ==1) {
+                calle(data.getElementsByTagName("Ca")[0].firstChild.data);
+                //direccion(data.getElementsByTagName("NC")[0].firstChild.data);
+                //colonia(data.getElementsByTagName("col")[0].firstChild.data);
+                //zona(data.getElementsByTagName("zon")[0].firstChild.data);
+                //frases(data.getElementsByTagName("FRASES")[0].firstChild.data);
+                //afiliacioniva(data.getElementsByTagName("AfiliacionIVA")[0].firstChild.data);
+                console.log("issuer response successfull");
+                //console.log(calle);
+                //console.log(frases);
+                //console.log(colonia);
+            }else{
+                //rej('No se Puede Obtener el Requestor');
+            }
+            console.log("response end");
+
+        })
+        .catch(err=>{
+            console.log(err);
+            rej(500);
+        })
+    })
+}
+
+
+
+
+
+	useEffect(()=>{
+		getInfo(user.nit, (nom)=>{
+			setNn(nom.toString())
+		},(ca)=>{
+			setCalle(ca.toString())
+		},
+		(err)=>{
+			if(err==200){
+				Alert.alert('Error de conexion');
+			}else{
+				Alert.alert(err);
+			}
+		});
+
+		console.log('Cambio de user:', user);
+		console.log('Cambio de user:', user);
+	})
+
+
+
+
+
+  getRequestor(nit,(name)=>{
+    setLoading(false);
+    handleInputChange('name',name.toString());
+    setNn(name.toString());
+    //handleInputChange('name',name);
+    setIsNit(true);
+  }, (tax)=>{
+    setTaxId(tax.toString());
+  },
+  (req)=>{
+    setRequestor(req.toString());
+  }, (err)=>{
+    handleInputChange('name',err);
+    if(err==200){
+      Alert.alert('Error de conexion');
+    }else{
+      Alert.alert(err);
+    }
+    setLoading(false);
+  });

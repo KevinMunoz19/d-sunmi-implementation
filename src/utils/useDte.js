@@ -7,8 +7,23 @@ import DB from './DB';
 const useDte = (props) => {
     const [dteString,setDteString] = useState('');
     const [dte,setDte] = useState({});
-    const {sendBill,cancelBill} = useApi();
+    const {sendBill,cancelBill, getRequestor, getInfo} = useApi();
     const {insert} = DB();
+
+    const [requestor,setRequestor] = useState('');
+    const [taxId,setTaxId] = useState('');
+
+    //const [calle,setCalle] = useState('');
+    //const [direccion,setDireccion] = useState('');
+    const [colonia,setColonia] = useState('');
+    const [zona,setZona] = useState('');
+    const [frases,setFrases] = useState('');
+    const [afiliacion,setAfiliacion] = useState('');
+    //const [nn,setNn] = useState('');
+
+
+
+
 
 
     const cancelDte = (user,dteInfo,res,rej)=>{
@@ -39,16 +54,30 @@ const useDte = (props) => {
             rej(err)
         })
     }
-    const generateString = (products,client,cf,iva,email,user,res,rej)=>{
-        var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
 
-        var issueComercialName="TEST";
-        var issueName=user.name;
+
+
+
+    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, res,rej)=>{
+        var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
+
+
+        console.log("fetched data");
+        console.log(nn);
+        console.log(calle);
+        console.log(direccion);
+        console.log(zona);
+        console.log(frases);
+        console.log(afiliacion);
+        console.log(zipcode);
+        //var issueComercialName="TEST";
+        var issueName=user.name;
+
         var issueAddress="CALLE 101 CALLE";
         var issueZipCode=101;
-        var issueMunicipality="TEST";
-        var issueDepartment="TEST";
+        var issueMunicipality="Guatemala";
+        var issueDepartment="Guatemala";
         if(cf){
             var receiverName = 'CONSUMIDOR FINAL';
             var receiverNit = 'CF';
@@ -79,7 +108,7 @@ const useDte = (props) => {
                     <dte:DatosEmision ID="DatosEmision">
                         <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${new Date().toISOString()}" Tipo="FACT"/>
                         <dte:Emisor AfiliacionIVA="GEN"
-                            NombreComercial="${issueComercialName}"
+                            NombreComercial="${nn}"
                             CodigoEstablecimiento="1"
                             NombreEmisor="${issueName}"
                             NITEmisor="${issueNit}">

@@ -1406,7 +1406,6 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
-drawable credomaticprinter
 drawable default_scroll_handle_bottom
 drawable default_scroll_handle_left
 drawable default_scroll_handle_right
@@ -1461,7 +1460,6 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
-drawable qrcode
 drawable redbox_top_border_background
 drawable side_nav_bar
 drawable src_img_fel
@@ -1471,7 +1469,6 @@ drawable src_img_logo
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
-drawable xflogo
 id ALT
 id BOTTOM_END
 id BOTTOM_START

@@ -74,18 +74,27 @@ const Dte = () =>{
 	const [isNit,setIsNit] = useState(false);
 	const [pdfSource,setPdfSource] = useState(null);
 	const [loading,setLoading] = useState(false);
-
-
-
 	const [nombretemporal,setNombreTemporal] = useState('');
 	const [nitTemporal,setNitTemporal] = useState('');
-
 	const [visibleButton,setVisibleButton] = useState(false);
 	const [userSend,setUserSend] = useState();
 	const [productsSend,setProductsSend] = useState([]);
 	const {select} = DB();
 	const [documento,setDocumento] = useState([]);
-	const {getBill} = useApi();
+	const {getBill, getInfo} = useApi();
+
+
+	const [nn,setNn] = useState('');
+	const [calle,setCalle] = useState('');
+	const [direccion,setDireccion] = useState('');
+	const [zona,setZona] = useState('');
+	const [frases,setFrases] = useState('');
+	const [afiliacion,setAfiliacion] = useState('');
+	const [zipc,setZipc] = useState('');
+
+
+
+
 
 
 	const radioProps = [
@@ -104,6 +113,7 @@ const Dte = () =>{
 		generateTotals(products,iva,setTotal,setSubTotal)
 	},[products,iva])
 
+
 	useEffect(()=>{
 		if(pdfSource != null){
 			setLoading(false);
@@ -118,8 +128,10 @@ const Dte = () =>{
 	},[])
 
 	useEffect(()=>{
-		console.log('Cambio de user:', user);
+		console.log('Cambio de user:');
+		//console.log('Cambio de user:', user);
 	},[user])
+
 
 	const onClientSelect = (client)=>{
 		setTimeout(()=>{
@@ -157,6 +169,36 @@ const Dte = () =>{
 			if(productModalVisible) setProductModalVisible(false);
 		},500)
 		setProducts([...products,product]);
+		var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+
+		getInfo(newnitfetch, (nom)=>{
+			setNn(nom.toString())
+		},(ca)=>{
+			setCalle(ca.toString())
+		},
+		(dir)=>{
+			setDireccion(dir.toString())
+		},
+		(zon)=>{
+			setZona(zon.toString())
+		},
+		(fr)=>{
+			setFrases(fr.toString())
+		},
+		(af)=>{
+			setAfiliacion(af.toString())
+		},
+		(zpc)=>{
+			setZipc(zpc.toString())
+		},
+		(err)=>{
+			if(err==200){
+				Alert.alert('Error de conexion');
+			}else{
+				Alert.alert(err);
+			}
+		});
+
 	}
 
 	const onProductRemove = (productToRemove)=>{
@@ -175,12 +217,13 @@ const Dte = () =>{
 
 	const onGenerate = ()=>{
 		setLoading(true);
+
 		if (user) {
 			if (email.trim().length > 0 ? validateEmail(email) : true){
 				if (products.length > 0) {
 					if((!cf && client.nit.trim().length > 0) || cf) {
 						if(iva == 0 || iva == 12){
-							generateString(products,client,cf,iva,email,user,(res)=>{
+							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, (res)=>{
 								console.log('res ->',res)
 								setPdfSource(res);
 							},(err)=>{

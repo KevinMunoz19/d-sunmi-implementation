@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     menuBodyContainer:{
-        width:'90%',
-        height:'60%',
+        width:'100%',
+        height:'75%',
         flexDirection:'column',
         backgroundColor:'rgb(119,211,83)',
         justifyContent: 'space-around'
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     sectionTouch:{
         marginTop:'6%',
         backgroundColor:'rgba(119,211,83,0.5)',
-        width:'80%',
+        width:'100%',
         height:'12%',
         flexDirection:'row',
         alignItems:'center'
@@ -190,5 +190,7 @@ const styles = StyleSheet.create({
     }
 
 });
+
+
 
 export default Home;
