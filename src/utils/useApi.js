@@ -301,7 +301,6 @@ const useApi = ()=>{
                     rej('No se Puede Obtener info de el emisor');
                 }
                 //console.log("info response");
-
             })
             .catch(err=>{
                 console.log(err);
