@@ -19,7 +19,6 @@ const DteOptions = ({
     onResendDte,
     onCloseModal,
     dteStatus,
-    //onImprimirDte,
 }) => {
     return(
         <View style={styles.container}>
@@ -41,10 +40,6 @@ const DteOptions = ({
             <TouchableOpacity  onPress={()=>onCloseModal()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>Cerrar</Text>
             </TouchableOpacity>
-            //<TouchableOpacity onPress={()=>onImprimirDte()}  style={styles.sectionTouch}>
-                //<Text style={styles.sectionTouchText}>Imprimir Documento</Text>
-            //</TouchableOpacity>
-
             </Modal>
         </View>
     )

@@ -5,11 +5,12 @@ import { Global } from '@jest/types';
 const  DOMParser = require('xmldom').DOMParser;
 delete Global.XMLHttpRequest;
 const useApi = ()=>{
-    
+
     const login = (body,res,rej)=>{
         loginOld(body,()=>{
             console.log(body);
-            fetch('https://felgttestaws.digifact.com.gt/felapi/api/login/get_token',{
+            fetch('https://felgtaws.digifact.com.gt/felapi/api/login/get_token',{
+            //fetch('https://felgttestaws.digifact.com.gt/felapi/api/login/get_token',{
                 method:'POST',
                 body:JSON.stringify(body),
                 headers: {
@@ -18,24 +19,29 @@ const useApi = ()=>{
             }).then(response=>{
                 return response.json();
             }).then(response=>{
-                console.log(` useDte res`,response);	
+                console.log(` useDte res`,response);
                 res(response);
             }).catch(err=>{
-                console.log(` useDte rej`,err);	
+                console.log(` useDte rej`,err);
                 rej(err)
             })
         })
-        
     }
 
+
     const loginOld = (body,res) =>{
+      console.log("Entrada a login old")
+        //return fetch('https://felgtaws.digifact.com.gt/felapi/api/login/get_token',{
         return fetch('https://felgttest.digifact.com.gt/gt.com.fact.felapi/api/login/get_token',{
+
             method:'POST',
             body:JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
             }
         }).then(response=>{
+            console.log("login old response");
+            console.log(response)
             return response.json();
         }).then(response=>{
             res();
@@ -46,7 +52,8 @@ const useApi = ()=>{
 
     const sendBill = (body,nit,token,res,rej)=>{
         loginOld({username:null,password:null},()=>{
-            fetch(`https://felgttestaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=CERTIFICATE_DTE_XML_TOSIGN&FORMAT=PDF XML`,{
+          fetch(`https://felgtaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=CERTIFICATE_DTE_XML_TOSIGN&FORMAT=PDF XML`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=CERTIFICATE_DTE_XML_TOSIGN&FORMAT=PDF XML`,{
                 method:'POST',
                 body:body,
                 headers: {
@@ -61,17 +68,17 @@ const useApi = ()=>{
                 console.log(response)
                 if(response.Codigo==1)res(response);
                 else rej('Ocurrio un error generando el documento')
-                
+
             }).catch(err=>{
                 console.log('sendBill',err);
                 rej(err);
             })
         })
-        
     }
     const cancelBill = (token,nit,id,body,res,rej)=>{
-        loginOld({username:null,password:null},()=>{  
-            fetch(`https://felgttestaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=ANULAR_FEL_TOSIGN&FORMAT=PDF`,{
+        loginOld({username:null,password:null},()=>{
+            fetch(`https://felgtaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=ANULAR_FEL_TOSIGN&FORMAT=PDF`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=ANULAR_FEL_TOSIGN&FORMAT=PDF`,{
                 method:'POST',
                 body:body,
                 headers: {
@@ -85,17 +92,18 @@ const useApi = ()=>{
             }).then(response=>{
                 console.log(response)
                 if(response.Codigo==1)res(response);
-                else rej('Ocurrion un error anulando el documento')   
+                else rej('Ocurrion un error anulando el documento')
             }).catch(err=>{
                 console.log('sendBill',err);
                 rej(err);
-            }) 
+            })
         })
-        
+
     }
     const getBill = (token,nit,id,res,rej)=>{
-        loginOld({username:null,password:null},()=>{  
-            fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
+        loginOld({username:null,password:null},()=>{
+          fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
                 method:'GET',
                 headers:{
                     'Authorization':token
@@ -117,8 +125,9 @@ const useApi = ()=>{
     }
 
     const getBillBack = (id,res,rej)=>{
-        loginOld({username:null,password:null},()=>{        
-            fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+        loginOld({username:null,password:null},()=>{
+          fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
                 method:'POST',
                 body:`<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -158,8 +167,11 @@ const useApi = ()=>{
     }
 
     const validateNit = (nit,cb,rej)=>{
+      console.log(nit);
+      console.log(typeof nit)
         loginOld({username:null,password:null},()=>{
-            fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
                 method:'POST',
                 body:`<?xml version="1.0" encoding="utf-8"?>
                 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -172,7 +184,7 @@ const useApi = ()=>{
                     <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
                     <UserName>GT.000000123456.admon</UserName>
                     <Data1>GetAllDestinatariesLike</Data1>
-                    <Data2>GT|123456|${nit}|</Data2>
+                    <Data2>GT|123456|${nit}|</Data2>\
                     <Data3></Data3>
                     </RequestTransaction>
                 </soap:Body>
@@ -183,7 +195,6 @@ const useApi = ()=>{
             }).then(response => response.text())
             .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
             .then(data => {
-                console.log(data);
                 if( data.getElementsByTagName("ResponseData1")[0].firstChild.data ==1) {
                     cb(data.getElementsByTagName("N")[0].firstChild.data);
                 }else{
@@ -193,15 +204,17 @@ const useApi = ()=>{
             .catch(err=>{
                 console.log(err);
                 rej(500);
-            }) 
+            })
         })
-        
     }
+
+
     return {
        login,
        sendBill,
        getBill,
        validateNit,
+       //validateNitNuevo,
        cancelBill
 	};
 }

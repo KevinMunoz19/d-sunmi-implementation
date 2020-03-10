@@ -30,26 +30,26 @@ build(data);
 
 function build(data){
 	var items = buildItems(data.items);
-	var xmlString = 
+	var xmlString =
 	`
 	<?xml version='1.0' encoding='UTF-8'?>
 	<dte:GTDocumento xmlns:dte="http://www.sat.gob.gt/dte/fel/0.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="0.4">
 	    <dte:SAT ClaseDocumento="dte">
 	        <dte:DTE ID="DatosCertificados">
-	            <dte:DatosEmision ID="DatosEmision">               
-	                <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${data.issueDate}" Tipo="FACT"/>                               
-	                <dte:Emisor AfiliacionIVA="GEN" 
-	                    NombreComercial="${data.issueComercialName}" 
-	                    CodigoEstablecimiento="1" 
-	                    NombreEmisor="${data.issueName}" 
-	                    NITEmisor="${data.issueNit}">                                       
-	                    <dte:DireccionEmisor>                        
-	                        <dte:Direccion>${data.issueAddress}</dte:Direccion>                       
-	                        <dte:CodigoPostal>${data.issueZipCode}</dte:CodigoPostal>                        
-	                        <dte:Municipio>${data.issueMunicipality}</dte:Municipio>                        
-	                        <dte:Departamento>${data.issueDepartment}</dte:Departamento>                        
-	                        <dte:Pais>GT</dte:Pais>                        
-	                    </dte:DireccionEmisor>                    
+	            <dte:DatosEmision ID="DatosEmision">
+	                <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${data.issueDate}" Tipo="FACT"/>
+	                <dte:Emisor AfiliacionIVA="GEN"
+	                    NombreComercial="${data.issueComercialName}"
+	                    CodigoEstablecimiento="1"
+	                    NombreEmisor="${data.issueName}"
+	                    NITEmisor="${data.issueNit}">
+	                    <dte:DireccionEmisor>
+	                        <dte:Direccion>${data.issueAddress}</dte:Direccion>
+	                        <dte:CodigoPostal>${data.issueZipCode}</dte:CodigoPostal>
+	                        <dte:Municipio>${data.issueMunicipality}</dte:Municipio>
+	                        <dte:Departamento>${data.issueDepartment}</dte:Departamento>
+	                        <dte:Pais>GT</dte:Pais>
+	                    </dte:DireccionEmisor>
 	                </dte:Emisor>
 	                <dte:Receptor CorreoReceptor="${data.receiverEmail}"
 	                    NombreReceptor="${data.receiverName}" IDReceptor="${data.receiverNit}">
@@ -75,7 +75,7 @@ function build(data){
 	                </dte:Totales>
 	            </dte:DatosEmision>
 	        </dte:DTE>
-	    </dte:SAT>       
+	    </dte:SAT>
 	</dte:GTDocumento>
 	`;
 
@@ -118,6 +118,6 @@ function buildItems(items){
 	return {
 		itemsString,
 		totalAmount,
-		totalTaxAmount 
+		totalTaxAmount
 	}
 }

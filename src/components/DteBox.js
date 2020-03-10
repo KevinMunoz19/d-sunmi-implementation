@@ -27,8 +27,8 @@ import DteOptions from './DteOptions.component';
 
 
 
-const activityStarter = NativeModules.ActivityStarter;
-const eventEmitterModule = NativeModules.EventEmitter;
+//const activityStarter = NativeModules.ActivityStarter;
+//const eventEmitterModule = NativeModules.EventEmitter;
 
 
 
@@ -128,7 +128,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
 
-										//onImprimirDte = {onImprimirDte}
+
                 />
             }
             <View style={styles.valuesColumn}>

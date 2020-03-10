@@ -17,11 +17,7 @@ import {
 	Alert,
 	ButtonGroup,
 	Linking,
-
 	requireNativeComponent,
-
-
-
 	NativeModules,
 	NativeEventEmitter,
 
@@ -30,8 +26,6 @@ import {
 
 
 import AppLink from 'react-native-app-link';
-
-
 
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -49,20 +43,17 @@ import useLastDte from '../utils/useLastDte';
 import useClientForm from '../utils/useClientForm';
 import IosHeader from '../components/IosHeader';
 import DB from '../utils/DB';
-
 import SectionDivider from '../components/SectionDivider.component';
 import { validateEmail } from '../utils/emailValidator';
-
-
 const Sw = requireNativeComponent('Sw');
 const activityStarter = NativeModules.ActivityStarter;
 const eventEmitterModule = NativeModules.EventEmitter;
-
 const printer = NativeModules.PrintModule;
 
 
 const Dte = () =>{
 	const [cf,setCf] = useState(false);
+	const {inputs,setInputs, handleInputChange, handleSubmit} = useClientForm();
 	const [clientModalVisible,setClientModalVisible] = useState(false);
 	const [createClientModalVisible,setCreateClientModalVisible] = useState(false);
 	const [productModalVisible,setProductModalVisible] = useState(false);
@@ -86,14 +77,12 @@ const Dte = () =>{
 
 
 
+	const [nombretemporal,setNombreTemporal] = useState('');
+	const [nitTemporal,setNitTemporal] = useState('');
 
 	const [visibleButton,setVisibleButton] = useState(false);
-
-
-
 	const [userSend,setUserSend] = useState();
 	const [productsSend,setProductsSend] = useState([]);
-
 	const {select} = DB();
 	const [documento,setDocumento] = useState([]);
 	const {getBill} = useApi();
@@ -140,10 +129,9 @@ const Dte = () =>{
 		setEmail(client.email);
 		setNit(client.nit);
 		setClient(client);
+		//setNitTemporal(client.email);
+		setNit(client.nit);
 	}
-
-
-
 
 	const findClient = (nit)=>{
 		setNit(nit);
@@ -187,7 +175,6 @@ const Dte = () =>{
 
 	const onGenerate = ()=>{
 		setLoading(true);
-
 		if (user) {
 			if (email.trim().length > 0 ? validateEmail(email) : true){
 				if (products.length > 0) {
@@ -206,9 +193,7 @@ const Dte = () =>{
 						}else{
 							setLoading(false);
 							Alert.alert('Verifica los datos!', 'El iva debe ser 0 o 12%.');
-
 						}
-
 					} else {
 						setLoading(false);
 						Alert.alert('Verifica los datos!', 'Si no es consumidor final el nit es requerido.');
@@ -235,19 +220,14 @@ const Dte = () =>{
 		select(query,[],(ldoc)=>{
 				setDocumento(ldoc);
 		})
-
 		setVisibleButton(true);
-
-		//Actions.home();
 	}
+
 
 	const onPrint = () => {
 		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend));
 		Actions.home();
 	}
-
-
-
 
 	return(
 		// <ImageBackground source={require('../img/Fondo.png')} style={{width: '100%', height: '100%'}} >
@@ -263,18 +243,22 @@ const Dte = () =>{
 								style={styles.icon}
 							/>
 						</TouchableOpacity>
-
 						<Clients action='select' onSelect={onClientSelect}></Clients>
-						{/* <TouchableOpacity  onPress={()=>createClient(false)} style={styles.createModalButton}>
+
+
+
+						<TouchableOpacity  onPress={()=>createClient(false)} style={styles.createModalButton}>
 							<Icon
 								name="add-circle"
                                 color="rgb(119,211,83)"
                                 size={50}
                                 style={styles.icon}
 							/>
-						</TouchableOpacity> */}
-					</Modal>
+						</TouchableOpacity>
 
+
+
+					</Modal>
 					<Modal visible={createClientModalVisible}>
 						<TouchableOpacity  onPress={()=>setCreateClientModalVisible(false)} style={styles.actionButton}>
 							<Icon
@@ -296,17 +280,7 @@ const Dte = () =>{
 								style={styles.icon}
                             />
 						</TouchableOpacity>
-
-
 						<Products action='select' onSelect={onProductSelect}></Products>
-						{/* <TouchableOpacity  onPress={()=>createProduct()} style={styles.createModalButton}>
-							<Icon
-                                name="add-circle"
-                                color="rgb(119,211,83)"
-                                size={50}
-                                style={styles.icon}
-                            />
-						</TouchableOpacity> */}
 					</Modal>
 					<Modal visible={createProductModalVisible}>
 						<TouchableOpacity  onPress={()=>setCreateProductModalVisible(false)} style={styles.closeModalButton}>
@@ -371,22 +345,20 @@ const Dte = () =>{
 										<Text fonSize={10} style={styles.fontSize}>Lista de clientes</Text>
 									</TouchableOpacity>
 								)}
-
-
 							</View>
 						</View>
-						{/* <View > */}
 
-							<View style={{width:'100%',height:'30%',marginTop:'5%', alignItems:'center'}}>
-								{/* Fila 3: email */}
-								<TextInput
-									placeholder="Email"
-									placeholderTextColor="black"
-									onChangeText={(e)=>{setEmail(e)}}
-									value={email}
-									style={styles.inputBorder}
-								/>
-							</View>
+						{/* <View > */}
+						<View style={{width:'100%',height:'30%',marginTop:'5%', alignItems:'center'}}>
+							{/* Fila 3: email */}
+							<TextInput
+								placeholder="Email"
+								placeholderTextColor="black"
+								onChangeText={(e)=>{setEmail(e)}}
+								value={email}
+								style={styles.inputBorder}
+							/>
+						</View>
 						{/* </View> */}
 
 

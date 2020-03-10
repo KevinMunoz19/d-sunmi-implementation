@@ -14,6 +14,7 @@ import {
 	ActivityIndicator
 }	from 'react-native';
 
+
 import useClientForm from '../utils/useClientForm'
 import Icon from "react-native-vector-icons/MaterialIcons";
 import useApi from '../utils/useApi';
@@ -26,13 +27,16 @@ const Client = ({id,client,action,onSelect}) =>{
 	const [nit,setNit] = useState();
 	const [isNit,setIsNit]=useState(false);
 	const [loading,setLoading]=useState(false);
+	const [kValue,setKValue] = useState(false);
+
+
 
 
 	BackHandler.addEventListener('hardwareBackPress', function() {
 		Actions.home();
 		return true;
 	});
-	
+
 	useEffect(() => {
 
 		if(action == 'edit'){
@@ -49,10 +53,21 @@ const Client = ({id,client,action,onSelect}) =>{
 	}
 
 	const searchNit = ()=>{
+
+		if (kValue==true){
+			if (nit.substr(nit.length -1) != "K")
+			setNit(nit.concat('K'));
+		}else if (kValue==false) {
+			if (nit.substr(nit.length -1) == "K"){
+				setNit(nit.substring(0, nit.length - 1));
+			}
+		}
+
 		setLoading(true);
 		validateNit(nit,(name)=>{
 			setLoading(false);
-			handleInputChange('name',name);
+			handleInputChange('name',name.toString());
+			//handleInputChange('name',name);
 			setIsNit(true);
 		},(err)=>{
 			handleInputChange('name',err);
@@ -61,17 +76,25 @@ const Client = ({id,client,action,onSelect}) =>{
 			}else{
 				Alert.alert(err);
 			}
-			
 			setLoading(false);
 		});
 	}
+
+
+
+
+
+
+
+
+
 
 	return(
 		// <ImageBackground source={require('../img/Fondo.png')} style={{width: '100%', height: '100%'}} >
 			<ScrollView style={{backgroundColor:'white',flex:1}}>
 				{(onSelect==null) && (
 					<IosHeader textHeader={'DTE'}/>
-				)}	
+				)}
 				<View style={{
 						height:80,
 						justifyContent:'flex-end',
@@ -92,9 +115,9 @@ const Client = ({id,client,action,onSelect}) =>{
 								Cliente
 							</Text>
 						</View>
-				</View> 
+				</View>
 				<View>
-					
+
 
 					<View style={styles.inputContainer}>
 						<Text>Nit</Text>
@@ -103,8 +126,36 @@ const Client = ({id,client,action,onSelect}) =>{
 							onBlur={searchNit}
 							value={`${inputs.nit | '' }`}
 							style={styles.input}
-							keyboardType = 'numeric'
+							//keyboardType = 'numeric'
 						/>
+						{!kValue &&
+						<TouchableOpacity
+							onPress={()=>setKValue(true)}
+							style={styles.clientListButton}
+						>
+							<Icon
+								name="description"
+								color="black"
+								size={20}
+								style={styles.listIcon}
+							/>
+							<Text fonSize={10} style={styles.fontSize}>Agregar K</Text>
+						</TouchableOpacity>
+					}
+						{kValue &&
+						<TouchableOpacity
+							onPress={()=>setKValue(false)}
+							style={styles.clientListButton}
+						>
+							<Icon
+								name="description"
+								color="black"
+								size={20}
+								style={styles.listIcon}
+							/>
+							<Text fonSize={10} style={styles.fontSize}>Quitar K</Text>
+						</TouchableOpacity>
+					}
 					</View>
 					{(loading)&&(
 						<ActivityIndicator visible={false} size='large' color='#26A657'/>
@@ -118,14 +169,14 @@ const Client = ({id,client,action,onSelect}) =>{
 							style={styles.input}
 						/>
 					</View>
-					
+
 					<View style={styles.inputContainer}>
 						<Text>Correo</Text>
 						<TextInput
 							onChangeText={(e)=>{handleInputChange('email',e)}}
 							value={inputs.email}
 							style={styles.input}
-						/>			
+						/>
 					</View>
 
 					<View style={styles.inputContainer}>
@@ -136,7 +187,7 @@ const Client = ({id,client,action,onSelect}) =>{
 							style={styles.input}
 						/>
 					</View>
-					
+
 					<View style={styles.inputContainer}>
 						<Text>Codigo Postal</Text>
 						<TextInput
@@ -164,8 +215,8 @@ const Client = ({id,client,action,onSelect}) =>{
 							style={styles.input}
 						/>
 					</View>
-					
-					
+
+
 					{(action == 'edit') && (
 						<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
 							<Icon
@@ -198,7 +249,7 @@ const Client = ({id,client,action,onSelect}) =>{
 							/>
 							<Text >REGISTRAR</Text>
 						</TouchableOpacity>
-					)}			
+					)}
 				</View>
 			</ScrollView>
 		// </ImageBackground>
@@ -232,6 +283,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     }
-	
+
 });
 export default Client;

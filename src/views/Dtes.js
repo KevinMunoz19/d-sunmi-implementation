@@ -27,8 +27,6 @@ const Dtes = () =>{
     const {select} = DB();
 
 
-		const [dteListLast,setDteListLast] = useState([]);
-
     useEffect(()=>{
         var query = `select * from dte`;
         select(query,[],(dtes)=>{

@@ -35,7 +35,7 @@ const Home = () => {
     const onMenu = ()=>{
         setMenuVisible(!menuVisible);
     }
-    
+
     const onLogout = ()=>{
         setMenuVisible(false);
 		logout();
@@ -50,57 +50,57 @@ const Home = () => {
                             style={styles.menuLogo}
                             source={require('../img/logo.png')}
                         />
-                        <TouchableOpacity style={styles.primaryGray} onPress={()=>{setMenuVisible(false)}}>	
+                        <TouchableOpacity style={styles.primaryGray} onPress={()=>{setMenuVisible(false)}}>
                             <Icon
                                 name="keyboard-arrow-left"
                                 color="black"
                                 size={50}
-                            /> 
-                        </TouchableOpacity> 
-                    </View> 
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.menuBodyContainer}>
-                        <TouchableOpacity onPress={()=>handlePress('clients')} style={styles.menuTouch}>	
+                        <TouchableOpacity onPress={()=>handlePress('clients')} style={styles.menuTouch}>
                             <Text style={styles.menuText}>Clientes</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>handlePress('products')} style={styles.menuTouch}>	
+                        <TouchableOpacity onPress={()=>handlePress('products')} style={styles.menuTouch}>
                             <Text style={styles.menuText}>Productos</Text>
                         </TouchableOpacity>
                         <View style={styles.menuLine}></View>
-                        <TouchableOpacity onPress={()=>onLogout()} style={styles.menuTouch}>	
+                        <TouchableOpacity onPress={()=>onLogout()} style={styles.menuTouch}>
                             <Text style={styles.menuText}>Cerrar Sesion</Text>
                         </TouchableOpacity>
-                    </View>        
-                </View>                
-            </Modal> 
+                    </View>
+                </View>
+            </Modal>
             <View style={styles.header}>
                 <Image
                     style={styles.logo}
                     source={require('../img/logo.png')}
-                /> 
-                <TouchableOpacity onPress={onMenu}>	
+                />
+                <TouchableOpacity onPress={onMenu}>
                     <Icon
                         name="view-list"
                         color="black"
                         size={50}
                         style={styles.headerIcon}
-                    /> 
-				</TouchableOpacity> 
-                                             
+                    />
+				</TouchableOpacity>
+
             </View>
             <ImageBackground source={require('../img/home-background.jpg')} style={styles.body}>
-                
-                <TouchableOpacity onPress={()=>handlePress('dte')} style={styles.sectionTouch}>	
+
+                <TouchableOpacity onPress={()=>handlePress('dte')} style={styles.sectionTouch}>
 					<Text style={styles.sectionTouchText}>Generar Factura</Text>
 				</TouchableOpacity>
-                <TouchableOpacity onPress={()=>handlePress('dtes')} style={styles.sectionTouch}>	
+                <TouchableOpacity onPress={()=>handlePress('dtes')} style={styles.sectionTouch}>
 					<Text style={styles.sectionTouchText}>Facturas Emitidas</Text>
 				</TouchableOpacity>
-                <TouchableOpacity onPress={()=>handlePress('products')} style={styles.sectionTouch}>	
+                <TouchableOpacity onPress={()=>handlePress('products')} style={styles.sectionTouch}>
 					<Text style={styles.sectionTouchText}>Mis Productos</Text>
-				</TouchableOpacity> 
-                <TouchableOpacity onPress={()=>handlePress('clients')} style={styles.sectionTouch}>	
+				</TouchableOpacity>
+                <TouchableOpacity onPress={()=>handlePress('clients')} style={styles.sectionTouch}>
 					<Text style={styles.sectionTouchText}>Mis Clientes</Text>
-				</TouchableOpacity>                                 
+				</TouchableOpacity>
             </ImageBackground>
         </View>
     );
@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     menuBodyContainer:{
-        width:'100%',
-        height:'75%',
+        width:'90%',
+        height:'60%',
         flexDirection:'column',
         backgroundColor:'rgb(119,211,83)',
         justifyContent: 'space-around'
@@ -168,8 +168,8 @@ const styles = StyleSheet.create({
         height:'100%'
     },
     logo:{
-        width: '70%', 
-        height: '60%' 
+        width: '70%',
+        height: '60%'
     },
     headerIcon:{
         marginRight: '2%'
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     sectionTouch:{
         marginTop:'6%',
         backgroundColor:'rgba(119,211,83,0.5)',
-        width:'100%',
+        width:'80%',
         height:'12%',
         flexDirection:'row',
         alignItems:'center'
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'white'
     }
-    
+
 });
 
 export default Home;

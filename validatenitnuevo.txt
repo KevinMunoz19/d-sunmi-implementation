@@ -1,0 +1,27 @@
+const validateNitNuevo = (nit,cb,rej)=>{
+  console.log(`Ingreso a validacion de NIT REST ${nit}`);
+  console.log(typeof nit);
+    loginOld({username:null,password:null},()=>{
+        fetch(`https://felgtaws.digifact.com.gt/felapi/api/SP?NIT=123456&DATA1=PLANILLACC_GetInfoNit&DATA2=NIT|10462812K&USERNAME=juan`,{
+            method:'GET',
+            headers: {
+                'Content-Type': 'text/xml',
+                'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkdULjAwMDAwMDEyMzQ1Ni5wY3VsYWpheSIsIm5iZiI6MTU4MDMxMzIxNCwiZXhwIjoxNjExNDE3MjE0LCJpYXQiOjE1ODAzMTMyMTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDkyMjAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQ5MjIwIn0.2Bu-aOA2JJuqqibTbEKeoX9uZQ2R522C-R8YWpW8HSE'
+            }
+        }).then(response => response.text())
+        .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+        .then(data => {
+            console.log(data);
+            if( data.getElementsByTagName("ResponseData1")[0].firstChild.data ==1) {
+                cb(data.getElementsByTagName("N")[0].firstChild.data);
+            }else{
+                rej('NIT INVALIDO');
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+            rej(500);
+        })
+    })
+
+}

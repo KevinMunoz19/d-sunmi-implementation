@@ -7,7 +7,7 @@ import { validateEmail } from './emailValidator';
 
 
 const useClientForm = (callback) => {
-	
+
 	const [inputs, setInputs] = useState({
 		nit: '',
 		name: '',
@@ -66,7 +66,7 @@ const useClientForm = (callback) => {
 				query = `DELETE from receiver where id = ?`,
 				fields = [inputs.id];
 			}
-			
+
 			insert(query,fields,(result)=>{
 				Alert.alert(`CLIENTE ${messageVerb} con exito`);
 				if(onSelect == null){
@@ -78,7 +78,7 @@ const useClientForm = (callback) => {
 						onSelect(client[0]);
 					})
 				}
-				
+
 			});
 		} else {
 			Alert.alert('Todos los campos son requeridos!');

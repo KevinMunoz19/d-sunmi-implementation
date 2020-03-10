@@ -1,0 +1,53 @@
+
+	const validateNitModule = () => {
+
+		var nitStringFull = pad(nit,10);
+		console.log(nit);
+		console.log(nitStringFull);
+
+
+		setLoading(true);
+		var NITRegExp = /^[1-9]{1}[0-9]*([K]{0,1}[k]{0,1})$/;
+		if (!NITRegExp.test(nitStringFull)) {
+	    Alert.alert('Nit Invalido');
+  	}else {
+			var pos = 0;
+		  var Correlativo = '';
+		  var DigitoVerificador:string = '';
+		  var Factor =0;
+			pos = nitStringFull.length - 1;
+		  Correlativo = nitStringFull.substring(0, pos);
+		  DigitoVerificador = nitStringFull.substring(pos, nitStringFull.length);
+		  Factor = Correlativo.length + 1;
+		  var Suma = 0;
+		  var Valor = 0;
+
+			var total = 0;
+
+			for (var i = 0; i <= pos - 1; i++) {
+		    Valor = nitStringFull.substring(i, i+1);
+		    Suma = Suma + Valor * Factor;
+		    Factor = Factor - 1;
+		  }
+		  var XMod11 = (11 - (Suma % 11)) % 11;
+
+			if ((XMod11 == 10 && DigitoVerificador == 'K') || ((XMod11+'') == DigitoVerificador)) {
+				setIsNit(true);
+				setLoading(false);
+				Alert.alert('Nit Valido');
+		  } else {
+				setLoading(false);
+				Alert.alert('Nit Escrito Invalido');
+		    return ("Nit Escrito Invalido");
+		  }
+  	}
+		setLoading(false);
+	}
+
+
+
+	function pad(n, width, z) {
+		z = z || '0';
+		n = n + '';
+		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+	}
