@@ -184,3 +184,27 @@ const getInfo = (nit, calle, rej)=>{
     }
     setLoading(false);
   });
+
+
+
+
+
+  const loginOld = (body,res) =>{
+    console.log("Entrada a login old")
+      //return fetch('https://felgtaws.digifact.com.gt/felapi/api/login/get_token',{
+      return fetch('https://felgt.digifact.com.gt/gt.com.fact.felapi/api/login/get_token',{
+
+          method:'POST',
+          body:JSON.stringify(body),
+          headers: {
+              'Content-Type': 'application/json',
+          }
+      }).then(response=>{
+          console.log("login old response");
+          return response.json();
+      }).then(response=>{
+          res();
+      }).catch(err=>{
+          res();
+      })
+  }

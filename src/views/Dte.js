@@ -91,7 +91,12 @@ const Dte = () =>{
 	const [frases,setFrases] = useState('');
 	const [afiliacion,setAfiliacion] = useState('');
 	const [zipc,setZipc] = useState('');
+	const [nombreComercial,setNombreComercial] = useState('');
+	const [direccionComercial,setDireccionComercial] = useState('');
 
+	const [singleZipc,setSingleZipc] = useState('');
+	const [singleNombreComercial,setSingleNombreComercial] = useState('');
+	const [singleDireccionComercial,setSingleDireccionComercial] = useState('');
 
 
 
@@ -191,6 +196,12 @@ const Dte = () =>{
 		(zpc)=>{
 			setZipc(zpc.toString())
 		},
+		(nomc)=>{
+			setNombreComercial(nomc.toString())
+		},
+		(dirc)=>{
+			setDireccionComercial(dirc.toString())
+		},
 		(err)=>{
 			if(err==200){
 				Alert.alert('Error de conexion');
@@ -198,6 +209,17 @@ const Dte = () =>{
 				Alert.alert(err);
 			}
 		});
+
+
+		var nombrectrim = nombreComercial.trim().split('|');
+		var direccionctrim = nombreComercial.trim().split('|');
+		var zipctrim = nombreComercial.trim().split('|');
+
+		setSingleNombreComercial(nombrectrim[0]);
+		setSingleDireccionComercial(direccionctrim[0]);
+		setSingleZipc(zipctrim[0]);
+
+
 
 	}
 
@@ -223,7 +245,7 @@ const Dte = () =>{
 				if (products.length > 0) {
 					if((!cf && client.nit.trim().length > 0) || cf) {
 						if(iva == 0 || iva == 12){
-							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, (res)=>{
+							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial,direccionComercial, (res)=>{
 								console.log('res ->',res)
 								setPdfSource(res);
 							},(err)=>{
@@ -268,7 +290,10 @@ const Dte = () =>{
 
 
 	const onPrint = () => {
-		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend));
+
+
+
+		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn);
 		Actions.home();
 	}
 

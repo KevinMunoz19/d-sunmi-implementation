@@ -58,30 +58,37 @@ const useDte = (props) => {
 
 
 
-    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, res,rej)=>{
+    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial, res,rej)=>{
         var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
 
+        var {frasesString} = generateFrasesString(frases);
+        var zipcodestrim = zipcode.trim();
+        var arrayzipcodes = zipcodestrim.split('|');
+
+        var nombrectrim = nombreComercial.trim();
+        var nombrecarray = nombrectrim.split('|');
+        var nombrecString = nombrecarray[0];
+
+        var direccioncomercialarray = direccionComercial.trim().split('|');
+        var dcString = direccioncomercialarray[0];
+
 
         console.log("fetched data");
-        console.log(nn);
-        console.log(calle);
-        console.log(direccion);
-        console.log(zona);
-        console.log(frases);
-        console.log(afiliacion);
-        console.log(zipcode);
-        //var issueComercialName="TEST";
-        var issueName=user.name;
+        console.log(nombrecString.substring(2));
+        console.log(dcString.substring(2));
 
-        var issueAddress="CALLE 101 CALLE";
-        var issueZipCode=101;
+
+
+
+        var issueName=user.name;
+        var issueAddress=`${calle} ${direccion} ZONA ${zona}`;
         var issueMunicipality="Guatemala";
         var issueDepartment="Guatemala";
         if(cf){
             var receiverName = 'CONSUMIDOR FINAL';
             var receiverNit = 'CF';
-            var receiverAddress = '5TA AVENIDA 16-65';
+            var receiverAddress = 'Ciudad';
             var receiverZipCode = 101;
             var receiverMunicipality = 101;
             var receiverDepartment = 101;
@@ -93,7 +100,6 @@ const useDte = (props) => {
             var receiverMunicipality = client.municipality;
             var receiverDepartment = client.department;
         }
-
         if(iva > 0 ){
             var taxShortName = 'IVA';
         }else{
@@ -107,14 +113,14 @@ const useDte = (props) => {
                 <dte:DTE ID="DatosCertificados">
                     <dte:DatosEmision ID="DatosEmision">
                         <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${new Date().toISOString()}" Tipo="FACT"/>
-                        <dte:Emisor AfiliacionIVA="GEN"
-                            NombreComercial="${nn}"
+                        <dte:Emisor AfiliacionIVA="${afiliacion}"
+                            NombreComercial="${nombrecString.substring(2)}"
                             CodigoEstablecimiento="1"
-                            NombreEmisor="${issueName}"
+                            NombreEmisor="${nn}"
                             NITEmisor="${issueNit}">
                             <dte:DireccionEmisor>
                                 <dte:Direccion>${issueAddress}</dte:Direccion>
-                                <dte:CodigoPostal>${issueZipCode}</dte:CodigoPostal>
+                                <dte:CodigoPostal>${arrayzipcodes[0]}</dte:CodigoPostal>
                                 <dte:Municipio>${issueMunicipality}</dte:Municipio>
                                 <dte:Departamento>${issueDepartment}</dte:Departamento>
                                 <dte:Pais>GT</dte:Pais>
@@ -131,7 +137,7 @@ const useDte = (props) => {
                             </dte:DireccionReceptor>
                         </dte:Receptor>
                         <dte:Frases>
-                            <dte:Frase TipoFrase="1" CodigoEscenario="1"/>
+                            ${frasesString}
                         </dte:Frases>
                         <dte:Items>
                             ${itemsString}
@@ -157,6 +163,39 @@ const useDte = (props) => {
         })
 
     }
+
+    const generateFrasesString = (frases)=>{
+
+      var frasestrim = frases.trim();
+      var arrayfrases = frasestrim.split('|');
+      var frasesString = ``;
+      arrayfrases.forEach((pos,i)=>{
+        var singleFrase = pos.split(',');
+        var tipo = singleFrase[0];
+        var escenario = singleFrase[1];
+        frasesString = frasesString+
+          `
+          <dte:Frase TipoFrase="${tipo}" CodigoEscenario="${escenario}"/>
+          `;
+      });
+    return {
+        frasesString,
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const saveDte = (encode,receiverName,receiverNit)=>{
         let xmlString = base64.decode(encode);

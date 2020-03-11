@@ -32,7 +32,7 @@ const useApi = ()=>{
     const loginOld = (body,res) =>{
       console.log("Entrada a login old")
         //return fetch('https://felgtaws.digifact.com.gt/felapi/api/login/get_token',{
-        return fetch('https://felgttest.digifact.com.gt/gt.com.fact.felapi/api/login/get_token',{
+        return fetch('https://felgt.digifact.com.gt/gt.com.fact.felapi/api/login/get_token',{
 
             method:'POST',
             body:JSON.stringify(body),
@@ -50,6 +50,7 @@ const useApi = ()=>{
     }
 
     const sendBill = (body,nit,token,res,rej)=>{
+      console.log("send bill entrada");
         loginOld({username:null,password:null},()=>{
           fetch(`https://felgtaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=CERTIFICATE_DTE_XML_TOSIGN&FORMAT=PDF XML`,{
             //fetch(`https://felgttestaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=CERTIFICATE_DTE_XML_TOSIGN&FORMAT=PDF XML`,{
@@ -61,7 +62,6 @@ const useApi = ()=>{
                     'Accept':'application/json'
                 }
             }).then(response=>{
-                console.log(response);
                 return response.json();
             }).then(response=>{
                 console.log(response)
@@ -258,7 +258,7 @@ const useApi = ()=>{
     }
 
 
-    const getInfo = (nit, name, calle, direccion, zona,frases,afiliacion,zipcode, rej)=>{
+    const getInfo = (nit, name, calle, direccion, zona,frases,afiliacion,zipcode, nombreComercial,direccionComercial, rej)=>{
       console.log("info entry");
         loginOld({username:null,password:null},()=>{
             fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
@@ -276,7 +276,7 @@ const useApi = ()=>{
                             <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
                             <UserName>GT.000000123456.RESTLET</UserName>
                             <Data1>PLANILLACC_GetInfoFiscalFELFORM</Data1>
-                            <Data2>NIT|${nit}</Data2>
+                            <Data2>NIT|35355913</Data2>
                             <Data3></Data3>
                           </RequestTransaction>
                         </soap:Body>
@@ -296,6 +296,8 @@ const useApi = ()=>{
                     //frases(data.getElementsByTagName("FRASES")[0].firstChild.data);
                     afiliacion(data.getElementsByTagName("AfiliacionIVA")[0].firstChild.data);
                     zipcode(data.getElementsByTagName("ESTCODPOSTAL")[0].firstChild.data);
+                    nombreComercial(data.getElementsByTagName("EST")[0].firstChild.data);
+                    direccionComercial(data.getElementsByTagName("ESTDIR")[0].firstChild.data);
                     //console.log("info response successfull");
                 }else{
                     rej('No se Puede Obtener info de el emisor');
@@ -315,22 +317,6 @@ const useApi = ()=>{
 			return (value.toString().length < length) ? PadLeft("0" + value, length) :
 			value;
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     return {
