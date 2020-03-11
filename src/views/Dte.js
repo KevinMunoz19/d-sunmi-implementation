@@ -283,7 +283,7 @@ const Dte = () =>{
 
 
 	const onPrint = () => {
-		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend));
+		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
 		Actions.home();
 	}
 

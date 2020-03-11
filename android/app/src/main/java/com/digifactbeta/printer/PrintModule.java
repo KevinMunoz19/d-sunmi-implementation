@@ -181,7 +181,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
 
     @ReactMethod
     //public void print(String response) {
-    public void print(String response, String usuario, String items, String nombre) {
+    public void print(String response, String usuario, String items, String nombre, String nombreComercial, String direccion) {
         // Eliminate brackets from sql json response
         String jsonstring = response.replace("[","").replace("]","");
         String jsonstringusuario = usuario.replace("[","").replace("]","");
@@ -218,6 +218,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
                     String direccionCertificador = "Edificio Paladium";
                     String separador = "                            ";
 
+                    String direccionNueva = direccion.substring(2);
+
 
                     BluetoothAdapter btAdapter = PrintModule.getBTAdapter();
                     BluetoothDevice device = PrintModule.getDevice(btAdapter);
@@ -227,7 +229,11 @@ public class PrintModule extends ReactContextBaseJavaModule{
 
                     String formatedTitleVenta = String.format("%-6s %-6s %-6s %-6s", "Cant.", "Des.", "Sub.",  "Tot.");
                     String formatedTotalVenta = String.format("%8s     %12s      ", "Total", "Q"+numeroTotal);
-                    sendStringDataBT(nombre,1,0,0);
+
+
+                    sendStringDataBT(nombre,1,1,0);
+                    sendStringDataBT(nombreComercial,1,0,0);
+                    sendStringDataBT(direccionNueva,1,0,0);
                     sendStringDataBT("NIT: "+nitComercio,1,0,0);
                     //sendStringDataBT(direccionComercio,1,0,0);
                     sendStringDataBT(separador,1,0,1);

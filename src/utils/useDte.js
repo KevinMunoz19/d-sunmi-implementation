@@ -76,7 +76,7 @@ const useDte = (props) => {
 
         console.log(dcArray[numeroEstablecimiento].substring(2));
 
-        var dcClean = dcArray[numeroEstablecimiento].substring(2).replace(/ +(?= )/g,'');
+        var dcClean = dcArray[numeroEstablecimiento].replace(/ +(?= )/g,'');
 
         var num = numeroEstablecimiento+1;
         var numeroEstablecimientoString = num.toString();
@@ -113,7 +113,7 @@ const useDte = (props) => {
             <dte:SAT ClaseDocumento="dte">
                 <dte:DTE ID="DatosCertificados">
                     <dte:DatosEmision ID="DatosEmision">
-                        <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${new Date().toISOString()}" Tipo="FACT"/>
+                        <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${new Date().toLocaleString()}" Tipo="FACT"/>
                         <dte:Emisor AfiliacionIVA="${afiliacion}"
                             NombreComercial="${ncArray[numeroEstablecimiento].substring(2)}"
                             CodigoEstablecimiento="${numeroEstablecimientoString}"
