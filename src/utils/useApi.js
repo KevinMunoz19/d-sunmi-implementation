@@ -276,7 +276,7 @@ const useApi = ()=>{
                             <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
                             <UserName>GT.000000123456.RESTLET</UserName>
                             <Data1>PLANILLACC_GetInfoFiscalFELFORM</Data1>
-                            <Data2>NIT|35355913</Data2>
+                            <Data2>NIT|${nit}</Data2>
                             <Data3></Data3>
                           </RequestTransaction>
                         </soap:Body>

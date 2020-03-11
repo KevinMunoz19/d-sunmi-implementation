@@ -58,31 +58,32 @@ const useDte = (props) => {
 
 
 
-    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial, res,rej)=>{
+    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial,numeroEstablecimiento, res,rej)=>{
         var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
-
         var {frasesString} = generateFrasesString(frases);
-        var zipcodestrim = zipcode.trim();
-        var arrayzipcodes = zipcodestrim.split('|');
 
-        var nombrectrim = nombreComercial.trim();
-        var nombrecarray = nombrectrim.split('|');
-        var nombrecString = nombrecarray[0];
+        var zcArray = zipcode.trim().split('|');
+        //var arrayzipcodes = zipcodestrim.split('|');
 
-        var direccioncomercialarray = direccionComercial.trim().split('|');
-        var dcString = direccioncomercialarray[0];
+        var ncArray = nombreComercial.trim().split('|');
 
+        //var nombrecString = nombrecarray[0];
 
-        console.log("fetched data");
-        console.log(nombrecString.substring(2));
-        console.log(dcString.substring(2));
+        var dcArray = direccionComercial.trim().split('|');
+        //var dcString = direccioncomercialarray[0];
+        //NombreComercial="${ncArray[0].substring(2)}"
 
+        console.log(dcArray[numeroEstablecimiento].substring(2));
 
+        var dcClean = dcArray[numeroEstablecimiento].substring(2).replace(/ +(?= )/g,'');
 
+        var num = numeroEstablecimiento+1;
+        var numeroEstablecimientoString = num.toString();
 
         var issueName=user.name;
-        var issueAddress=`${calle} ${direccion} ZONA ${zona}`;
+
+        //`${calle} ${direccion} ZONA ${zona}`;
         var issueMunicipality="Guatemala";
         var issueDepartment="Guatemala";
         if(cf){
@@ -114,13 +115,13 @@ const useDte = (props) => {
                     <dte:DatosEmision ID="DatosEmision">
                         <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${new Date().toISOString()}" Tipo="FACT"/>
                         <dte:Emisor AfiliacionIVA="${afiliacion}"
-                            NombreComercial="${nombrecString.substring(2)}"
-                            CodigoEstablecimiento="1"
+                            NombreComercial="${ncArray[numeroEstablecimiento].substring(2)}"
+                            CodigoEstablecimiento="${numeroEstablecimientoString}"
                             NombreEmisor="${nn}"
                             NITEmisor="${issueNit}">
                             <dte:DireccionEmisor>
-                                <dte:Direccion>${issueAddress}</dte:Direccion>
-                                <dte:CodigoPostal>${arrayzipcodes[0]}</dte:CodigoPostal>
+                                <dte:Direccion>${dcClean}</dte:Direccion>
+                                <dte:CodigoPostal>${zcArray[numeroEstablecimiento]}</dte:CodigoPostal>
                                 <dte:Municipio>${issueMunicipality}</dte:Municipio>
                                 <dte:Departamento>${issueDepartment}</dte:Departamento>
                                 <dte:Pais>GT</dte:Pais>
