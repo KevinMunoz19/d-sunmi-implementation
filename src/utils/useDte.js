@@ -28,6 +28,8 @@ const useDte = (props) => {
 
     const cancelDte = (user,dteInfo,res,rej)=>{
         console.warn(dteInfo.date);
+        var tzoffset = (new Date()).getTimezoneOffset()*60000;
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
         var body = `
         <?xml version='1.0' encoding='utf-8'?>
             <dte:GTAnulacionDocumento xmlns:dte="http://www.sat.gob.gt/dte/fel/0.1.0"
@@ -37,7 +39,7 @@ const useDte = (props) => {
                     <dte:AnulacionDTE ID="DatosCertificados">
                         <dte:DatosGenerales ID="DatosAnulacion" NumeroDocumentoAAnular="${dteInfo.auth_number}" NITEmisor="${user.string_nit.replace(/0+(?!$)/,'')}"
                             IDReceptor="${dteInfo.receiver_nit}" FechaEmisionDocumentoAnular="${new Date(dteInfo.date.replace(' ','T')).toISOString()}"
-                            FechaHoraAnulacion="${new Date().toISOString()}" MotivoAnulacion="Anulado"/>
+                            FechaHoraAnulacion="${localISOTime}" MotivoAnulacion="Anulado"/>
                     </dte:AnulacionDTE>
                 </dte:SAT>
             </dte:GTAnulacionDocumento>
@@ -63,6 +65,11 @@ const useDte = (props) => {
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
         var {frasesString} = generateFrasesString(frases);
 
+        var tzoffset = (new Date()).getTimezoneOffset()*60000;
+        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
+        console.log("Fecha Actual");
+        console.log(localISOTime);
+
         var zcArray = zipcode.trim().split('|');
         //var arrayzipcodes = zipcodestrim.split('|');
 
@@ -75,6 +82,7 @@ const useDte = (props) => {
         //NombreComercial="${ncArray[0].substring(2)}"
 
         console.log(dcArray[numeroEstablecimiento].substring(2));
+        console.log(products);
 
         var dcClean = dcArray[numeroEstablecimiento].replace(/ +(?= )/g,'');
 
@@ -113,7 +121,7 @@ const useDte = (props) => {
             <dte:SAT ClaseDocumento="dte">
                 <dte:DTE ID="DatosCertificados">
                     <dte:DatosEmision ID="DatosEmision">
-                        <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${new Date().toLocaleString()}" Tipo="FACT"/>
+                        <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${localISOTime}" Tipo="FACT"/>
                         <dte:Emisor AfiliacionIVA="${afiliacion}"
                             NombreComercial="${ncArray[numeroEstablecimiento].substring(2)}"
                             CodigoEstablecimiento="${numeroEstablecimientoString}"
@@ -207,8 +215,11 @@ const useDte = (props) => {
         var authNumber = authNumberTag.firstChild.data;
         var dteNumber = authNumberTag.getAttribute('Numero');
         var serie = authNumberTag.getAttribute('Serie');
-        var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,DATETIME('now'),?,?,?,?)`;
-        insert(query,[receiverName,receiverNit,total,serie,dteNumber,authNumber],(result)=>{
+        var tzoffset = (new Date()).getTimezoneOffset()*60000;
+        var fecha = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).replace("T"," ");
+        //var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,DATETIME('now'),?,?,?,?)`;
+        var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,?,?,?,?,?)`;
+        insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber],(result)=>{
             console.log('DTE registrado con exito');
         },(err)=>{
             console.log('ocurrio un error registrando el dte', err);
@@ -217,6 +228,7 @@ const useDte = (props) => {
     }
 
     const generateItemString = (products,client,cf,iva)=>{
+
 
         var totalAmount = 0;
 	    var totalTaxAmount = 0;
@@ -244,7 +256,7 @@ const useDte = (props) => {
                 <dte:Item NumeroLinea="${i+1}" BienOServicio="B">
                     <dte:Cantidad>${product.quantity}</dte:Cantidad>
                     <dte:UnidadMedida>CA</dte:UnidadMedida>
-                    <dte:Descripcion>item</dte:Descripcion>
+                    <dte:Descripcion>${product.name}</dte:Descripcion>
                     <dte:PrecioUnitario>${product.price}</dte:PrecioUnitario>
                     <dte:Precio>${totalItemAmount.toFixed(2)}</dte:Precio>
                     <dte:Descuento>0</dte:Descuento>

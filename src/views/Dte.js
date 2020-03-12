@@ -506,6 +506,18 @@ const Dte = () =>{
 						</TouchableOpacity>
 					</View>
 
+					<View style={styles.generateBillButtonContainer}>
+						<TouchableOpacity onPress={() => Linking.openURL(`mailto:${email}?subject=Factura Electronica Digifact&body=Description`)} style={styles.actionButton}>
+							<Icon
+								name="add"
+								color="#26A657"
+								size={50}
+								style={styles.icon}
+							/>
+							<Text >Mandar Correo</Text>
+						</TouchableOpacity>
+					</View>
+
 
 
 

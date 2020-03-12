@@ -31,14 +31,14 @@ const DteOptions = ({
                 style={styles.upperModal}
             >
             <TouchableOpacity  onPress={()=>onViewDte()} style={styles.sectionTouch}>
-                <Text style={styles.sectionTouchText}>Ver documento</Text>
+                <Text style={styles.sectionTouchText}>VER DOCUMENTO</Text>
             </TouchableOpacity>
             {(dteStatus == 1 ) &&
             <TouchableOpacity  onPress={()=>onCancelDte()} style={styles.sectionTouch}>
-                <Text style={styles.sectionTouchText}>Anular Documento</Text>
+                <Text style={styles.sectionTouchText}>ANULAR DOCUMENTO</Text>
             </TouchableOpacity>}
             <TouchableOpacity  onPress={()=>onCloseModal()} style={styles.sectionTouch}>
-                <Text style={styles.sectionTouchText}>Cerrar</Text>
+                <Text style={styles.sectionTouchText}>CERRAR</Text>
             </TouchableOpacity>
             </Modal>
         </View>
@@ -63,17 +63,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     sectionTouch:{
+        marginLeft:'20%',
         marginTop:'6%',
         backgroundColor:'rgba(119,211,83,0.5)',
-        width:'100%',
+        width:'60%',
         height:'12%',
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+
+
+        justifyContent:'center',
+
     },
     sectionTouchText:{
-        marginTop:'5%',
-        marginLeft:'5%',
-        fontSize:20,
+        marginBottom:'5%',
+        //marginLeft:'10%',
+        fontSize:40,
         color:'white'
     }
   });

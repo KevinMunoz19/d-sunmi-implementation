@@ -3,6 +3,11 @@ import { Actions } from 'react-native-router-flux';
 import useUser from './../utils/useUser';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+import {
 	Text,
 	View,
 	TouchableOpacity,
@@ -20,6 +25,9 @@ import {
 */
 
 const Home = () => {
+
+
+
     const {logout} = useUser();
     const [menuVisible,setMenuVisible] = useState(false);
     const handlePress = (view)=>{
@@ -31,6 +39,7 @@ const Home = () => {
 			case 'dtes':Actions.dtes(); break;
 		}
     }
+
 
     const onMenu = ()=>{
         setMenuVisible(!menuVisible);
@@ -113,7 +122,7 @@ const styles = StyleSheet.create({
     header:{
         backgroundColor: 'white',
         width: '100%',
-        height: '15%',
+        height: '25%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems:'center'
@@ -144,14 +153,14 @@ const styles = StyleSheet.create({
         backgroundColor:'white'
     },
     menuLogo:{
-        marginLeft:'2%',
-        width:'80%',
-        height:'100%'
+        marginLeft:'10%',
+				width: wp('30%'),//80
+        height: hp('20%'),//
     },
     menuText:{
         fontSize:20,
         color:'white',
-        marginLeft:'5%'
+        marginLeft:'10%'
     },
     primaryGray:{
         flex:1,
@@ -165,27 +174,34 @@ const styles = StyleSheet.create({
     body:{
         flexDirection: 'column',
         width:'100%',
-        height:'100%'
+        height:'100%',
+				//alignItems:'center',
+
+				//justifyContent:'center',
     },
     logo:{
-        width: '70%',
-        height: '60%'
+        width: wp('30%'),
+        height: hp('20%'),
     },
     headerIcon:{
         marginRight: '2%'
     },
     sectionTouch:{
-        marginTop:'6%',
+        marginTop:'3%',
         backgroundColor:'rgba(119,211,83,0.5)',
-        width:'100%',
-        height:'12%',
+
+				width: wp('100%'),
+				height: hp('12%'),
+
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+
+				justifyContent:'center',
     },
     sectionTouchText:{
-        marginTop:'5%',
-        marginLeft:'5%',
-        fontSize:20,
+        //marginTop:'1%',
+        marginLeft:'10%',
+        fontSize: hp('4%'),
         color:'white'
     }
 

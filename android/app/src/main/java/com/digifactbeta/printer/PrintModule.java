@@ -218,7 +218,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
                     String direccionCertificador = "Edificio Paladium";
                     String separador = "                            ";
 
-                    String direccionNueva = direccion.substring(2);
+                    String nombreComercialNuevo = nombreComercial.substring(2);
 
 
                     BluetoothAdapter btAdapter = PrintModule.getBTAdapter();
@@ -232,8 +232,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
 
 
                     sendStringDataBT(nombre,1,1,0);
-                    sendStringDataBT(nombreComercial,1,0,0);
-                    sendStringDataBT(direccionNueva,1,0,0);
+                    sendStringDataBT(nombreComercialNuevo,1,0,0);
+                    sendStringDataBT(direccion,1,0,0);
                     sendStringDataBT("NIT: "+nitComercio,1,0,0);
                     //sendStringDataBT(direccionComercio,1,0,0);
                     sendStringDataBT(separador,1,0,1);

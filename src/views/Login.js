@@ -1,5 +1,8 @@
 import React, {Fragment,useState,useEffect} from 'react';
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
+
 import {
 	Text,
 	View,
@@ -12,6 +15,7 @@ import {
 	Alert,
 	ActivityIndicator
 }	from 'react-native';
+
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {Actions} from 'react-native-router-flux';
@@ -34,11 +38,11 @@ const Login = () =>{
 			}
 		})
 	},[])
-	
+
 	function handlerSend(){
 		setLoading(true);
 		function PadLeft(value, length) {
-			return (value.toString().length < length) ? PadLeft("0" + value, length) : 
+			return (value.toString().length < length) ? PadLeft("0" + value, length) :
 			value;
 		}
 
@@ -67,7 +71,7 @@ const Login = () =>{
 							Actions.home();
 						}
 					});
-					
+
 				}else{
 					setLoading(false);
 					if(response.code == 2001){
@@ -75,7 +79,7 @@ const Login = () =>{
 					}else{
 						Alert.alert(response.message);
 					}
-					
+
 				}
 			}
 		},(err)=>{
@@ -90,7 +94,7 @@ const Login = () =>{
 		// <ImageBackground source={require('../img/Fondo.png')} style={{width: '100%', height: '100%'}} >
 		// 	<View style={styles.container}>
 		// 		<Image source={require('../img/logo.png')} style={styles.logo}/>
-				
+
 		// 		<TextInput style = {styles.input}
 		// 			placeholder="Nit"
 		// 			onChangeText={(e)=>{setNit(e)}}
@@ -114,10 +118,10 @@ const Login = () =>{
 		// </ImageBackground >
 		<View style={loginStyles.primaryContainer}>
 			<View style={loginStyles.headerContainer}>
-			
+
 			</View>
 			<View style={loginStyles.imageContainer}>
-				
+
 				<Image source={require('../img/logo.png')} style={loginStyles.logo}/>
 			</View>
 			<View style={loginStyles.formContainer}>
@@ -157,7 +161,7 @@ const Login = () =>{
 							secureTextEntry={true}
 						/>
 					{/* </View> */}
-					
+
 				</View>
 			</View>
 			{(loading)&&(
@@ -187,14 +191,15 @@ const loginStyles = StyleSheet.create({
 		alignItems:'center'
 	},
 	logo:{
-		width:'100%',
-		height:'60%'
+		width: wp('60%'),
+		height: hp('20%'),
 	},
 	formContainer:{
 		flex:3,
 		backgroundColor:'white',
 		alignItems:'center',
-		justifyContent:'space-around'
+		justifyContent:'space-around',
+		height: hp('60%'),
 	},
 	buttonContainer:{
 		flex:2,
@@ -202,8 +207,9 @@ const loginStyles = StyleSheet.create({
 		alignItems:'center'
 	},
 	inputContainer:{
-		paddingTop:'4%',
-		width:'70%',
+		paddingTop:'2%',
+		width: wp('40%'),
+		//width:'70%',
 		textAlign:'center',
 		flexDirection:'row',
 		alignItems:'center',
@@ -211,8 +217,7 @@ const loginStyles = StyleSheet.create({
 		borderBottomWidth:1,
 	},
 	input:{
-		
-		width:'100%'
+		width: wp('30%')
 	},
 	button:{
 		width:'60%',
@@ -260,7 +265,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderRadius:9
 	},
-	
+
  })
 
 export default Login;
