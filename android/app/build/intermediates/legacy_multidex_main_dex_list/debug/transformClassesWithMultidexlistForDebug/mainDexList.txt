@@ -141,6 +141,7 @@ androidx/viewpager/widget/ViewPager$DecorView.class
 androidx/viewpager2/widget/ViewPager2$OffscreenPageLimit.class
 androidx/viewpager2/widget/ViewPager2$Orientation.class
 androidx/viewpager2/widget/ViewPager2$ScrollState.class
+com/RNFetchBlob/RNFetchBlobPackage.class
 com/digifactbeta/ActivityStarterReactPackage.class
 com/digifactbeta/BuildConfig.class
 com/digifactbeta/EventEmitterModule.class

@@ -16,7 +16,7 @@ const DteOptions = ({
     isVisible,
     onViewDte,
     onCancelDte,
-    onResendDte,
+    onReprintDte,
     onCloseModal,
     dteStatus,
 }) => {
@@ -32,6 +32,9 @@ const DteOptions = ({
             >
             <TouchableOpacity  onPress={()=>onViewDte()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>VER DOCUMENTO</Text>
+            </TouchableOpacity>
+            <TouchableOpacity  onPress={()=>onReprintDte()} style={styles.sectionTouch}>
+                <Text style={styles.sectionTouchText}>REIMPRIMIR DOCUMENTO</Text>
             </TouchableOpacity>
             {(dteStatus == 1 ) &&
             <TouchableOpacity  onPress={()=>onCancelDte()} style={styles.sectionTouch}>

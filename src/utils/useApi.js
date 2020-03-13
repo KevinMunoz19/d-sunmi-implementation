@@ -1,8 +1,14 @@
 import React,{useState} from 'react';
-
+import base64 from 'react-native-base64';
+import {PermissionsAndroid, Alert} from "react-native";
+import RNFetchBlob from 'rn-fetch-blob'
 import fb from 'rn-fetch-blob'
 import { Global } from '@jest/types';
 const  DOMParser = require('xmldom').DOMParser;
+
+
+
+
 delete Global.XMLHttpRequest;
 const useApi = ()=>{
 
@@ -110,6 +116,141 @@ const useApi = ()=>{
             }).then(response=>{
                 return response.json()
             }).then(response=>{
+                if(response.Codigo == 1){
+                    res(response.ResponseDATA3)
+                }else{
+                    rej('Documento No Valido');
+                }
+            }).catch(err=>{
+                console.log(err);
+                rej('Error obteniendo documento')
+            })
+        })
+    }
+
+    const download = (token)=>{
+
+      const { config, fs } = RNFetchBlob
+      let PictureDir = fs.dirs.PictureDir // this is the pictures directory. You can check the available directories in the wiki.
+      let options = {
+        fileCache: true,
+        addAndroidDownloads : {
+          useDownloadManager : true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
+          notification : false,
+          path:  PictureDir + "/me_", // this is the path where your downloaded file will live in
+          description : 'Downloading image.'
+        }
+      }
+      config(options).fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=000000123456&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=34EB322D-5754-4856-AAF5-3D120EAB0C50`,{
+        method:'GET',
+        headers:{
+            'Authorization':token
+        }
+      }).then((response) => {
+        if(response.Codigo == 1){
+            res(response.ResponseDATA3)
+        }else{
+            rej('Documento No Valido pdf download');
+        }
+      }).catch(err=>{
+          console.log(err);
+          rej('Error obteniendo documento download')
+      })
+
+    }
+
+
+    const getBillXML = (token,nit,id,cant,prec,desc,res,rej)=>{
+      console.log("Entrada a get bill xml")
+        loginOld({username:null,password:null},()=>{
+          fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=XML&GUID=${id}`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
+                method:'GET',
+                headers:{
+                    'Authorization':token
+                }
+            })
+            //.then(res => res.text())
+            .then(res=>{
+                return res.json()
+            })
+            .then(response=>{
+                console.log("Resultado res")
+                //console.log(response);
+                console.log(typeof response);
+                if(response.Codigo == 1){
+                  res(response.ResponseDATA1)
+                  var xmlString = base64.decode(response.ResponseDATA1);
+                  console.log("xml decoded")
+                  console.log(typeof xmlString)
+                  //console.log(xmlString)
+                  let domparser = new DOMParser();
+                  let xmlStringF = domparser.parseFromString(xmlString, "text/xml");
+                  console.log("xml decoded F")
+                  //console.log(xmlStringF)
+                  console.log(typeof xmlStringF)
+                  console.log(xmlStringF.getElementsByTagName('dte:Direccion')[0].firstChild.data); //emisor
+                  console.log(xmlStringF.getElementsByTagName('dte:NumeroAutorizacion')[0].firstChild.data);
+                  console.log(xmlStringF.getElementsByTagName('dte:FechaHoraCertificacion')[0].firstChild.data);
+                  console.log(xmlStringF.getElementsByTagName('dte:Direccion')[1].firstChild.data); //receptor
+                  //console.log(xmlStringF.getElementsByTagName("dte:DatosGenerales").attributes);
+
+                  let x = xmlStringF.getElementsByTagName("dte:Item");
+                  var cantidades = '';
+                  var precios = '';
+                  var descripciones = '';
+                  let y = x[0].getElementsByTagName("dte:Cantidad")[0].childNodes[0].nodeValue;
+                  console.log(y)
+                  for (i = 0; i < x.length; i++) {
+                    let canti = x[i].getElementsByTagName("dte:Cantidad")[0].childNodes[0].nodeValue;
+                    let preci = x[i].getElementsByTagName("dte:Precio")[0].childNodes[0].nodeValue;
+                    let descri = x[i].getElementsByTagName("dte:Descripcion")[0].childNodes[0].nodeValue;
+                    cantidades = cantidades+`${canti},`;
+                    precios = precios+`${preci},`;
+                    descripciones = descripciones+`${descri},`;
+                  }
+                  console.log("cantidad")
+                  console.log(cantidades);
+                  console.log("descripciones")
+                  console.log(descripciones);
+                  console.log("precios")
+                  console.log(precios);
+
+                  cant(cantidades.substring(0,cantidades.length -1));
+                  prec(descripciones.substring(0,descripciones.length -1));
+                  desc(precios.substring(0,precios.length -1));
+
+
+
+                }else{
+                    rej('Documento No Valido');
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+                rej('Error obteniendo documento')
+            })
+        })
+    }
+
+
+
+
+    const getBillSave = (token,nit,id,res,rej)=>{
+      console.log("Entrada a get bill save")
+      console.log(token)
+      console.log(nit)
+      console.log(id)
+        loginOld({username:null,password:null},()=>{
+          fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
+                method:'GET',
+                headers:{
+                    'Authorization':token
+                }
+            }).then(response=>{
+                return response.json()
+            }).then(response=>{
                 console.log(response);
                 if(response.Codigo == 1){
                     res(response.ResponseDATA3)
@@ -122,6 +263,8 @@ const useApi = ()=>{
             })
         })
     }
+
+
 
     const getBillBack = (id,res,rej)=>{
         loginOld({username:null,password:null},()=>{
@@ -323,8 +466,11 @@ const useApi = ()=>{
        login,
        sendBill,
        getBill,
+       getBillXML,
+       getBillSave,
        validateNit,
        getRequestor,
+       download,
        //validateNitNuevo,
        cancelBill,
        getInfo

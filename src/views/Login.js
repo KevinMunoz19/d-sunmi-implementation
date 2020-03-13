@@ -13,7 +13,8 @@ import {
 	ImageBackground,
 	TouchableOpacity,
 	Alert,
-	ActivityIndicator
+	ActivityIndicator,
+	ScrollView,
 }	from 'react-native';
 
 
@@ -116,6 +117,7 @@ const Login = () =>{
 		// 		</TouchableOpacity>
 		// 	</View>
 		// </ImageBackground >
+		<ScrollView style={{backgroundColor:'white',flex:1}}>
 		<View style={loginStyles.primaryContainer}>
 			<View style={loginStyles.headerContainer}>
 
@@ -173,6 +175,7 @@ const Login = () =>{
 				</TouchableOpacity>
 			</View>
 		</View>
+		</ScrollView>
 	);
 }
 const loginStyles = StyleSheet.create({
@@ -208,7 +211,7 @@ const loginStyles = StyleSheet.create({
 	},
 	inputContainer:{
 		paddingTop:'2%',
-		width: wp('40%'),
+		width: wp('30%'),
 		//width:'70%',
 		textAlign:'center',
 		flexDirection:'row',
@@ -217,11 +220,11 @@ const loginStyles = StyleSheet.create({
 		borderBottomWidth:1,
 	},
 	input:{
-		width: wp('30%')
+		width: wp('20%')
 	},
 	button:{
-		width:'60%',
-		height:'30%',
+		width:'50%',
+		height:'90%',
 		backgroundColor:'#828B95',
 		alignItems:'center',
 		justifyContent:'center'
@@ -260,7 +263,7 @@ const styles = StyleSheet.create({
 	sendButton:{
 		backgroundColor:'#26A657',
 		width:'40%',
-		height:'5%',
+		height:'15%',
 		textAlign: 'center',
 		justifyContent: 'center',
 		borderRadius:9

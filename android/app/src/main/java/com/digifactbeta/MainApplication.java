@@ -5,6 +5,7 @@ import android.app.Application;
 import org.pgsqlite.SQLitePluginPackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -31,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
 
 
       //return Arrays.asList(
-              //new MainReactPackage()
+              //new MainReactPackage(),
+            new RNFetchBlobPackage();
             //new RNSendIntentPackage(),
       //        new MyModulePackage()
 
@@ -45,6 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new SwPackage());
       packages.add(new ActivityStarterReactPackage());
       packages.add(new PrintPackage());
+
 
       return packages;
     }

@@ -208,3 +208,93 @@ const getInfo = (nit, calle, rej)=>{
           res();
       })
   }
+
+  const getBillXML = (token,nit,id,res,rej)=>{
+    console.log("Entrada a get bill xml")
+      loginOld({username:null,password:null},()=>{
+        fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=XML&GUID=${id}`,{
+          //fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
+              method:'GET',
+              headers:{
+                  'Authorization':token
+              }
+          }).then(response=>{
+              return response.json()
+          })
+
+
+
+
+
+          .then(response=>{
+              console.log(response);
+              if(response.Codigo == 1){
+                res(response.ResponseDATA1)
+                var xmlString = base64.decode(response.ResponseDATA1);
+                console.log("xml decoded")
+                console.log(xmlString)
+                let domparser = new DOMParser();
+
+
+                let xmlStringF = domparser.parseFromString(xmlString, "text/xml").documentElement;
+                console.log("xml decoded F")
+                console.log(xmlStringF)
+                console.log(typeof xmlStringF)
+                //console.log(base64.decode(response.ResponseDATA1));
+                //console.log(base64.decode(response.ResponseDATA1).getElementsByTagName("dte:NombreCorto")[0].firstChild.data)
+                //var XMLParser = require('react-xml-parser');
+                //var xml = new XMLParser().parseFromString(xmlString);    // Assume xmlText contains the example XML
+                console.log(xml);
+                console.log("tipo")
+                console.log(typeof xml);
+                //console.log(xml.getElementsByTagName('dte:NombreCorto')[0].firstChild);
+
+              }else{
+                  rej('Documento No Valido');
+              }
+          })
+          .catch(err=>{
+              console.log(err);
+              rej('Error obteniendo documento')
+          })
+      })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  .then(response=>{
+      console.log(response);
+      if(response.Codigo == 1){
+        res(response.ResponseDATA1)
+        var xmlString = base64.decode(response.ResponseDATA1);
+        console.log("xml decoded")
+        console.log(xmlString)
+        let domparser = new DOMParser();
+
+
+        let xmlStringF = domparser.parseFromString(xmlString, "text/xml").documentElement;
+        console.log("xml decoded F")
+        console.log(xmlStringF)
+        console.log(typeof xmlStringF)
+        //console.log(base64.decode(response.ResponseDATA1));
+        //console.log(base64.decode(response.ResponseDATA1).getElementsByTagName("dte:NombreCorto")[0].firstChild.data)
+        //var XMLParser = require('react-xml-parser');
+        //var xml = new XMLParser().parseFromString(xmlString);    // Assume xmlText contains the example XML
+        console.log(xml);
+        console.log("tipo")
+        console.log(typeof xml);
+        //console.log(xml.getElementsByTagName('dte:NombreCorto')[0].firstChild);
+
+      }else{
+          rej('Documento No Valido');
+      }
+  })

@@ -25,23 +25,33 @@ import useDte from "../utils/useDte";
 import useUser from '../utils/useUser';
 import DteOptions from './DteOptions.component';
 
-
-
-//const activityStarter = NativeModules.ActivityStarter;
-//const eventEmitterModule = NativeModules.EventEmitter;
-
-
+import fb from 'rn-fetch-blob'
 
 const DteBox = ({dte,setPdfSource}) =>{
 
-    const {getBill} = useApi();
+    const {getBill,getBillXML, getInfo} = useApi();
     const {cancelDte} = useDte();
     const {getUser} = useUser();
 
     const [loading,setLoading] = useState(false);
     const [user,setUser] = useState();
     const [optionModalVisible,setOptionModalVisible] = useState(false);
+		const [xmldata,setXmldata] = useState('');
 
+		const [nn,setNn] = useState('');
+		const [calle,setCalle] = useState('');
+		const [direccion,setDireccion] = useState('');
+		const [zona,setZona] = useState('');
+		const [frases,setFrases] = useState('');
+		const [afiliacion,setAfiliacion] = useState('');
+		const [zipc,setZipc] = useState('');
+		const [nombreComercial,setNombreComercial] = useState('');
+		const [direccionComercial,setDireccionComercial] = useState('');
+		const [cantidadesString,setCantidadesString] = useState('');
+		const [preciosString,setPreciosString] = useState('');
+		const [descripcionesString,setDescripcionesString] = useState('');
+
+		const [numEstablecimiento,setNumEstablecimiento] = useState();
 
     useEffect(()=>{
 		getUser((userInfo)=>{
@@ -49,22 +59,58 @@ const DteBox = ({dte,setPdfSource}) =>{
 		})
     },[])
 
+		useEffect(()=>{
+
+		})
+
     const onAction = ()=>{
+			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+			setNumEstablecimiento(0);
+			getInfo(newnitfetch, (nom)=>{
+				 setNn(nom.toString())
+				},(ca)=>{
+					setCalle(ca.toString())
+				},
+				(dir)=>{
+					setDireccion(dir.toString())
+				},
+				(zon)=>{
+					setZona(zon.toString())
+				},
+				(fr)=>{
+					setFrases(fr.toString())
+				},
+				(af)=>{
+					setAfiliacion(af.toString())
+				},
+				(zpc)=>{
+					setZipc(zpc.toString())
+				},
+				(nomc)=>{
+					setNombreComercial(nomc.toString())
+				},
+				(dirc)=>{
+					setDireccionComercial(dirc.toString())
+				},
+				(err)=>{
+					if(err==200){
+						Alert.alert('Error de conexion');
+					}else{
+						Alert.alert(err);
+					}
+				});
         setOptionModalVisible(true);
-        // setLoading(true);
-        // getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
-        //     setPdfSource(source);
-        //     setLoading(false);
-        // },(err)=>{
-        //     setLoading(false);
-        //     Alert.alert(err);
-        // })
     };
 
     const onViewDte = ()=>{
         setOptionModalVisible(false);
         setLoading(true);
-        getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
+				//getBillXML(user.token,user.string_nit,dte.auth_number, (xmldata)=>{
+				//	setXmldata(xmldata);
+				//},(err)=>{
+				//	Alert.alert(err);
+				//});
+				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
             setPdfSource(source);
             setLoading(false);
         },(err)=>{
@@ -72,6 +118,68 @@ const DteBox = ({dte,setPdfSource}) =>{
             Alert.alert(err);
         })
     }
+
+
+		const onReprintDte = ()=>{
+			//resend(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),totaldte.toString())
+
+			var numeroserie = dte.serie;
+			var numero = dte.number;
+			var numeroaut = dte.auth_number;
+			var fechadte = dte.date;
+			var nombrereceptor = dte.receiver_name;
+			var nitreceptor = dte.receiver_nit;
+			var totaldte = dte.amount;
+
+
+			console.log("entrada a reprint");
+			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+
+
+
+			getBillXML(user.token,user.string_nit,dte.auth_number, (ca)=>{
+				setCantidadesString(ca);
+			},
+			(pr)=>{
+				setPreciosString(pr.toString())
+			},
+			(des)=>{
+				setDescripcionesString(des.toString())
+			},
+			(re)=>{
+				setXmldata(re);
+			},
+			(err)=>{
+				Alert.alert(err);
+			});
+
+			console.log(`resultados cantidades ${cantidadesString}`)
+
+
+
+
+			getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
+				setXmldata(source);
+				let nitstring = user.string_nit;
+				var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+				setLoading(false);
+			},(err)=>{
+					setLoading(false);
+					Alert.alert(err);
+			})
+
+
+
+
+
+			setOptionModalVisible(false);
+			setLoading(false);
+
+		}
+
+
+
+
     const onCancelDte = ()=>{
         // solicitar eliminar el documento
         setOptionModalVisible(false);
@@ -103,9 +211,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
     }
-    const onResendDte = ()=>{
 
-    }
 
 		//const onImprimirDte = () => {
 			//activityStarter.navigateToExample("Hello")
@@ -122,7 +228,7 @@ const DteBox = ({dte,setPdfSource}) =>{
                     isVisible = {true}
                     onViewDte = {onViewDte}
                     onCancelDte = {onCancelDte}
-                    onResendDte = {onResendDte}
+                    onReprintDte = {onReprintDte}
                     onCloseModal = {onCloseModal}
                     dteStatus = {dte.status}
 

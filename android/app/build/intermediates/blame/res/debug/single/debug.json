@@ -705,7 +705,7 @@
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_provider_paths.xml.flat",
-        "source": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\node_modules\\react-native-image-picker\\android\\build\\intermediates\\packaged_res\\debug\\xml\\provider_paths.xml"
+        "source": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\node_modules\\rn-fetch-blob\\android\\build\\intermediates\\packaged_res\\debug\\xml\\provider_paths.xml"
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_search_dropdown_item_icons_2line.xml.flat",
