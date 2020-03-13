@@ -26,6 +26,7 @@ import useUser from '../utils/useUser';
 import DteOptions from './DteOptions.component';
 
 import fb from 'rn-fetch-blob'
+const printer = NativeModules.PrintModule;
 
 const DteBox = ({dte,setPdfSource}) =>{
 
@@ -50,6 +51,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 		const [cantidadesString,setCantidadesString] = useState('');
 		const [preciosString,setPreciosString] = useState('');
 		const [descripcionesString,setDescripcionesString] = useState('');
+		const [fl,setFl] = useState(false);
 
 		const [numEstablecimiento,setNumEstablecimiento] = useState();
 
@@ -60,12 +62,12 @@ const DteBox = ({dte,setPdfSource}) =>{
     },[])
 
 		useEffect(()=>{
+			setNumEstablecimiento(0);
 
 		})
 
     const onAction = ()=>{
 			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
-			setNumEstablecimiento(0);
 			getInfo(newnitfetch, (nom)=>{
 				 setNn(nom.toString())
 				},(ca)=>{
@@ -99,7 +101,81 @@ const DteBox = ({dte,setPdfSource}) =>{
 						Alert.alert(err);
 					}
 				});
+
+
+				getBillXML(user.token,user.string_nit,dte.auth_number, (ca)=>{
+					setCantidadesString(ca);
+				},
+				(pr)=>{
+					setPreciosString(pr.toString())
+				},
+				(des)=>{
+					setDescripcionesString(des.toString())
+				},
+				(re)=>{
+					setXmldata(re);
+				},
+				(err)=>{
+					Alert.alert(err);
+				});
         setOptionModalVisible(true);
+    };
+
+
+		const fetchdata = ()=>{
+
+			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+			getInfo(newnitfetch, (nom)=>{
+				 setNn(nom.toString())
+				},(ca)=>{
+					setCalle(ca.toString())
+				},
+				(dir)=>{
+					setDireccion(dir.toString())
+				},
+				(zon)=>{
+					setZona(zon.toString())
+				},
+				(fr)=>{
+					setFrases(fr.toString())
+				},
+				(af)=>{
+					setAfiliacion(af.toString())
+				},
+				(zpc)=>{
+					setZipc(zpc.toString())
+				},
+				(nomc)=>{
+					setNombreComercial(nomc.toString())
+				},
+				(dirc)=>{
+					setDireccionComercial(dirc.toString())
+				},
+				(err)=>{
+					if(err==200){
+						Alert.alert('Error de conexion');
+					}else{
+						Alert.alert(err);
+					}
+				});
+
+
+				getBillXML(user.token,user.string_nit,dte.auth_number, (ca)=>{
+					setCantidadesString(ca);
+				},
+				(pr)=>{
+					setPreciosString(pr.toString())
+				},
+				(des)=>{
+					setDescripcionesString(des.toString())
+				},
+				(re)=>{
+					setXmldata(re);
+				},
+				(err)=>{
+					Alert.alert(err);
+				});
+				onReprintDte();
     };
 
     const onViewDte = ()=>{
@@ -121,59 +197,43 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
 		const onReprintDte = ()=>{
-			//resend(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),totaldte.toString())
-
-			var numeroserie = dte.serie;
-			var numero = dte.number;
-			var numeroaut = dte.auth_number;
-			var fechadte = dte.date;
-			var nombrereceptor = dte.receiver_name;
-			var nitreceptor = dte.receiver_nit;
-			var totaldte = dte.amount;
 
 
-			console.log("entrada a reprint");
-			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+			if (cantidadesString == null){
+				//setOptionModalVisible(false);
+				fetchdata();
+			}else{
+
+				setLoading(true);
+
+				var numeroserie = dte.serie;
+				var numero = dte.number;
+				var numeroaut = dte.auth_number;
+				var fechadte = dte.date;
+				var nombrereceptor = dte.receiver_name;
+				var nitreceptor = dte.receiver_nit;
+				var totaldte = dte.amount;
 
 
-
-			getBillXML(user.token,user.string_nit,dte.auth_number, (ca)=>{
-				setCantidadesString(ca);
-			},
-			(pr)=>{
-				setPreciosString(pr.toString())
-			},
-			(des)=>{
-				setDescripcionesString(des.toString())
-			},
-			(re)=>{
-				setXmldata(re);
-			},
-			(err)=>{
-				Alert.alert(err);
-			});
-
-			console.log(`resultados cantidades ${cantidadesString}`)
-
-
-
-
-			getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
-				setXmldata(source);
-				let nitstring = user.string_nit;
+				console.log("entrada a reprint");
 				var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+
+				console.log(`resultados cantidades ${cantidadesString}`)
+
+				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
+					setXmldata(source);
+					printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
+					//setLoading(false);
+				},(err)=>{
+						setLoading(false);
+						Alert.alert(err);
+				})
+
+				setOptionModalVisible(false);
 				setLoading(false);
-			},(err)=>{
-					setLoading(false);
-					Alert.alert(err);
-			})
+			}
 
 
-
-
-
-			setOptionModalVisible(false);
-			setLoading(false);
 
 		}
 
