@@ -7,7 +7,7 @@ import DB from './DB';
 const useDte = (props) => {
     const [dteString,setDteString] = useState('');
     const [dte,setDte] = useState({});
-    const {sendBill,cancelBill, getRequestor, getInfo} = useApi();
+    const {sendBill,cancelBill, getRequestor, getInfo, sendemailBill} = useApi();
     const {insert} = DB();
 
     const [requestor,setRequestor] = useState('');
@@ -174,7 +174,6 @@ const useDte = (props) => {
     }
 
     const generateFrasesString = (frases)=>{
-
       var frasestrim = frases.trim();
       var arrayfrases = frasestrim.split('|');
       var frasesString = ``;
@@ -193,18 +192,57 @@ const useDte = (props) => {
   }
 
 
+  const generateEmailString = (user,doc,email,res,rej)=>{
+
+    var id = doc.toString().trim().substring(15).substring(0,-3);
+    console.log("id");
+    console.log(typeof id)
+    console.log(id);
 
 
+      var nit = user.string_nit;
+      var guid = '97AF9235-5D69-4BCA-9AD6-1AF2D0892C5E';
+      var stringdata1 =
+        `
+        <Dictionary name="StoredXmlSelector"><Entry k="Store" v="issued"/><Entry k="IssuerCountryCode" v="GT"/><Entry k="IssuerTaxId" v="${nit}"/><Entry k="DocumentGUID" v="${guid}"/></Dictionary>
+        `;
+      var stringEncoded = base64.encode(stringdata1);
+
+      var stringdata2 =
+        `
+        <Procesamiento><Dictionary name="email"><Entry k="from" v="pruebaemail@documentagface.com"/><Entry k="fromName" v="usuarioTESTdocumentagface"/><Entry k="to" v="${email}"/><Entry k="subject" v="Factura Electronica"/><Entry k="formats" v="pdf"/><Entry k="body template name" v="mail_default_${nit}.html"/></Dictionary></Procesamiento>
+        `;
+      var stringEncoded2 = base64.encode(stringdata2);
 
 
-
-
-
-
-
-
-
-
+      var xmlStringEmail =
+      `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Body>
+          <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+          <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+          <Transaction>QUEUE_FOR_DISTRIBUTION</Transaction>
+          <Country>GT</Country>
+          <Entity>000000123456</Entity>
+          <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+          <UserName>GT.000000123456.admon</UserName>
+          <Data1>${stringEncoded}</Data1>
+          <Data2>${stringEncoded2}</Data2>
+          <Data3></Data3>
+          </RequestTransaction>
+      </soap:Body>
+      </soap:Envelope>`
+      ;
+      console.log("body string")
+      console.log(typeof xmlStringEmail)
+      console.log(xmlStringEmail);
+      sendemailBill(xmlStringEmail,(response)=>{
+          console.log(response);
+          res(response)
+      },(err)=>{
+          rej(err);
+      })
+  }
 
     const saveDte = (encode,receiverName,receiverNit)=>{
         let xmlString = base64.decode(encode);
@@ -298,7 +336,8 @@ const useDte = (props) => {
     return {
         generateTotals,
         generateString,
-        cancelDte
+        cancelDte,
+        generateEmailString,
 	};
 
 }

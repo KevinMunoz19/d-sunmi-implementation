@@ -261,13 +261,12 @@ public class PrintModule extends ReactContextBaseJavaModule{
                         String precioItem = item.getString("price");
                         String nombreItem = item.getString("name");
                         String cantidadItem = item.getString("quantity");
-                        int precio = Integer.parseInt(precioItem);
-                        int cantidad = Integer.parseInt(cantidadItem);
-                        int precioTotal = precio * cantidad;
+                        double precio = Double.parseDouble(precioItem);
+                        double cantidad = Double.parseDouble(cantidadItem);
+                        double precioTotal = precio * cantidad;
                         String subTotal = String.valueOf(precioTotal);
-                        if (nombreItem.length() >=6){
-                            String nombreItemRemoved = nombreItem.substring(0,5);
-                        }
+                        int maxLength = (nombreItem.length() < 5)?nombreItem.length():5;
+                        nombreItem = nombreItem.substring(0, maxLength);
 
                         String formatedDataVenta = String.format("%-6s %-6s %-6s %-6s", cantidadItem, nombreItem, "Q"+precioItem,  "Q"+precioTotal);
                         sendStringDataBT(formatedDataVenta,1,0,0);
@@ -305,6 +304,24 @@ public class PrintModule extends ReactContextBaseJavaModule{
     //public void print(String response) {
     public void reprint(String nombre, String nombrecomercial, String direccioncomercial, String nitcomercial, String numeroserie, String numero, String numeroaut, String fecha, String receptor, String nitreceptor, String cantidades, String descripciones, String precios, String total) {
 
+
+
+        String[] arraycantidad = cantidades.split(",");
+        int length = nombrecomercial.length();
+        int lengthitems = arraycantidad[0].length();
+        if (length<=1 && lengthitems<=1){
+            BluetoothAdapter btAdapter = PrintModule.getBTAdapter();
+            BluetoothDevice device = PrintModule.getDevice(btAdapter);
+            BluetoothSocket socket = null;
+            try {
+                socket = PrintModule.getSocket(device);
+                sendStringDataBT(" ",1,0,0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+
+
         try {
             // String vars to store data from json object related to document emitter
             String tipoDocumentoTributario = "Documento Tributario Electronico";
@@ -331,7 +348,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
             String formatedTitleVenta = String.format("%-6s %-6s %-6s %-6s", "Cant.", "Des.", "Uni.",  "Tot.");
             String formatedTotalVenta = String.format("%8s     %12s      ", "Total", "Q"+total);
 
-            String[] arraycantidad = cantidades.split(",");
+
             String[] arraydescripcion = descripciones.split(",");
             String[] arrayprecio = precios.split(",");
 
@@ -359,18 +376,17 @@ public class PrintModule extends ReactContextBaseJavaModule{
             sendStringDataBT(formatedTitleVenta,1,1,0);
             for (int i=0; i < arraycantidad.length; i++) {
 
-                int precio = Integer.parseInt(arrayprecio[i]);
-                int cantidad = Integer.parseInt(arraycantidad[i]);
-                int precioTotal = precio * cantidad;
+                double precio = Double.parseDouble(arrayprecio[i]);
+                double cantidad = Double.parseDouble(arraycantidad[i]);
+                double precioTotal = precio * cantidad;
                 String subTotal = String.valueOf(precioTotal);
 
-                if (arraydescripcion[i].length() >=6){
-                    arraydescripcion[i] = arraydescripcion[i].substring(0,5);
-                }
+                int maxLength = (arraydescripcion[i].length() < 5)?arraydescripcion[i].length():5;
+                arraydescripcion[i] = arraydescripcion[i].substring(0, maxLength);
 
                 String formatedDataVenta = String.format("%-6s %-6s %-6s %-6s", arraycantidad[i], arraydescripcion[i], "Q"+arrayprecio[i],  "Q"+subTotal);
                 sendStringDataBT(formatedDataVenta,1,0,0);
-                sendStringDataBT(Integer.toString(arraycantidad.length),1,0,0);
+
             }
             sendStringDataBT(formatedTotalVenta,1,0,0);
             sendStringDataBT(separador,1,0,1);
@@ -386,6 +402,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
         }
 
     }

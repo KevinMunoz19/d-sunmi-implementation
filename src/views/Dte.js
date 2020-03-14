@@ -67,7 +67,7 @@ const Dte = () =>{
 	const [products,setProducts] = useState([]);
 	const [total,setTotal] = useState(0);
 	const [subTotal,setSubTotal] = useState(0);
-	const {generateTotals,generateString} = useDte();
+	const {generateTotals,generateString,generateEmailString} = useDte();
 	const {getUser} = useUser();
 	const [user,setUser] = useState();
 	const {findByNit} = useClientForm();
@@ -95,6 +95,8 @@ const Dte = () =>{
 	const [direccionComercial,setDireccionComercial] = useState('');
 
 	const [numEstablecimiento,setNumEstablecimiento] = useState();
+
+	const [autorizacion,setAutorizacion] = useState('');
 
 	//const [singleZipc,setSingleZipc] = useState('');
 	//const [singleNombreComercial,setSingleNombreComercial] = useState('');
@@ -272,12 +274,21 @@ const Dte = () =>{
 		}
 	}
 
+
+
 	const onClosePdf = ()=>{
 		setPdfModalVisible(false);
 		var query = `select * from dte where id=(select max(id) from dte)`;
 		select(query,[],(ldoc)=>{
 				setDocumento(ldoc);
 		})
+
+		var query = `select auth_number from dte where id=(select max(id) from dte)`;
+		select(query,[],(ldoc)=>{
+				setAutorizacion(ldoc);
+		})
+
+
 		setVisibleButton(true);
 	}
 
@@ -285,6 +296,16 @@ const Dte = () =>{
 	const onPrint = () => {
 		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
 		Actions.home();
+	}
+	const onGenerateE = ()=> {
+		generateEmailString(userSend,autorizacion,email, (res)=>{
+			console.log('res ->',res)
+
+		},(err)=>{
+			console.log('error',err);
+			setLoading(false);
+			Alert.alert(`Ocurrio un error enviando el documento, por favor intete luego`);
+		});
 	}
 
 	return(
@@ -418,8 +439,6 @@ const Dte = () =>{
 							/>
 						</View>
 						{/* </View> */}
-
-
 					</View>
 					<View style={{width:'100%',alignItems:'center',marginBottom:10}}>
 						<SectionDivider width={'80%'} sectionName={'IVA 12 %'}/>
@@ -506,17 +525,6 @@ const Dte = () =>{
 						</TouchableOpacity>
 					</View>
 
-					<View style={styles.generateBillButtonContainer}>
-						<TouchableOpacity onPress={() => Linking.openURL(`mailto:${email}?subject=Factura Electronica Digifact&body=Description`)} style={styles.actionButton}>
-							<Icon
-								name="add"
-								color="#26A657"
-								size={50}
-								style={styles.icon}
-							/>
-							<Text >Mandar Correo</Text>
-						</TouchableOpacity>
-					</View>
 
 
 
@@ -536,6 +544,21 @@ const Dte = () =>{
 								style={styles.icon}
 							/>
 							<Text >Imprimir Factura</Text>
+						</TouchableOpacity>
+					}
+					</View>
+					<View style={styles.generateBillButtonContainer}>
+					{visibleButton &&
+						<TouchableOpacity
+							onPress={onGenerateE}
+							style={styles.actionButton}>
+							<Icon
+								name="add"
+								color="#26A657"
+								size={50}
+								style={styles.icon}
+							/>
+							<Text >Mandar Factura por Correo</Text>
 						</TouchableOpacity>
 					}
 					</View>

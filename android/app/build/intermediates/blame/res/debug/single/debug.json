@@ -1,15 +1,15 @@
 [
     {
-        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
-        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\bce2ee9d2cffcd0452ebec1d5520ec2b\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
+        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_half_black_16dp.png.flat",
+        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_layout_snackbar_include.xml.flat",
         "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\b931ac4f385f7f3dafae5d2c90ecb121\\res\\layout\\design_layout_snackbar_include.xml"
     },
     {
-        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_half_black_16dp.png.flat",
-        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png"
+        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
+        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\bce2ee9d2cffcd0452ebec1d5520ec2b\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -56,12 +56,12 @@
         "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_bottom_sheet_slide_out.xml.flat",
-        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\b931ac4f385f7f3dafae5d2c90ecb121\\res\\anim\\design_bottom_sheet_slide_out.xml"
-    },
-    {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_popup_enter.xml.flat",
         "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_bottom_sheet_slide_out.xml.flat",
+        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\b931ac4f385f7f3dafae5d2c90ecb121\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
@@ -944,16 +944,16 @@
         "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\drawable-mdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_design_ic_visibility.png.flat",
-        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\b931ac4f385f7f3dafae5d2c90ecb121\\res\\drawable-xhdpi-v4\\design_ic_visibility.png"
+        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
+        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_nav_default_pop_enter_anim.xml.flat",
         "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\1b73d046e5a0e796cc720b56f7753f5e\\res\\anim\\nav_default_pop_enter_anim.xml"
     },
     {
-        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
-        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
+        "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_design_ic_visibility.png.flat",
+        "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\b931ac4f385f7f3dafae5d2c90ecb121\\res\\drawable-xhdpi-v4\\design_ic_visibility.png"
     },
     {
         "merged": "C:\\Users\\Digifact003\\Desktop\\d-sunmi\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_vector_test.xml.flat",

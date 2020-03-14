@@ -24,6 +24,7 @@ import useApi from "../utils/useApi";
 import useDte from "../utils/useDte";
 import useUser from '../utils/useUser';
 import DteOptions from './DteOptions.component';
+import base64 from 'react-native-base64';
 
 import fb from 'rn-fetch-blob'
 const printer = NativeModules.PrintModule;
@@ -197,15 +198,11 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
 		const onReprintDte = ()=>{
-
-
 			if (cantidadesString == null){
 				//setOptionModalVisible(false);
 				fetchdata();
 			}else{
-
 				setLoading(true);
-
 				var numeroserie = dte.serie;
 				var numero = dte.number;
 				var numeroaut = dte.auth_number;
@@ -213,13 +210,9 @@ const DteBox = ({dte,setPdfSource}) =>{
 				var nombrereceptor = dte.receiver_name;
 				var nitreceptor = dte.receiver_nit;
 				var totaldte = dte.amount;
-
-
 				console.log("entrada a reprint");
 				var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
-
 				console.log(`resultados cantidades ${cantidadesString}`)
-
 				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
 					setXmldata(source);
 					printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
@@ -228,15 +221,10 @@ const DteBox = ({dte,setPdfSource}) =>{
 						setLoading(false);
 						Alert.alert(err);
 				})
-
 				setOptionModalVisible(false);
 				setLoading(false);
 			}
-
-
-
 		}
-
 
 
 
@@ -289,6 +277,7 @@ const DteBox = ({dte,setPdfSource}) =>{
                     onViewDte = {onViewDte}
                     onCancelDte = {onCancelDte}
                     onReprintDte = {onReprintDte}
+										onGenerateEmailString = {onGenerateEmailString}
                     onCloseModal = {onCloseModal}
                     dteStatus = {dte.status}
 

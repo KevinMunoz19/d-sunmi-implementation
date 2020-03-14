@@ -36,7 +36,7 @@ const useApi = ()=>{
 
 
     const loginOld = (body,res) =>{
-      console.log("Entrada a login old")
+
         //return fetch('https://felgtaws.digifact.com.gt/felapi/api/login/get_token',{
         return fetch('https://felgt.digifact.com.gt/gt.com.fact.felapi/api/login/get_token',{
 
@@ -46,7 +46,7 @@ const useApi = ()=>{
                 'Content-Type': 'application/json',
             }
         }).then(response=>{
-            console.log("login old response");
+
             return response.json();
         }).then(response=>{
             res();
@@ -80,6 +80,8 @@ const useApi = ()=>{
             })
         })
     }
+
+
     const cancelBill = (token,nit,id,body,res,rej)=>{
         loginOld({username:null,password:null},()=>{
             fetch(`https://felgtaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=ANULAR_FEL_TOSIGN&FORMAT=PDF`,{
@@ -160,7 +162,7 @@ const useApi = ()=>{
     }
 
 
-    const getBillXML = (token,nit,id,cant,prec,desc,res,rej)=>{
+    const getBillXML = (token,nit,id,cant,desc,prec,res,rej)=>{
       console.log("Entrada a get bill xml")
         loginOld({username:null,password:null},()=>{
           fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=XML&GUID=${id}`,{
@@ -217,8 +219,9 @@ const useApi = ()=>{
                   console.log(precios);
 
                   cant(cantidades.substring(0,cantidades.length -1));
-                  prec(descripciones.substring(0,descripciones.length -1));
                   desc(precios.substring(0,precios.length -1));
+                  prec(descripciones.substring(0,descripciones.length -1));
+
 
 
 
@@ -308,6 +311,31 @@ const useApi = ()=>{
         })
     }
 
+
+
+
+    const sendemailBill = (body,res,rej)=>{
+      console.log("send bill email entrada");
+        loginOld({username:null,password:null},()=>{
+          fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+            //fetch(`https://felgttestaws.digifact.com.gt/felapi/api/FELRequest?NIT=${nit}&TIPO=CERTIFICATE_DTE_XML_TOSIGN&FORMAT=PDF XML`,{
+                method:'POST',
+                body:body,
+                headers: {
+                    'Content-Type': 'text/xml',
+                }
+            }).then(response=>{
+                console.log(response)
+            }).catch(err=>{
+                console.log('sendemailBill',err);
+                rej(err);
+            })
+        })
+    }
+
+
+
+
     const validateNit = (nit,cb,rej)=>{
       console.log(nit);
       console.log(typeof nit)
@@ -326,7 +354,7 @@ const useApi = ()=>{
                     <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
                     <UserName>GT.000000123456.admon</UserName>
                     <Data1>GetAllDestinatariesLike</Data1>
-                    <Data2>GT|123456|${nit}|</Data2>\
+                    <Data2>GT|123456|${nit}|</Data2>
                     <Data3></Data3>
                     </RequestTransaction>
                 </soap:Body>
@@ -473,7 +501,8 @@ const useApi = ()=>{
        download,
        //validateNitNuevo,
        cancelBill,
-       getInfo
+       getInfo,
+       sendemailBill,
 	};
 }
 
