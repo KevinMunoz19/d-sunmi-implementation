@@ -193,15 +193,22 @@ const useDte = (props) => {
 
 
   const generateEmailString = (user,doc,email,res,rej)=>{
-
-    var id = doc.toString().trim().substring(15).substring(0,-3);
-    console.log("id");
-    console.log(typeof id)
-    console.log(id);
-
+    //var id = doc.toString().trim().substring(15).substring(0,-3);
+    var id = JSON.stringify(doc);
+    //console.log("id");
+    //console.log(typeof id)
+    //console.log(id.replace("[","").replace("]",""));
+    //console.log(JSON.parse(id.replace("[","").replace("]","")))
+    var idjsonstring = id.replace("[","").replace("]","");
+    var idjson = JSON.parse(id.replace("[","").replace("]",""));
+    console.log("json parse");
+    console.log(JSON.parse(id));
+    console.log("Value");
+    console.log(idjson.auth_number);
 
       var nit = user.string_nit;
-      var guid = '97AF9235-5D69-4BCA-9AD6-1AF2D0892C5E';
+      var guid = idjson.auth_number;
+      //var guid = '97AF9235-5D69-4BCA-9AD6-1AF2D0892C5E';
       var stringdata1 =
         `
         <Dictionary name="StoredXmlSelector"><Entry k="Store" v="issued"/><Entry k="IssuerCountryCode" v="GT"/><Entry k="IssuerTaxId" v="${nit}"/><Entry k="DocumentGUID" v="${guid}"/></Dictionary>

@@ -130,36 +130,7 @@ const useApi = ()=>{
         })
     }
 
-    const download = (token)=>{
 
-      const { config, fs } = RNFetchBlob
-      let PictureDir = fs.dirs.PictureDir // this is the pictures directory. You can check the available directories in the wiki.
-      let options = {
-        fileCache: true,
-        addAndroidDownloads : {
-          useDownloadManager : true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
-          notification : false,
-          path:  PictureDir + "/me_", // this is the path where your downloaded file will live in
-          description : 'Downloading image.'
-        }
-      }
-      config(options).fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=000000123456&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=34EB322D-5754-4856-AAF5-3D120EAB0C50`,{
-        method:'GET',
-        headers:{
-            'Authorization':token
-        }
-      }).then((response) => {
-        if(response.Codigo == 1){
-            res(response.ResponseDATA3)
-        }else{
-            rej('Documento No Valido pdf download');
-        }
-      }).catch(err=>{
-          console.log(err);
-          rej('Error obteniendo documento download')
-      })
-
-    }
 
 
     const getBillXML = (token,nit,id,cant,desc,prec,res,rej)=>{
@@ -498,8 +469,6 @@ const useApi = ()=>{
        getBillSave,
        validateNit,
        getRequestor,
-       download,
-       //validateNitNuevo,
        cancelBill,
        getInfo,
        sendemailBill,

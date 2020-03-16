@@ -304,8 +304,6 @@ public class PrintModule extends ReactContextBaseJavaModule{
     //public void print(String response) {
     public void reprint(String nombre, String nombrecomercial, String direccioncomercial, String nitcomercial, String numeroserie, String numero, String numeroaut, String fecha, String receptor, String nitreceptor, String cantidades, String descripciones, String precios, String total) {
 
-
-
         String[] arraycantidad = cantidades.split(",");
         int length = nombrecomercial.length();
         int lengthitems = arraycantidad[0].length();
@@ -406,16 +404,6 @@ public class PrintModule extends ReactContextBaseJavaModule{
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
     private static byte[] boldOn() {

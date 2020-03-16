@@ -198,11 +198,12 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
 		const onReprintDte = ()=>{
+			setLoading(true);
 			if (cantidadesString == null){
 				//setOptionModalVisible(false);
 				fetchdata();
 			}else{
-				setLoading(true);
+				//setLoading(true);
 				var numeroserie = dte.serie;
 				var numero = dte.number;
 				var numeroaut = dte.auth_number;
@@ -216,7 +217,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
 					setXmldata(source);
 					printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
-					//setLoading(false);
+					setLoading(false);
 				},(err)=>{
 						setLoading(false);
 						Alert.alert(err);
@@ -277,7 +278,7 @@ const DteBox = ({dte,setPdfSource}) =>{
                     onViewDte = {onViewDte}
                     onCancelDte = {onCancelDte}
                     onReprintDte = {onReprintDte}
-										onGenerateEmailString = {onGenerateEmailString}
+										//onGenerateEmailString = {onGenerateEmailString}
                     onCloseModal = {onCloseModal}
                     dteStatus = {dte.status}
 
