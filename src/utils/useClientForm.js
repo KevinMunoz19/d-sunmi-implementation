@@ -20,7 +20,7 @@ const useClientForm = (callback) => {
 
 	const {select,insert} = DB();
 
-  	const handleInputChange = (name,value) => {
+  const handleInputChange = (name,value) => {
 	  setInputs(inputs => ({...inputs, [name]: value}));
 	}
 
@@ -78,7 +78,6 @@ const useClientForm = (callback) => {
 						onSelect(client[0]);
 					})
 				}
-
 			});
 		} else {
 			Alert.alert('Todos los campos son requeridos!');
@@ -92,8 +91,8 @@ const useClientForm = (callback) => {
 	}
 
 	return {
-	    handleSubmit,
-	    handleInputChange,
+	  handleSubmit,
+	  handleInputChange,
 		inputs,
 		setInputs,
 		findByNit

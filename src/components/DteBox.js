@@ -68,7 +68,8 @@ const DteBox = ({dte,setPdfSource}) =>{
 		})
 
     const onAction = ()=>{
-			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+			//var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+			var newnitfetch = user.string_nit;
 			getInfo(newnitfetch, (nom)=>{
 				 setNn(nom.toString())
 				},(ca)=>{
@@ -124,8 +125,8 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
 		const fetchdata = ()=>{
-
-			var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+			//var newnitfetch = user.string_nit.replace(/0+(?!$)/,'');
+			var newnitfetch = user.string_nit;
 			getInfo(newnitfetch, (nom)=>{
 				 setNn(nom.toString())
 				},(ca)=>{
@@ -212,11 +213,22 @@ const DteBox = ({dte,setPdfSource}) =>{
 				var nitreceptor = dte.receiver_nit;
 				var totaldte = dte.amount;
 				console.log("entrada a reprint");
-				var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+				//var newnitfetch = user.string_nit.replace(/0+(?!$)/,'');
+				var newnitfetch = user.string_nit;
+				var nombreComercial = "LA FATTORIA PIZZERIA";
+				var direccionComercial = "16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA";
 				console.log(`resultados cantidades ${cantidadesString}`)
 				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
 					setXmldata(source);
-					printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
+					console.log(source);
+					try{
+						console.log(nombreComercial);
+						console.log(typeof nombreComercial);
+						console.log()
+						printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
+					}catch(error){
+						Alert.alert("No se encuentra una impresora Bluetooth conectada");
+					}
 					setLoading(false);
 				},(err)=>{
 						setLoading(false);

@@ -1,5 +1,4 @@
 import React, {Fragment,useState,useEffect} from 'react';
-
 import {
 	Text,
 	View,
@@ -13,8 +12,6 @@ import {
 	BackHandler,
 	ActivityIndicator
 }	from 'react-native';
-
-
 import useClientForm from '../utils/useClientForm'
 import Icon from "react-native-vector-icons/MaterialIcons";
 import useApi from '../utils/useApi';
@@ -28,28 +25,15 @@ const Client = ({id,client,action,onSelect}) =>{
 	const [isNit,setIsNit]=useState(false);
 	const [loading,setLoading]=useState(false);
 	const [kValue,setKValue] = useState(false);
-
-
-
 	const [requestor,setRequestor] = useState('');
 	const [taxId,setTaxId] = useState('');
-
 	const [calle,setCalle] = useState('');
 	const [direccion,setDireccion] = useState('');
 	const [colonia,setColonia] = useState('');
 	const [zona,setZona] = useState('');
 	const [frases,setFrases] = useState('');
 	const [afiliacion,setAfiliacion] = useState('');
-
 	const [nn,setNn] = useState('');
-
-
-
-
-
-
-
-
 
 	BackHandler.addEventListener('hardwareBackPress', function() {
 		Actions.home();
@@ -57,7 +41,6 @@ const Client = ({id,client,action,onSelect}) =>{
 	});
 
 	useEffect(() => {
-
 		if(action == 'edit'){
 			client.zipCode = client.zip_code;
 			setInputs(client);
@@ -72,7 +55,6 @@ const Client = ({id,client,action,onSelect}) =>{
 	}
 
 	const searchNit = ()=>{
-
 		if (kValue==true){
 			if (nit.substr(nit.length -1) != "K")
 			setNit(nit.concat('K'));
@@ -81,12 +63,10 @@ const Client = ({id,client,action,onSelect}) =>{
 				setNit(nit.substring(0, nit.length - 1));
 			}
 		}
-
 		setLoading(true);
 		validateNit(nit,(name)=>{
 			setLoading(false);
 			handleInputChange('name',name.toString());
-			//handleInputChange('name',name);
 			setIsNit(true);
 		},(err)=>{
 			handleInputChange('name',err);
@@ -97,18 +77,7 @@ const Client = ({id,client,action,onSelect}) =>{
 			}
 			setLoading(false);
 		});
-
-
-
 	}
-
-
-
-
-
-
-
-
 
 
 	return(
@@ -139,14 +108,13 @@ const Client = ({id,client,action,onSelect}) =>{
 						</View>
 				</View>
 				<View>
-
-
 					<View style={styles.inputContainer}>
 						<Text>Nit</Text>
 						<TextInput
 							onChangeText={(e)=>{changeNit(e)}}
 							onBlur={searchNit}
-							value={`${inputs.nit | '' }`}
+							//value={`${inputs.nit | '' }`}
+							value={inputs.nit}
 							style={styles.input}
 							//keyboardType = 'numeric'
 						/>
@@ -198,6 +166,7 @@ const Client = ({id,client,action,onSelect}) =>{
 							onChangeText={(e)=>{handleInputChange('email',e)}}
 							value={inputs.email}
 							style={styles.input}
+							keyboardType = 'email-address'
 						/>
 					</View>
 
@@ -216,7 +185,7 @@ const Client = ({id,client,action,onSelect}) =>{
 							onChangeText={(e)=>{handleInputChange('zipCode',e)}}
 							value={inputs.zipCode}
 							style={styles.input}
-							// keyboardType = 'numeric'
+							keyboardType = 'numeric'
 						/>
 					</View>
 
@@ -237,8 +206,6 @@ const Client = ({id,client,action,onSelect}) =>{
 							style={styles.input}
 						/>
 					</View>
-
-
 					{(action == 'edit') && (
 						<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
 							<Icon
@@ -276,7 +243,6 @@ const Client = ({id,client,action,onSelect}) =>{
 			</ScrollView>
 		// </ImageBackground>
 	);
-
 }
 
 const styles = StyleSheet.create({
@@ -296,15 +262,14 @@ const styles = StyleSheet.create({
 	actionButton:{
 		backgroundColor:'black',
 		marginTop:5,
-        flexDirection:'row',
-        backgroundColor:'white',
-        borderBottomColor:'#26A657',
-        borderTopColor:'#26A657',
-        borderBottomWidth:1,
-        borderTopWidth:1,
-        justifyContent:'center',
-        alignItems:'center'
-    }
-
+    flexDirection:'row',
+    backgroundColor:'white',
+    borderBottomColor:'#26A657',
+    borderTopColor:'#26A657',
+    borderBottomWidth:1,
+    borderTopWidth:1,
+    justifyContent:'center',
+    alignItems:'center'
+  }
 });
 export default Client;

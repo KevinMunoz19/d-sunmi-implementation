@@ -33,13 +33,16 @@ const DteOptions = ({
             <TouchableOpacity  onPress={()=>onViewDte()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>VER DOCUMENTO</Text>
             </TouchableOpacity>
+            {(dteStatus == 1 ) &&
             <TouchableOpacity  onPress={()=>onReprintDte()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>REIMPRIMIR DOCUMENTO</Text>
             </TouchableOpacity>
+            }
             {(dteStatus == 1 ) &&
             <TouchableOpacity  onPress={()=>onCancelDte()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>ANULAR DOCUMENTO</Text>
-            </TouchableOpacity>}
+            </TouchableOpacity>
+            }
             <TouchableOpacity  onPress={()=>onCloseModal()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>CERRAR</Text>
             </TouchableOpacity>

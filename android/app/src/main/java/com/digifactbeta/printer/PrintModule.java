@@ -232,8 +232,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
 
 
                     sendStringDataBT(nombre,1,1,0);
-                    sendStringDataBT(nombreComercialNuevo,1,0,0);
-                    sendStringDataBT(direccion,1,0,0);
+                    sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
+                    sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
                     sendStringDataBT("NIT: "+nitComercio,1,0,0);
                     //sendStringDataBT(direccionComercio,1,0,0);
                     sendStringDataBT(separador,1,0,1);
@@ -305,9 +305,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
     public void reprint(String nombre, String nombrecomercial, String direccioncomercial, String nitcomercial, String numeroserie, String numero, String numeroaut, String fecha, String receptor, String nitreceptor, String cantidades, String descripciones, String precios, String total) {
 
         String[] arraycantidad = cantidades.split(",");
-        int length = nombrecomercial.length();
         int lengthitems = arraycantidad[0].length();
-        if (length<=1 && lengthitems<=1){
+        if (lengthitems<=0){
             BluetoothAdapter btAdapter = PrintModule.getBTAdapter();
             BluetoothDevice device = PrintModule.getDevice(btAdapter);
             BluetoothSocket socket = null;
@@ -318,8 +317,6 @@ public class PrintModule extends ReactContextBaseJavaModule{
                 e.printStackTrace();
             }
         }else {
-
-
         try {
             // String vars to store data from json object related to document emitter
             String tipoDocumentoTributario = "Documento Tributario Electronico";
@@ -351,8 +348,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
             String[] arrayprecio = precios.split(",");
 
             sendStringDataBT(nombre,1,1,0);
-            sendStringDataBT(nombreComercialNuevo,1,0,0);
-            sendStringDataBT(direccioncomercial,1,0,0);
+            sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
+            sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
             sendStringDataBT("NIT: "+nitcomercial,1,0,0);
             //sendStringDataBT(direccionComercio,1,0,0);
             sendStringDataBT(separador,1,0,1);

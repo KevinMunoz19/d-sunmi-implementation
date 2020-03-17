@@ -11,7 +11,6 @@ if(Platform.OS == 'ios'){
         console.warn('error', error);
     })
 }else{
-
     var conn = SQLite.openDatabase({name:'test.db',createFromLocation:'~example.db'},(ok)=>{
         console.warn('connect db ok');
     },

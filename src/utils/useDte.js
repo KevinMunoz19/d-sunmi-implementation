@@ -5,34 +5,24 @@ var DOMParser = require('xmldom').DOMParser;
 import DB from './DB';
 
 const useDte = (props) => {
-    const [dteString,setDteString] = useState('');
-    const [dte,setDte] = useState({});
-    const {sendBill,cancelBill, getRequestor, getInfo, sendemailBill} = useApi();
-    const {insert} = DB();
+  const [dteString,setDteString] = useState('');
+  const [dte,setDte] = useState({});
+  const {sendBill,cancelBill, getRequestor, getInfo, sendemailBill} = useApi();
+  const {insert} = DB();
+  const [requestor,setRequestor] = useState('');
+  const [taxId,setTaxId] = useState('');
+  const [colonia,setColonia] = useState('');
+  const [zona,setZona] = useState('');
+  const [frases,setFrases] = useState('');
+  const [afiliacion,setAfiliacion] = useState('');
 
-    const [requestor,setRequestor] = useState('');
-    const [taxId,setTaxId] = useState('');
-
-    //const [calle,setCalle] = useState('');
-    //const [direccion,setDireccion] = useState('');
-    const [colonia,setColonia] = useState('');
-    const [zona,setZona] = useState('');
-    const [frases,setFrases] = useState('');
-    const [afiliacion,setAfiliacion] = useState('');
-    //const [nn,setNn] = useState('');
-
-
-
-
-
-
-    const cancelDte = (user,dteInfo,res,rej)=>{
-        console.warn(dteInfo.date);
-        var tzoffset = (new Date()).getTimezoneOffset()*60000;
-        var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
-        var body = `
-        <?xml version='1.0' encoding='utf-8'?>
-            <dte:GTAnulacionDocumento xmlns:dte="http://www.sat.gob.gt/dte/fel/0.1.0"
+  const cancelDte = (user,dteInfo,res,rej)=>{
+    console.warn(dteInfo.date);
+    var tzoffset = (new Date()).getTimezoneOffset()*60000;
+    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
+    var body = `
+      <?xml version='1.0' encoding='utf-8'?>
+        <dte:GTAnulacionDocumento xmlns:dte="http://www.sat.gob.gt/dte/fel/0.1.0"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 Version="0.1">
                 <dte:SAT>
@@ -43,55 +33,34 @@ const useDte = (props) => {
                     </dte:AnulacionDTE>
                 </dte:SAT>
             </dte:GTAnulacionDocumento>
-        `;
-        console.log(body);
-        cancelBill(user.token,user.string_nit,dteInfo.auth_number,body,()=>{
-            var query = `UPDATE dte set status = ? where auth_number = ?`;
-            insert(query,[0,dteInfo.auth_number],(result)=>{
-                res();
-            },(err)=>{
-                rej("Error actualizando el estado del documento a 'ANULADO'")
-            })
-        },(err)=>{
-            rej(err)
-        })
-    }
-
-
-
+    `;
+    console.log(body);
+    cancelBill(user.token,user.string_nit,dteInfo.auth_number,body,()=>{
+      var query = `UPDATE dte set status = ? where auth_number = ?`;
+      insert(query,[0,dteInfo.auth_number],(result)=>{
+      res();
+    },(err)=>{
+      rej("Error actualizando el estado del documento a 'ANULADO'")
+    })
+    },(err)=>{
+      rej(err)
+    })
+  }
 
     const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial,numeroEstablecimiento, res,rej)=>{
         var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
+        //var issueNit=user.string_nit;
         var {frasesString} = generateFrasesString(frases);
-
         var tzoffset = (new Date()).getTimezoneOffset()*60000;
         var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
-        console.log("Fecha Actual");
-        console.log(localISOTime);
-
         var zcArray = zipcode.trim().split('|');
-        //var arrayzipcodes = zipcodestrim.split('|');
-
         var ncArray = nombreComercial.trim().split('|');
-
-        //var nombrecString = nombrecarray[0];
-
         var dcArray = direccionComercial.trim().split('|');
-        //var dcString = direccioncomercialarray[0];
-        //NombreComercial="${ncArray[0].substring(2)}"
-
-        console.log(dcArray[numeroEstablecimiento].substring(2));
-        console.log(products);
-
         var dcClean = dcArray[numeroEstablecimiento].replace(/ +(?= )/g,'');
-
         var num = numeroEstablecimiento+1;
         var numeroEstablecimientoString = num.toString();
-
         var issueName=user.name;
-
-        //`${calle} ${direccion} ZONA ${zona}`;
         var issueMunicipality="Guatemala";
         var issueDepartment="Guatemala";
         if(cf){
@@ -103,7 +72,8 @@ const useDte = (props) => {
             var receiverDepartment = 101;
         }else{
             var receiverName = client.name;
-            var receiverNit = client.nit.replace(/0+(?!$)/,'');
+            //var receiverNit = client.nit.replace(/0+(?!$)/,'');
+            var receiverNit = client.nit;
             var receiverAddress = client.address;
             var receiverZipCode = client.zip_code;
             var receiverMunicipality = client.municipality;
@@ -123,7 +93,7 @@ const useDte = (props) => {
                     <dte:DatosEmision ID="DatosEmision">
                         <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${localISOTime}" Tipo="FACT"/>
                         <dte:Emisor AfiliacionIVA="${afiliacion}"
-                            NombreComercial="${ncArray[numeroEstablecimiento].substring(2)}"
+                            NombreComercial="${ncArray[numeroEstablecimiento].substring(3)}"
                             CodigoEstablecimiento="${numeroEstablecimientoString}"
                             NombreEmisor="${nn}"
                             NITEmisor="${issueNit}">
@@ -162,6 +132,7 @@ const useDte = (props) => {
             </dte:SAT>
         </dte:GTDocumento>
         `;
+        console.log("Generar Factura API")
         console.log(xmlString);
         sendBill(xmlString,user.string_nit,user.token,(response)=>{
             console.log(response.ResponseDATA3);
@@ -193,22 +164,15 @@ const useDte = (props) => {
 
 
   const generateEmailString = (user,doc,email,res,rej)=>{
-    //var id = doc.toString().trim().substring(15).substring(0,-3);
     var id = JSON.stringify(doc);
-    //console.log("id");
-    //console.log(typeof id)
-    //console.log(id.replace("[","").replace("]",""));
-    //console.log(JSON.parse(id.replace("[","").replace("]","")))
     var idjsonstring = id.replace("[","").replace("]","");
     var idjson = JSON.parse(id.replace("[","").replace("]",""));
     console.log("json parse");
     console.log(JSON.parse(id));
     console.log("Value");
     console.log(idjson.auth_number);
-
       var nit = user.string_nit;
       var guid = idjson.auth_number;
-      //var guid = '97AF9235-5D69-4BCA-9AD6-1AF2D0892C5E';
       var stringdata1 =
         `
         <Dictionary name="StoredXmlSelector"><Entry k="Store" v="issued"/><Entry k="IssuerCountryCode" v="GT"/><Entry k="IssuerTaxId" v="${nit}"/><Entry k="DocumentGUID" v="${guid}"/></Dictionary>
@@ -220,8 +184,6 @@ const useDte = (props) => {
         <Procesamiento><Dictionary name="email"><Entry k="from" v="pruebaemail@documentagface.com"/><Entry k="fromName" v="usuarioTESTdocumentagface"/><Entry k="to" v="${email}"/><Entry k="subject" v="Factura Electronica"/><Entry k="formats" v="pdf"/><Entry k="body template name" v="mail_default_${nit}.html"/></Dictionary></Procesamiento>
         `;
       var stringEncoded2 = base64.encode(stringdata2);
-
-
       var xmlStringEmail =
       `<?xml version="1.0" encoding="utf-8"?>
       <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -240,89 +202,79 @@ const useDte = (props) => {
       </soap:Body>
       </soap:Envelope>`
       ;
-      console.log("body string")
-      console.log(typeof xmlStringEmail)
-      console.log(xmlStringEmail);
       sendemailBill(xmlStringEmail,(response)=>{
-          console.log(response);
           res(response)
       },(err)=>{
           rej(err);
       })
   }
 
-    const saveDte = (encode,receiverName,receiverNit)=>{
-        let xmlString = base64.decode(encode);
-        console.log('xmlString',xmlString);
-        let xml = new DOMParser().parseFromString(xmlString, "text/xml").documentElement;
-        var authNumberTag = xml.getElementsByTagName("dte:NumeroAutorizacion")[0];
-        var total = xml.getElementsByTagName("dte:GranTotal")[0].firstChild.data;
-        var authNumber = authNumberTag.firstChild.data;
-        var dteNumber = authNumberTag.getAttribute('Numero');
-        var serie = authNumberTag.getAttribute('Serie');
-        var tzoffset = (new Date()).getTimezoneOffset()*60000;
-        var fecha = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).replace("T"," ");
-        //var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,DATETIME('now'),?,?,?,?)`;
-        var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,?,?,?,?,?)`;
-        insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber],(result)=>{
-            console.log('DTE registrado con exito');
-        },(err)=>{
-            console.log('ocurrio un error registrando el dte', err);
-        })
-        console.log('otros' ,authNumber,dteNumber,serie);
+  const saveDte = (encode,receiverName,receiverNit)=>{
+    let xmlString = base64.decode(encode);
+    let xml = new DOMParser().parseFromString(xmlString, "text/xml").documentElement;
+    var authNumberTag = xml.getElementsByTagName("dte:NumeroAutorizacion")[0];
+    var total = xml.getElementsByTagName("dte:GranTotal")[0].firstChild.data;
+    var authNumber = authNumberTag.firstChild.data;
+    var dteNumber = authNumberTag.getAttribute('Numero');
+    var serie = authNumberTag.getAttribute('Serie');
+    var tzoffset = (new Date()).getTimezoneOffset()*60000;
+    var fecha = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).replace("T"," ");
+    //var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,DATETIME('now'),?,?,?,?)`;
+    var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,?,?,?,?,?)`;
+    insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber],(result)=>{
+      console.log('DTE registrado con exito');
+    },(err)=>{
+      console.log('ocurrio un error registrando el dte', err);
+    })
+      console.log('otros' ,authNumber,dteNumber,serie);
+  }
+
+  const generateItemString = (products,client,cf,iva)=>{
+
+    var totalAmount = 0;
+	  var totalTaxAmount = 0;
+    var itemsString = ``;
+    if(iva > 0 ){
+      var taxShortName = 'IVA';
+      var taxCodeNumber = 1;
+    }else{
+      var taxShortName = 'CERO';
+      var taxCodeNumber = 2;
     }
-
-    const generateItemString = (products,client,cf,iva)=>{
-
-
-        var totalAmount = 0;
-	    var totalTaxAmount = 0;
-        var itemsString = ``;
-        if(iva > 0 ){
-            var taxShortName = 'IVA';
-            var taxCodeNumber = 1;
-        }else{
-            var taxShortName = 'CERO';
-            var taxCodeNumber = 2;
-        }
-
-        products.forEach((product,i)=>{
-
-
-            //buscar tipo de bien o servicio
-            // buscar tipos de medidas
-            var taxableAmount = iva == 0?(product.price * product.quantity) : (product.price / ((iva * 0.01) + 1)) * product.quantity;
-            var taxAmount = (iva * 0.01) * taxableAmount;
-            var totalItemAmount = product.price * product.quantity;
-            totalAmount += totalItemAmount;
-            totalTaxAmount += taxAmount;
-            itemsString = itemsString+
-            `
-                <dte:Item NumeroLinea="${i+1}" BienOServicio="B">
-                    <dte:Cantidad>${product.quantity}</dte:Cantidad>
-                    <dte:UnidadMedida>CA</dte:UnidadMedida>
-                    <dte:Descripcion>${product.name}</dte:Descripcion>
-                    <dte:PrecioUnitario>${product.price}</dte:PrecioUnitario>
-                    <dte:Precio>${totalItemAmount.toFixed(2)}</dte:Precio>
-                    <dte:Descuento>0</dte:Descuento>
-                    <dte:Impuestos>
-                        <dte:Impuesto>
-                            <dte:NombreCorto>${taxShortName}</dte:NombreCorto>
-                            <dte:CodigoUnidadGravable>${taxCodeNumber}</dte:CodigoUnidadGravable>
-                            <dte:MontoGravable>${taxableAmount.toFixed(2)}</dte:MontoGravable>
-                            <dte:MontoImpuesto>${taxAmount.toFixed(2)}</dte:MontoImpuesto>
-                        </dte:Impuesto>
-                    </dte:Impuestos>
-                    <dte:Total>${totalItemAmount.toFixed(2)}</dte:Total>
-            </dte:Item>
-            `;
-
-        });
-        return {
-            itemsString,
-            totalAmount,
-            totalTaxAmount
-        }
+    products.forEach((product,i)=>{
+      //buscar tipo de bien o servicio
+      // buscar tipos de medidas
+      var taxableAmount = iva == 0?(product.price * product.quantity) : (product.price / ((iva * 0.01) + 1)) * product.quantity;
+      var taxAmount = (iva * 0.01) * taxableAmount;
+      var totalItemAmount = product.price * product.quantity;
+      totalAmount += totalItemAmount;
+      totalTaxAmount += taxAmount;
+      itemsString = itemsString+
+        `
+        <dte:Item NumeroLinea="${i+1}" BienOServicio="B">
+          <dte:Cantidad>${product.quantity}</dte:Cantidad>
+          <dte:UnidadMedida>CA</dte:UnidadMedida>
+          <dte:Descripcion>${product.name}</dte:Descripcion>
+          <dte:PrecioUnitario>${product.price}</dte:PrecioUnitario>
+          <dte:Precio>${totalItemAmount.toFixed(2)}</dte:Precio>
+          <dte:Descuento>0</dte:Descuento>
+          <dte:Impuestos>
+              <dte:Impuesto>
+              <dte:NombreCorto>${taxShortName}</dte:NombreCorto>
+              <dte:CodigoUnidadGravable>${taxCodeNumber}</dte:CodigoUnidadGravable>
+              <dte:MontoGravable>${taxableAmount.toFixed(2)}</dte:MontoGravable>
+              <dte:MontoImpuesto>${taxAmount.toFixed(2)}</dte:MontoImpuesto>
+            </dte:Impuesto>
+          </dte:Impuestos>
+          <dte:Total>${totalItemAmount.toFixed(2)}</dte:Total>
+        </dte:Item>
+        `;
+      });
+      return {
+        itemsString,
+        totalAmount,
+        totalTaxAmount
+      }
     }
 
     const generateTotals = (products,iva,setTotal,setSubTotal)=>{

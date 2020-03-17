@@ -1,39 +1,65 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-    
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Envío de DTE</title>
+	<style>
+		p			{color:#e1e1e1;
+						font-family: "Trebuchet MS", Helvetica, sans-serif;
+						font-size: 20px;
+						padding: 15px 200px;
+						text-shadow: 1px 1px 0 #000,
+              1px 1px 0 #000,
+            	1px 1px 0 #000;
+              1px 1px 0 #000;
+					}
+		td    {padding: 0px;}
+		#info		{background: url(https://scontent.fgua2-1.fna.fbcdn.net/v/t1.0-9/p960x960/87396962_2999771836784467_4318779140149870592_o.jpg?_nc_cat=110&_nc_sid=2d5d41&_nc_oc=AQlkzFnJR3VUupDSigXljekkH4HfWbOAV9lBWrK3ZXLlTzeoNYTQjV0ci8tR26sBquU&_nc_ht=scontent.fgua2-1.fna&_nc_tp=6&oh=dc9eadb97805065e210ba526b7cc3c1b&oe=5E93F3A9);
+							background-size: auto;
+						}
+	</style>
 </head>
-<body bgcolor="#F3F4F5">
- 
-<table border="0" cellspacing="0" cellpadding="0">
+<body bgcolor="#ffffff">
+<table border="3" cellspacing="0" cellpadding="5" >
   <tr>
-   <td align="left" bgcolor="#5F5D62"><a href="https://test.digifact.com.gt/mx.com.fact.res/logo/AMARILLO/logo.jpg"><img src="https://test.digifact.com.gt/mx.com.fact.res/logo/AMARILLO/logo.jpg" alt="corporacion_amarillo" /></a></td>
+   <td align="center" bgcolor="#202020">
+		 <a href="https://www.lafattoriapizzeria.com/">
+			 <img src="https://www.lafattoriapizzeria.com/wp-content/uploads/2017/06/lafattoria-logo.png" alt="LaFattoria_Pizzeria" width="100px"/>
+		 </a>
+	 </td>
   </tr>
   <tr>
-    <td bgcolor="#999999">
-       <p><b><var>Subject|Factura Electrónica</var></b></p>
- <p style="font-family: Arial">Estimado cliente, gracias por su preferencia</p>
-<p style="font-family: Arial" align="justify">
- Le saludamos de <b>Corporación Amarillo, S.A</b>.
-Adjunto nos permitimos enviar la factura electrónica, generada el día <b><var>IssuedTimeStamp|dd/MM/yyyy</var></b> por el servicio de transporte brindado,
-   el monto de <b> <var>DCurrency</var> <var>DTotal|#,##0.00</var> </b>.<br/>
-<br/>
-  Para validar el documento electrónico adjunto, puede ingresar al la dirección web:<a href="https://www.digifact.com.gt/validadocumento.aspx">DIGIFACT</a>      
-  </p>
-<p style="font-family: Arial">Consulte los adjuntos, por favor.</p>
-<p style="font-family: Arial" align="center"><font color="yellow">--No responda a este correo--</font></p> 
-<hr/>
+    <td id="info"   bgcolor="#202020" >
+      <p><b><var>Subject|Factura Electrónica</var></b></p>
+
+ 		 	<p align="justify">
+				Estimado cliente, le saludamos de <b>La Fattoria Pizzeria</b>:
+			</p>
+			<p align="justify">
+				Adjunto nos permitimos enviar la factura electrónica, generada el día <b><var>IssuedTimeStamp|dd/MM/yyyy</var></b> por consumo de alimentos,
+   			el monto de <b> <var>DCurrency</var> <var>DTotal|#,##0.00</var> </b>.<br/>
+				<br/>
+  			Para validar el documento electrónico adjunto, puede ingresar al la dirección web: <a href="https://www.digifact.com.gt/validadocumento.aspx">DIGIFACT</a>
+  		</p>
+			<p>Adjunto a este correo se encuentra el Documento Tributario Electronico en archivo PDF.</p>
+			<p align="center"><font color="white" weight="bold"><b>-----No responda a este correo-----</b></font></p>
+			<hr/>
     </td>
   </tr>
-<tr>
-  <td align="right" bgcolor="#5F5D62"> <a href="https://test.digifact.com.gt/mx.com.fact.res/logo/AMARILLO/logobottom.png"><img src="https://test.digifact.com.gt/mx.com.fact.res/logo/AMARILLO/logobottom.png" alt="corporacion_amarillo" width="610px" /></a></td>
-</tr>
+	<tr>
+  	<td align="center" bgcolor="#202020">
+    	<a href="https://test.digifact.com.gt/mx.com.fact.res/logo/AMARILLO/logobottom.png">
+      	<img src="https://www.lafattoriapizzeria.com/wp-content/uploads/2017/06/lafattoria-toolbar.png" alt="LaFattoria_Pizzeria" width="200px" />
+    	</a>
+    	<a href="https://es-la.facebook.com/pizza.com.gt/">
+      	<img src="https://cdn.icon-icons.com/icons2/642/PNG/512/facebook_icon-icons.com_59205.png" alt="LaFattoria_Pizzeria" width="30" />
+    	</a>
+    	<a href="https://www.instagram.com/lafattoriapizzeria/">
+      	<img src="https://cdn.icon-icons.com/icons2/642/PNG/512/instagram_icon-icons.com_59207.png" alt="LaFattoria_Pizzeria" width="30" />
+    	</a>
+  	</td>
+	</tr>
 </table>
-
-
  <!-- <table style="visibility: hidden"  > <tr><td>Serie y Folio:</td><td><var>Batch</var><var>Serial</var></td></tr> <tr><td>Fecha de Emisión:</td><td><var>IssuedTimeStamp|dd/MM/yyyy</var></td></tr> <tr><td>Tipo de Comprobante:</td><td><var>Kind</var> (<var>SKind</var>)</td></tr> <tr><td>Monto Total:</td><td><var>DTotal|#,##0.00</var> <var>DCurrency</var></td></tr></table> 	-->
-
 </body>
 </html>

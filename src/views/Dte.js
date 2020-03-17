@@ -93,18 +93,8 @@ const Dte = () =>{
 	const [zipc,setZipc] = useState('');
 	const [nombreComercial,setNombreComercial] = useState('');
 	const [direccionComercial,setDireccionComercial] = useState('');
-
 	const [numEstablecimiento,setNumEstablecimiento] = useState();
-
 	const [autorizacion,setAutorizacion] = useState('');
-
-	//const [singleZipc,setSingleZipc] = useState('');
-	//const [singleNombreComercial,setSingleNombreComercial] = useState('');
-	//const [singleDireccionComercial,setSingleDireccionComercial] = useState('');
-
-
-
-
 
 	const radioProps = [
 		{label: 'Nit  ', value: false },
@@ -116,12 +106,9 @@ const Dte = () =>{
 		{label:'Exento',value:0}
 	]
 
-
-
 	useEffect(()=>{
 		generateTotals(products,iva,setTotal,setSubTotal)
 	},[products,iva])
-
 
 	useEffect(()=>{
 		if(pdfSource != null){
@@ -139,7 +126,6 @@ const Dte = () =>{
 	useEffect(()=>{
 		console.log('Cambio de user:');
 		setNumEstablecimiento(0);
-		//console.log('Cambio de user:', user);
 	},[user])
 
 
@@ -151,7 +137,6 @@ const Dte = () =>{
 		setEmail(client.email);
 		setNit(client.nit);
 		setClient(client);
-		//setNitTemporal(client.email);
 		setNit(client.nit);
 	}
 
@@ -214,7 +199,6 @@ const Dte = () =>{
 				Alert.alert(err);
 			}
 		});
-
 	}
 
 	const onProductRemove = (productToRemove)=>{
@@ -233,7 +217,6 @@ const Dte = () =>{
 
 	const onGenerate = ()=>{
 		setLoading(true);
-
 		if (user) {
 			if (email.trim().length > 0 ? validateEmail(email) : true){
 				if (products.length > 0) {
@@ -274,37 +257,31 @@ const Dte = () =>{
 		}
 	}
 
-
-
 	const onClosePdf = ()=>{
 		setPdfModalVisible(false);
 		var query = `select * from dte where id=(select max(id) from dte)`;
 		select(query,[],(ldoc)=>{
 				setDocumento(ldoc);
 		})
-
 		var query = `select auth_number from dte where id=(select max(id) from dte)`;
 		select(query,[],(ldoc)=>{
 				setAutorizacion(ldoc);
 		})
-
-
 		setVisibleButton(true);
 	}
-
 
 	const onPrint = () => {
 		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
 		Actions.home();
 	}
+
 	const onGenerateE = ()=> {
 		generateEmailString(userSend,autorizacion,email, (res)=>{
 			console.log('res ->',res)
-
 		},(err)=>{
 			console.log('error',err);
 			setLoading(false);
-			Alert.alert(`Ocurrio un error enviando el documento, por favor intete luego`);
+			Alert.alert(`Ocurrio un error enviando el documento por correo, por favor intete luego`);
 		});
 	}
 
@@ -323,19 +300,14 @@ const Dte = () =>{
 							/>
 						</TouchableOpacity>
 						<Clients action='select' onSelect={onClientSelect}></Clients>
-
-
-
 						<TouchableOpacity  onPress={()=>createClient(false)} style={styles.createModalButton}>
 							<Icon
 								name="add-circle"
-                                color="rgb(119,211,83)"
-                                size={50}
-                                style={styles.icon}
+                color="rgb(119,211,83)"
+                size={50}
+                style={styles.icon}
 							/>
 						</TouchableOpacity>
-
-
 
 					</Modal>
 					<Modal visible={createClientModalVisible}>
@@ -353,22 +325,22 @@ const Dte = () =>{
 					<Modal visible={productModalVisible}>
 						<TouchableOpacity  onPress={()=>setProductModalVisible(false)} style={styles.closeModalButton}>
 							<Icon
-                                name="keyboard-arrow-left"
-                                color="black"
+                name="keyboard-arrow-left"
+                color="black"
 								size={50}
 								style={styles.icon}
-                            />
+              />
 						</TouchableOpacity>
 						<Products action='select' onSelect={onProductSelect}></Products>
 					</Modal>
 					<Modal visible={createProductModalVisible}>
 						<TouchableOpacity  onPress={()=>setCreateProductModalVisible(false)} style={styles.closeModalButton}>
 							<Icon
-                                name="keyboard-arrow-left"
-                                color="black"
+                name="keyboard-arrow-left"
+                color="black"
 								size={50}
 								style={styles.icon}
-                            />
+              />
 						</TouchableOpacity>
 						<Product action='create' onSelect={onProductSelect}></Product>
 					</Modal>
@@ -525,13 +497,6 @@ const Dte = () =>{
 						</TouchableOpacity>
 					</View>
 
-
-
-
-
-
-
-
 					<View style={styles.generateBillButtonContainer}>
 					{visibleButton &&
 						<TouchableOpacity
@@ -575,18 +540,15 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		flex: 1
 	},
-
 	javaBtn: {
 		height: 50,
 		width: 100,
 		backgroundColor: 'yellow'
 	},
-
-
 	createModalButton:{
 		flexDirection:'row',
 		justifyContent:'flex-end',
-        alignItems:'center'
+    alignItems:'center'
 	},
 	closeModalButton:{
 		flexDirection:'row'
@@ -626,19 +588,12 @@ const styles = StyleSheet.create({
 	nitContainer: {
 		flexDirection: 'row',
 		width:'80%'
-		// borderColor: '#000',
-		// borderWidth: 2
-		// justifyContent: 'space-between',
-		// borderBottomColor: '#DDDDDD',
-		// borderBottomWidth: 1,
 	},
 	nitInput: {
 		flex: 3,
 		marginRight: 20,
 		borderBottomColor: '#DDDDDD',
 		borderBottomWidth: 1,
-		// width: 80
-
 	},
 	clientListButton: {
 		padding: 10,
@@ -693,15 +648,15 @@ const styles = StyleSheet.create({
 	},
 	actionButton:{
 		marginTop:5,
-        flexDirection:'row',
-        backgroundColor:'white',
-        borderBottomColor:'#26A657',
-        borderTopColor:'#26A657',
-        borderBottomWidth:1,
-        borderTopWidth:1,
-        justifyContent:'center',
-        alignItems:'center'
-    }
+    flexDirection:'row',
+    backgroundColor:'white',
+    borderBottomColor:'#26A657',
+    borderTopColor:'#26A657',
+    borderBottomWidth:1,
+    borderTopWidth:1,
+    justifyContent:'center',
+    alignItems:'center'
+  }
 });
 
 export default Dte;
