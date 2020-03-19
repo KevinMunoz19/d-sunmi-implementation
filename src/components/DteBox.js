@@ -67,41 +67,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 		})
 
     const onAction = ()=>{
-			console.log("Informacion de Fattoria");
-			getInfo(9521127, (nom)=>{
-				console.log(nom);
-			},(ca)=>{
-				console.log(ca);
-			},
-			(dir)=>{
-				console.log(dir);
-			},
-			(zon)=>{
-				console.log(zon);
-			},
-			(fr)=>{
-				console.log(fr);
-			},
-			(af)=>{
-				console.log(af);
-			},
-			(zpc)=>{
-				console.log(zpc);
-			},
-			(nomc)=>{
-				console.log(nomc);
-			},
-			(dirc)=>{
-				dirc.replace(/ +(?= )/g,'');
-				console.log(dirc);
-			},
-			(err)=>{
-				if(err==200){
-					Alert.alert('Error de conexion');
-				}else{
-					Alert.alert(err);
-				}
-			});
+
 			//var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
 			var newnitfetch = user.string_nit;
 			getInfo(newnitfetch, (nom)=>{
@@ -154,7 +120,13 @@ const DteBox = ({dte,setPdfSource}) =>{
 				(err)=>{
 					Alert.alert(err);
 				});
-        setOptionModalVisible(true);
+
+				setTimeout(()=>{
+        	setOptionModalVisible(true);
+			},500);
+
+
+				setLoading(false);
     };
 
 
@@ -257,7 +229,9 @@ const DteBox = ({dte,setPdfSource}) =>{
 					try{
 						console.log(nombreComercial);
 						console.log(typeof nombreComercial);
-						printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
+						setTimeout(()=>{
+							printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
+						},500);
 					}catch(error){
 						Alert.alert("No se encuentra una impresora Bluetooth conectada");
 					}
