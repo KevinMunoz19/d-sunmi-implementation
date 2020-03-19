@@ -276,6 +276,12 @@ const Dte = () =>{
 
 	const onPrint = () => {
 		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
+		// reprint
+		setTimeout(()=>{
+			printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
+		},5000)
+
+
 		Actions.home();
 	}
 
