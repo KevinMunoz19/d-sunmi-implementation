@@ -24,16 +24,16 @@ const FirstTimeForm = () => {
     const {setUserInfo}  = useUser();
     const [loading,setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        contactName: null,
-        id: null,
-        nation: null,
-        job: null,
-        certificate: null,
-        certificateName:null,
-        cellphone: '+ 502',
-        email: '',
-        logo: null,
-        logoName:null
+        contactName: "DigifactApp",
+        id: "123456",
+        nation: "Guatemala",
+        job: "null",
+        certificate: "null",
+        certificateName:"null",
+        cellphone: '+ 502 12345678',
+        email: 'digifactapp@gmail.com',
+        logo: "null",
+        logoName:"null"
     });
 
     const handleInputChange = (newValue, key) => {

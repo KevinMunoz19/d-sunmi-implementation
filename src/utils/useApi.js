@@ -101,6 +101,7 @@ const useApi = ()=>{
   }
 
   const getBill = (token,nit,id,res,rej)=>{
+    console.log("Entrada a get bill");
     loginOld({username:null,password:null},()=>{
       fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
       //fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
@@ -113,6 +114,8 @@ const useApi = ()=>{
       }).then(response=>{
         if(response.Codigo == 1){
           res(response.ResponseDATA3)
+          console.log("get bill response");
+          console.log(response);
         }else{
           rej('Documento No Valido');
         }
@@ -124,6 +127,7 @@ const useApi = ()=>{
   }
 
   const getBillXML = (token,nit,id,cant,desc,prec,res,rej)=>{
+    console.log("entrada get bill xml");
     loginOld({username:null,password:null},()=>{
       fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=XML&GUID=${id}`,{
       //fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
@@ -262,7 +266,10 @@ const useApi = ()=>{
           'Content-Type': 'text/xml',
         }
       }).then(response=>{
+        console.log("Respuesta Send Bill Email")
         console.log(response)
+        console.log("Body")
+        console.log(body);
       }).catch(err=>{
         console.log('sendemailBill',err);
         rej(err);
@@ -390,6 +397,7 @@ const useApi = ()=>{
         }).then(response => response.text())
         .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
         .then(data => {
+          console.log("respuesta get info");
           if( data.getElementsByTagName("ResponseData1")[0].firstChild.data ==1) {
             name(data.getElementsByTagName("Nom")[0].firstChild.data);
             calle(data.getElementsByTagName("Ca")[0].firstChild.data);

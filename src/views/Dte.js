@@ -128,6 +128,10 @@ const Dte = () =>{
 		setNumEstablecimiento(0);
 	},[user])
 
+	useEffect(()=>{
+
+	})
+
 
 	const onClientSelect = (client)=>{
 		setTimeout(()=>{

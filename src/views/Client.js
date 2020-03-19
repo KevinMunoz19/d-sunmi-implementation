@@ -54,6 +54,12 @@ const Client = ({id,client,action,onSelect}) =>{
 		setNit(nit);
 	}
 
+	const changeNitK = (nit) =>{
+		newnitk = nit+'K';
+		handleInputChange('nit',newnitk);
+		setNit(newnitk);
+	}
+
 	const searchNit = ()=>{
 		if (kValue==true){
 			if (nit.substr(nit.length -1) != "K")
@@ -63,6 +69,8 @@ const Client = ({id,client,action,onSelect}) =>{
 				setNit(nit.substring(0, nit.length - 1));
 			}
 		}
+		console.log("entrada a search nit");
+		console.log(nit);
 		setLoading(true);
 		validateNit(nit,(name)=>{
 			setLoading(false);
@@ -120,7 +128,8 @@ const Client = ({id,client,action,onSelect}) =>{
 						/>
 						{!kValue &&
 						<TouchableOpacity
-							onPress={()=>setKValue(true)}
+							//onPress={()=>setKValue(true)}
+							onPress={()=>changeNitK(nit)}
 							style={styles.clientListButton}
 						>
 							<Icon

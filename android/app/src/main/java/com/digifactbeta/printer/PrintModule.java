@@ -232,8 +232,10 @@ public class PrintModule extends ReactContextBaseJavaModule{
 
 
                     sendStringDataBT(nombre,1,1,0);
-                    sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
-                    sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
+                    //sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
+                    //sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
+                    sendStringDataBT(nombreComercialNuevo,1,0,0);
+                    sendStringDataBT(direccion,1,0,0);
                     sendStringDataBT("NIT: "+nitComercio,1,0,0);
                     //sendStringDataBT(direccionComercio,1,0,0);
                     sendStringDataBT(separador,1,0,1);
@@ -317,87 +319,87 @@ public class PrintModule extends ReactContextBaseJavaModule{
                 e.printStackTrace();
             }
         }else {
-        try {
-            // String vars to store data from json object related to document emitter
-            String tipoDocumentoTributario = "Documento Tributario Electronico";
-            String strFactura = "Factura";
-            //String formatedDocumento = String.format("%10s      %10s  ", "Numero: ", numeroDocumento);
-            String strDatosCliente = "Datos Cliente";
-            // String vars to store data from json object related to items
-            String strDetalleVenta = "Detalle Venta";
-            // String vars to store data from json object related to certifier
-            String nombreCertificador = "CYBER ESPACIO,";
-            String nombreCertificador2 = "SOCIEDAD ANONIMA";
-            String nitCertificador = "77454820";
-            String direccionCertificador = "Edificio Paladium";
-            String separador = "                            ";
-            //String nombreComercialNuevo = nombreComercial.substring(2);
+            try {
+                // String vars to store data from json object related to document emitter
+                String tipoDocumentoTributario = "Documento Tributario Electronico";
+                String strFactura = "Factura";
+                //String formatedDocumento = String.format("%10s      %10s  ", "Numero: ", numeroDocumento);
+                String strDatosCliente = "Datos Cliente";
+                // String vars to store data from json object related to items
+                String strDetalleVenta = "Detalle Venta";
+                // String vars to store data from json object related to certifier
+                String nombreCertificador = "CYBER ESPACIO,";
+                String nombreCertificador2 = "SOCIEDAD ANONIMA";
+                String nitCertificador = "77454820";
+                String direccionCertificador = "Edificio Paladium";
+                String separador = "                            ";
+                //String nombreComercialNuevo = nombreComercial.substring(2);
 
 
-            BluetoothAdapter btAdapter = PrintModule.getBTAdapter();
-            BluetoothDevice device = PrintModule.getDevice(btAdapter);
-            BluetoothSocket socket = null;
-            socket = PrintModule.getSocket(device);
+                BluetoothAdapter btAdapter = PrintModule.getBTAdapter();
+                BluetoothDevice device = PrintModule.getDevice(btAdapter);
+                BluetoothSocket socket = null;
+                socket = PrintModule.getSocket(device);
 
-            String nombreComercialNuevo = nombrecomercial.substring(2);
-            String formatedTitleVenta = String.format("%-6s %-6s %-6s %-6s", "Cant.", "Des.", "Uni.",  "Tot.");
-            String formatedTotalVenta = String.format("%8s     %12s      ", "Total", "Q"+total);
+                String nombreComercialNuevo = nombrecomercial.substring(2);
+                String formatedTitleVenta = String.format("%-6s %-6s %-6s %-6s", "Cant.", "Des.", "Uni.",  "Tot.");
+                String formatedTotalVenta = String.format("%8s     %12s      ", "Total", "Q"+total);
 
 
-            String[] arraydescripcion = descripciones.split(",");
-            String[] arrayprecio = precios.split(",");
+                String[] arraydescripcion = descripciones.split(",");
+                String[] arrayprecio = precios.split(",");
 
-            sendStringDataBT(nombre,1,1,0);
-            sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
-            sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
-            sendStringDataBT("NIT: "+nitcomercial,1,0,0);
-            //sendStringDataBT(direccionComercio,1,0,0);
-            sendStringDataBT(separador,1,0,1);
-            sendStringDataBT(tipoDocumentoTributario,1,1,0);
-            sendStringDataBT(separador,1,0,1);
-            sendStringDataBT(strFactura,1,1,0);
-            sendStringDataBT("Serie: "+numeroserie,0,0,0);
-            sendStringDataBT("Numero: "+numero,0,0,0);
-            sendStringDataBT("No. Autorizacion: ",0,0,0);
-            sendStringDataBT(numeroaut,1,0,0);
-            sendStringDataBT("Fecha Emision: ",0,0,0);
-            sendStringDataBT(fecha,1,0,0);
-            sendStringDataBT(separador,1,0,1);
-            sendStringDataBT(strDatosCliente,1,1,0);
-            sendStringDataBT("Nombre: "+receptor,0,0,0);
-            sendStringDataBT("NIT: "+nitreceptor,0,0,0);
-            sendStringDataBT(separador,1,0,1);
-            sendStringDataBT(strDetalleVenta,1,1,0);
-            sendStringDataBT(formatedTitleVenta,1,1,0);
-            for (int i=0; i < arraycantidad.length; i++) {
+                sendStringDataBT(nombre,1,1,0);
+                sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
+                sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
+                sendStringDataBT("NIT: "+nitcomercial,1,0,0);
+                //sendStringDataBT(direccionComercio,1,0,0);
+                sendStringDataBT(separador,1,0,1);
+                sendStringDataBT(tipoDocumentoTributario,1,1,0);
+                sendStringDataBT(separador,1,0,1);
+                sendStringDataBT(strFactura,1,1,0);
+                sendStringDataBT("Serie: "+numeroserie,0,0,0);
+                sendStringDataBT("Numero: "+numero,0,0,0);
+                sendStringDataBT("No. Autorizacion: ",0,0,0);
+                sendStringDataBT(numeroaut,1,0,0);
+                sendStringDataBT("Fecha Emision: ",0,0,0);
+                sendStringDataBT(fecha,1,0,0);
+                sendStringDataBT(separador,1,0,1);
+                sendStringDataBT(strDatosCliente,1,1,0);
+                sendStringDataBT("Nombre: "+receptor,0,0,0);
+                sendStringDataBT("NIT: "+nitreceptor,0,0,0);
+                sendStringDataBT(separador,1,0,1);
+                sendStringDataBT(strDetalleVenta,1,1,0);
+                sendStringDataBT(formatedTitleVenta,1,1,0);
+                for (int i=0; i < arraycantidad.length; i++) {
 
-                double precio = Double.parseDouble(arrayprecio[i]);
-                double cantidad = Double.parseDouble(arraycantidad[i]);
-                double precioTotal = precio * cantidad;
-                String subTotal = String.valueOf(precioTotal);
+                    double precio = Double.parseDouble(arrayprecio[i]);
+                    double cantidad = Double.parseDouble(arraycantidad[i]);
+                    double precioTotal = precio * cantidad;
+                    String subTotal = String.valueOf(precioTotal);
 
-                int maxLength = (arraydescripcion[i].length() < 5)?arraydescripcion[i].length():5;
-                arraydescripcion[i] = arraydescripcion[i].substring(0, maxLength);
+                    int maxLength = (arraydescripcion[i].length() < 5)?arraydescripcion[i].length():5;
+                    arraydescripcion[i] = arraydescripcion[i].substring(0, maxLength);
 
-                String formatedDataVenta = String.format("%-6s %-6s %-6s %-6s", arraycantidad[i], arraydescripcion[i], "Q"+arrayprecio[i],  "Q"+subTotal);
-                sendStringDataBT(formatedDataVenta,1,0,0);
+                    String formatedDataVenta = String.format("%-6s %-6s %-6s %-6s", arraycantidad[i], arraydescripcion[i], "Q"+arrayprecio[i],  "Q"+subTotal);
+                    sendStringDataBT(formatedDataVenta,1,0,0);
 
+                }
+                sendStringDataBT(formatedTotalVenta,1,0,0);
+                sendStringDataBT(separador,1,0,1);
+                sendStringDataBT("Datos Certificador",1,1,0);
+                sendStringDataBT(nombreCertificador,1,0,0);
+                sendStringDataBT(nombreCertificador2,1,0,0);
+                sendStringDataBT("NIT: "+nitCertificador,1,0,0);
+                //sendStringDataBT(direccionCertificador,1,0,0);
+                sendStringDataBT("",1,0,0);
+                sendStringDataBT("",1,0,0);
+                sendStringDataBT("",1,0,0);
+                sendStringDataBT("",1,0,0);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            sendStringDataBT(formatedTotalVenta,1,0,0);
-            sendStringDataBT(separador,1,0,1);
-            sendStringDataBT("Datos Certificador",1,1,0);
-            sendStringDataBT(nombreCertificador,1,0,0);
-            sendStringDataBT(nombreCertificador2,1,0,0);
-            sendStringDataBT("NIT: "+nitCertificador,1,0,0);
-            //sendStringDataBT(direccionCertificador,1,0,0);
-            sendStringDataBT("",1,0,0);
-            sendStringDataBT("",1,0,0);
-            sendStringDataBT("",1,0,0);
-            sendStringDataBT("",1,0,0);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         }
 
     }
@@ -450,9 +452,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
         return result;
     }
 
-    /**
-     * 居中对齐
-     */
+
     public static byte[] alignCenter() {
         byte[] result = new byte[3];
         result[0] = ESC;
@@ -461,9 +461,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
         return result;
     }
 
-    /**
-     * 居右
-     */
+
     public static byte[] alignRight() {
         byte[] result = new byte[3];
         result[0] = ESC;
@@ -517,13 +515,10 @@ public class PrintModule extends ReactContextBaseJavaModule{
         } else {
             PrintModule.sendData(underlineOff(), socket);
         }
-
         PrintModule.sendData(stringdataB, socket);
         PrintModule.sendData(nextLine(1), socket);
-
         PrintModule.sendData(underlineOff(), socket);
         PrintModule.sendData(boldOff(), socket);
-
     }
 
 

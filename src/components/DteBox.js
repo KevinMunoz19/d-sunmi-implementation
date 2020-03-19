@@ -64,10 +64,44 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 		useEffect(()=>{
 			setNumEstablecimiento(0);
-
 		})
 
     const onAction = ()=>{
+			console.log("Informacion de Fattoria");
+			getInfo(9521127, (nom)=>{
+				console.log(nom);
+			},(ca)=>{
+				console.log(ca);
+			},
+			(dir)=>{
+				console.log(dir);
+			},
+			(zon)=>{
+				console.log(zon);
+			},
+			(fr)=>{
+				console.log(fr);
+			},
+			(af)=>{
+				console.log(af);
+			},
+			(zpc)=>{
+				console.log(zpc);
+			},
+			(nomc)=>{
+				console.log(nomc);
+			},
+			(dirc)=>{
+				dirc.replace(/ +(?= )/g,'');
+				console.log(dirc);
+			},
+			(err)=>{
+				if(err==200){
+					Alert.alert('Error de conexion');
+				}else{
+					Alert.alert(err);
+				}
+			});
 			//var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
 			var newnitfetch = user.string_nit;
 			getInfo(newnitfetch, (nom)=>{
@@ -183,11 +217,6 @@ const DteBox = ({dte,setPdfSource}) =>{
     const onViewDte = ()=>{
         setOptionModalVisible(false);
         setLoading(true);
-				//getBillXML(user.token,user.string_nit,dte.auth_number, (xmldata)=>{
-				//	setXmldata(xmldata);
-				//},(err)=>{
-				//	Alert.alert(err);
-				//});
 				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
             setPdfSource(source);
             setLoading(false);
@@ -199,8 +228,12 @@ const DteBox = ({dte,setPdfSource}) =>{
 
 
 		const onReprintDte = ()=>{
+			setOptionModalVisible(false);
 			setLoading(true);
 			if (cantidadesString == null){
+				setLoading(false);
+				console.log("Volver a obtener datos");
+				console.log(cantidadesString);
 				//setOptionModalVisible(false);
 				fetchdata();
 			}else{
@@ -220,11 +253,10 @@ const DteBox = ({dte,setPdfSource}) =>{
 				console.log(`resultados cantidades ${cantidadesString}`)
 				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
 					setXmldata(source);
-					console.log(source);
+					//console.log(source);
 					try{
 						console.log(nombreComercial);
 						console.log(typeof nombreComercial);
-						console.log()
 						printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
 					}catch(error){
 						Alert.alert("No se encuentra una impresora Bluetooth conectada");
@@ -234,7 +266,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 						setLoading(false);
 						Alert.alert(err);
 				})
-				setOptionModalVisible(false);
+				//setOptionModalVisible(false);
 				setLoading(false);
 			}
 		}
@@ -290,13 +322,8 @@ const DteBox = ({dte,setPdfSource}) =>{
                     onViewDte = {onViewDte}
                     onCancelDte = {onCancelDte}
                     onReprintDte = {onReprintDte}
-										//onGenerateEmailString = {onGenerateEmailString}
                     onCloseModal = {onCloseModal}
                     dteStatus = {dte.status}
-
-
-
-
                 />
             }
             <View style={styles.valuesColumn}>
