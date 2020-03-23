@@ -96,6 +96,8 @@ const Dte = () =>{
 	const [numEstablecimiento,setNumEstablecimiento] = useState();
 	const [autorizacion,setAutorizacion] = useState('');
 
+	const [payment,setPayment] = useState(0);
+
 	const radioProps = [
 		{label: 'Nit  ', value: false },
 		{label: 'Consumidor Final	', value: true }
@@ -105,6 +107,12 @@ const Dte = () =>{
 		{label:'12%  ',value:12},
 		{label:'Exento',value:0}
 	]
+
+	const radioPaymentType = [
+		{label: 'Efectivo', value: 0 },
+		{label: 'Cheque', value: 1 },
+		{label: 'Tarjeta', value: 2 }
+	];
 
 	useEffect(()=>{
 		generateTotals(products,iva,setTotal,setSubTotal)
@@ -131,7 +139,6 @@ const Dte = () =>{
 	useEffect(()=>{
 
 	})
-
 
 	const onClientSelect = (client)=>{
 		setTimeout(()=>{
@@ -380,6 +387,7 @@ const Dte = () =>{
 								onPress={(value) => {setCf(value)}}
 								/>
 						</View>
+
 						<View style={{alignItems:'center'}}>
 							<View style={styles.nitContainer}>
 								{/* Fila 1: nit y boton */}
@@ -453,6 +461,21 @@ const Dte = () =>{
 							<Picker.item label='12%' value={12}/>
 						</Picker> */}
 					{/* </View> */}
+					<View style={{width:'100%',alignItems:'center'}}>
+						<SectionDivider width={'80%'} sectionName={'TIPO DE PAGO'}/>
+					</View>
+					<View style={styles.contentContainer}>
+						<View style={styles.cfContainer}>
+							<RadioForm
+								radio_props={radioPaymentType}
+								formHorizontal={true}
+								initial={0}
+								buttonColor={'#26A657'}
+								onPress={(value) => {setPayment(value)}}
+								/>
+						</View>
+					</View>
+
 					<View style={{width:'100%',alignItems:'center'}}>
 						<SectionDivider width={'80%'} sectionName={'PRODUCTOS O SERVICIOS'}/>
 					</View>
@@ -537,8 +560,6 @@ const Dte = () =>{
 						</TouchableOpacity>
 					}
 					</View>
-
-
 				</View>
 			</ScrollView>
 		// </ImageBackground>
