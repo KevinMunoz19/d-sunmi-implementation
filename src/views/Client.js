@@ -87,6 +87,13 @@ const Client = ({id,client,action,onSelect}) =>{
 		});
 	}
 
+	const defaultValues = ()=>{
+		handleInputChange('address','Ciudad');
+		handleInputChange('zipCode','01010');
+		handleInputChange('municipality','Guatemala');
+		handleInputChange('department','Guatemala');
+	};
+
 
 	return(
 		// <ImageBackground source={require('../img/Fondo.png')} style={{width: '100%', height: '100%'}} >
@@ -124,7 +131,7 @@ const Client = ({id,client,action,onSelect}) =>{
 							//value={`${inputs.nit | '' }`}
 							value={inputs.nit}
 							style={styles.input}
-							//keyboardType = 'numeric'
+							keyboardType = 'numeric'
 						/>
 						{!kValue &&
 						<TouchableOpacity
@@ -141,6 +148,18 @@ const Client = ({id,client,action,onSelect}) =>{
 							<Text fonSize={10} style={styles.fontSize}>Agregar K</Text>
 						</TouchableOpacity>
 					}
+					<TouchableOpacity
+						onPress={()=>defaultValues()}
+						style={styles.clientListButton}
+					>
+						<Icon
+							name="description"
+							color="black"
+							size={20}
+							style={styles.listIcon}
+						/>
+						<Text fonSize={10} style={styles.fontSize}>Llenar Formulario</Text>
+					</TouchableOpacity>
 						{kValue &&
 						<TouchableOpacity
 							onPress={()=>setKValue(false)}

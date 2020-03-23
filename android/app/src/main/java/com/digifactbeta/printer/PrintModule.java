@@ -445,6 +445,7 @@ public class PrintModule extends ReactContextBaseJavaModule{
     }
 
     public static byte[] alignLeft() {
+
         byte[] result = new byte[3];
         result[0] = ESC;
         result[1] = 97;
