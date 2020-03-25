@@ -23,10 +23,10 @@ const Products = (props) =>{
     const [productList,setProductList] = useState([]);
     const {select} = DB();
     const {action,onSelect} = props;
-    
+
 
     useEffect(()=>{
-        
+
         var query = `select * from product`;
         select(query,[],(products)=>{
             setProductList(products);
@@ -40,7 +40,7 @@ const Products = (props) =>{
             <View style={styles.container}>
                 {(onSelect==null) && (
 					<IosHeader textHeader={'DTE'}/>
-				)}	
+				)}
                 <View style={styles.headerContainer}>
                     <View style={styles.textHeaderContainer}>
                         <Text style={styles.textHeader}>PRODUCTOS</Text>
@@ -56,7 +56,7 @@ const Products = (props) =>{
                                 )
                             })}
                             </View>
-                            
+
                         )}
                         {(productList.length==0 &&
                             <View style={styles.textContainer}>
@@ -85,12 +85,12 @@ const Products = (props) =>{
 
             //         </View>
             //         <View style={styles.bodyContainer}>
- 
-            //         </View>
-                    
-                    
 
-                               
+            //         </View>
+
+
+
+
             //     </View>
             // </ScrollView>
 	);
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 	container:{
         flex:1,
         backgroundColor:'white'
-        
+
     },
     textHeader:{
         color:'white',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         width:'100%',
         alignItems:'center'
     }
-    
+
 });
 
 export default Products;

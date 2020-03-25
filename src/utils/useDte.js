@@ -47,7 +47,7 @@ const useDte = (props) => {
     })
   }
 
-    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial,numeroEstablecimiento,payment,status, res,rej)=>{
+    const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial,numeroEstablecimiento,payment, res,rej)=>{
         var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
         //var issueNit=user.string_nit;
@@ -209,7 +209,7 @@ const useDte = (props) => {
       })
   }
 
-  const saveDte = (encode,receiverName,receiverNit,payment,statusp)=>{
+  const saveDte = (encode,receiverName,receiverNit,payment)=>{
     let xmlString = base64.decode(encode);
     let xml = new DOMParser().parseFromString(xmlString, "text/xml").documentElement;
     var authNumberTag = xml.getElementsByTagName("dte:NumeroAutorizacion")[0];
@@ -223,11 +223,13 @@ const useDte = (props) => {
     var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number,payment) values (?,?,?,?,?,?,?,?)`;
     insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment],(result)=>{
       console.log('DTE registrado con exito');
+      console.log(typeof payment);
       console.log(payment);
+
     },(err)=>{
       console.log('ocurrio un error registrando el dte', err);
     })
-      console.log('otros' ,authNumber,dteNumber,serie);
+      //console.log('otros' ,authNumber,dteNumber,serie);
   }
 
   const generateItemString = (products,client,cf,iva)=>{

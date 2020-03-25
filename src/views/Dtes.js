@@ -26,13 +26,21 @@ const Dtes = () =>{
     const [loading,setLoading] = useState(false);
     const {select} = DB();
 
+		const [dteListCash,setDteListCash] = useState([]);
+		const [dteListCard,setDteListCard] = useState([]);
+		const [dteListCheck,setDteListCheck] = useState([]);
+
+		var flag = 1;
 
     useEffect(()=>{
         var query = `select * from dte`;
-        select(query,[],(dtes)=>{
-            setDteList(dtes);
-        })
-    })
+				select(query,[],(dtes)=>{
+	           setDteList(dtes);
+	      })
+    },[])
+
+
+
 
     useEffect(()=>{
 		if(pdfSource != null){
@@ -77,7 +85,6 @@ const Dtes = () =>{
                         })
                         }
                         </View>
-
                     )}
                     {(dteList.length==0 &&
                         <View style={styles.textContainer}>

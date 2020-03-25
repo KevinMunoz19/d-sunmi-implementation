@@ -31,13 +31,15 @@ const Home = () => {
     const {logout} = useUser();
     const [menuVisible,setMenuVisible] = useState(false);
     const handlePress = (view)=>{
-		setMenuVisible(false);
-		switch(view){
-			case 'clients':Actions.clients({action:'manage'}); break;
-			case 'products':Actions.products({action:'manage'}); break;
-			case 'dte':Actions.dte(); break;
-			case 'dtes':Actions.dtes(); break;
-		}
+  		setMenuVisible(false);
+  		switch(view){
+  			case 'clients':Actions.clients({action:'manage'}); break;
+  			case 'products':Actions.products({action:'manage'}); break;
+  			case 'dte':Actions.dte(); break;
+  			case 'dtes':Actions.dtes(); break;
+        case 'dtessummary':Actions.dtessummary(); break;
+
+  		}
     }
 
 
@@ -50,6 +52,7 @@ const Home = () => {
 		logout();
 		Actions.login();
 	}
+
     return (
         <View style={styles.container}>
             <Modal transparent={true} style={styles.modal} visible={menuVisible}>
@@ -110,6 +113,9 @@ const Home = () => {
                 <TouchableOpacity onPress={()=>handlePress('clients')} style={styles.sectionTouch}>
 					<Text style={styles.sectionTouchText}>Mis Clientes</Text>
 				</TouchableOpacity>
+                <TouchableOpacity onPress={()=>handlePress('dtessummary')} style={styles.sectionTouch}>
+          <Text style={styles.sectionTouchText}>Resumen de Facturas</Text>
+        </TouchableOpacity>
             </ImageBackground>
         </View>
     );

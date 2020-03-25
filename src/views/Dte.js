@@ -233,7 +233,7 @@ const Dte = () =>{
 				if (products.length > 0) {
 					if((!cf && client.nit.trim().length > 0) || cf) {
 						if(iva == 0 || iva == 12){
-							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial, direccionComercial, numEstablecimiento,payment,payment, (res)=>{
+							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial, direccionComercial, numEstablecimiento,payment, (res)=>{
 							//generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial,direccionComercial, (res)=>{
 								console.log("productos");
 								console.log(typeof products)
