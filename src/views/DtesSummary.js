@@ -30,6 +30,18 @@ const Dtes = () =>{
 		const [dteListCheck,setDteListCheck] = useState([]);
 		const [dteListCard,setDteListCard] = useState([]);
 
+		const [count0,setCount0] = useState('');
+		const [count1,setCount1] = useState('');
+		const [count2,setCount2] = useState('');
+
+		const [amount0,setAmount0] = useState('');
+		const [amount1,setAmount1] = useState('');
+		const [amount2,setAmount2] = useState('');
+
+		const [tot,setTot] = useState([]);
+		const [amount,setAmount] = useState([]);
+
+
 
 		useEffect(()=>{
         var query = `select * from dte where payment = 0`;
@@ -52,6 +64,22 @@ const Dtes = () =>{
         })
     },[])
 
+		useEffect(()=>{
+			var qt = `select count(id) ct, payment from dte group by payment`;
+			select(qt,[],(tt)=>{
+					setCount0(tt[0].ct)
+					setCount1(tt[1].ct)
+					setCount2(tt[2].ct)
+			})
+
+			var qa = `select sum(amount) at, payment from dte group by payment`;
+			select(qa,[],(ta)=>{
+				setAmount0(ta[0].at);
+				setAmount1(ta[1].at);
+				setAmount2(ta[2].at);
+			})
+    },[])
+
 
 
 
@@ -71,6 +99,7 @@ const Dtes = () =>{
 
 
 	return(
+
         <View style={styles.container}>
             <Modal visible={pdfModalVisible}>
                 <TouchableOpacity  onPress={()=>onClosePdf()} style={styles.closeModalButton}>
@@ -91,6 +120,18 @@ const Dtes = () =>{
             </View>
             <View style={styles.bodyContainer}>
                 <ScrollView style={styles.scroll}>
+
+
+
+
+								<Text>Efectivo #{count0} Q{amount0}</Text>
+								<Text>Cheque #{count1} Q{amount1}</Text>
+								<Text>Tarjeta #{count2} Q{amount2}</Text>
+
+
+
+
+
 
 
 
@@ -162,8 +203,6 @@ const Dtes = () =>{
 		                            <Text>No existen facturas registradas con tarjeta</Text>
 		                        </View>
 		                    )}
-
-
 
 
                 </ScrollView>
