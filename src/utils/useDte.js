@@ -219,13 +219,11 @@ const useDte = (props) => {
     var serie = authNumberTag.getAttribute('Serie');
     var tzoffset = (new Date()).getTimezoneOffset()*60000;
     var fecha = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).replace("T"," ");
+    //var fechaformated = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).split('T')[0];
     //var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,DATETIME('now'),?,?,?,?)`;
     var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number,payment) values (?,?,?,?,?,?,?,?)`;
     insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment],(result)=>{
       console.log('DTE registrado con exito');
-      console.log(typeof payment);
-      console.log(payment);
-
     },(err)=>{
       console.log('ocurrio un error registrando el dte', err);
     })
@@ -250,6 +248,8 @@ const useDte = (props) => {
       var taxableAmount = iva == 0?(product.price * product.quantity) : (product.price / ((iva * 0.01) + 1)) * product.quantity;
       var taxAmount = (iva * 0.01) * taxableAmount;
       var totalItemAmount = product.price * product.quantity;
+
+      var productName = product.name;
       totalAmount += totalItemAmount;
       totalTaxAmount += taxAmount;
       itemsString = itemsString+
@@ -257,7 +257,7 @@ const useDte = (props) => {
         <dte:Item NumeroLinea="${i+1}" BienOServicio="B">
           <dte:Cantidad>${product.quantity}</dte:Cantidad>
           <dte:UnidadMedida>CA</dte:UnidadMedida>
-          <dte:Descripcion>${product.name}</dte:Descripcion>
+          <dte:Descripcion>${productName.trim()}</dte:Descripcion>
           <dte:PrecioUnitario>${product.price}</dte:PrecioUnitario>
           <dte:Precio>${totalItemAmount.toFixed(2)}</dte:Precio>
           <dte:Descuento>0</dte:Descuento>

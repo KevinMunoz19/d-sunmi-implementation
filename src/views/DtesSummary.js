@@ -41,6 +41,9 @@ const Dtes = () =>{
 		const [tot,setTot] = useState([]);
 		const [amount,setAmount] = useState([]);
 
+		const [todayDay,setTodayDay] = useState('');
+		const [todayDay2,setTodayDay2] = useState('');
+
 
 
 		useEffect(()=>{
@@ -78,6 +81,34 @@ const Dtes = () =>{
 				setAmount1(ta[1].at);
 				setAmount2(ta[2].at);
 			})
+    },[])
+
+		useEffect(()=>{
+			var tzoffset = (new Date()).getTimezoneOffset()*60000;
+	    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
+			var nowDate = localISOTime.slice(0,10);
+        var querybyday = `select * from dte where payment = 0 and date >= date('${nowDate.trim()} 00:00:00')`;
+        select(querybyday,[],(dteday)=>{
+					setTodayDay(dteday[0].date);
+					//console.log(todayDay.slice(0,10).trim());
+        })
+    },[])
+
+		useEffect(()=>{
+			var tzoffset = (new Date()).getTimezoneOffset()*60000;
+	    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
+			var nowDate = localISOTime.slice(0,10);
+			var nowYear = localISOTime.slice(0,4);
+			var nowMonth = localISOTime.slice(5,7);
+
+        var querybyday2 = `select * from dte where payment = 0 and date >= date('${nowYear.trim()}-${nowMonth.trim()}-01 00:00:00')`;
+        select(querybyday2,[],(dteday2)=>{
+					setTodayDay2(dteday2[0].date);
+					//console.log(todayDay.slice(0,10).trim());
+        })
+				console.log("query string");
+				console.log(querybyday2);
+
     },[])
 
 
@@ -127,6 +158,10 @@ const Dtes = () =>{
 								<Text>Efectivo #{count0} Q{amount0}</Text>
 								<Text>Cheque #{count1} Q{amount1}</Text>
 								<Text>Tarjeta #{count2} Q{amount2}</Text>
+								<Text>Fecha{todayDay}</Text>
+								<Text>Fecha{todayDay2}</Text>
+
+
 
 
 
