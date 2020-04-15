@@ -4,9 +4,7 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0b26e9d99c1dd79005d81175c2bd5fd4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0b26e9d99c1dd79005d81175c2bd5fd4/res" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.barteksc/pdfium-android/1.9.0/a9e3efce867c5e49a12afa7f5ab4c24a94b1f2e1/pdfium-android-1.9.0-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.barteksc/pdfium-android/1.9.0/7b432c3c96496f23e21e21fd0799774d1a51c811/pdfium-android-1.9.0-sources.jar!/" />
     </SOURCES>

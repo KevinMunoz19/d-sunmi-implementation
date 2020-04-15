@@ -10,7 +10,8 @@ import {
     Button,
     TouchableOpacity,
     ImageBackground,
-    Modal
+    Modal,
+		Picker
 }	from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import DteBox from '../components/DteBox';
@@ -128,6 +129,10 @@ const Dtes = () =>{
 		setPdfModalVisible(false);
 	}
 
+	function h() {
+
+	}
+
 
 	return(
 
@@ -162,7 +167,57 @@ const Dtes = () =>{
 								<Text>Fecha{todayDay2}</Text>
 
 
+								<View style={styles.headerContainerSub}>
+										<View style={styles.textHeaderContainerSub}>
+												<Text style={styles.textHeaderSub}>Ordenar Por</Text>
+										</View>
+								</View>
 
+								<View style={styles.formRow}>
+			            <View style={[styles.inputContainer, styles.input]}>
+			              <Picker
+			                style={styles.selectInput}
+			                placeholder="Mes"
+			              >
+			                <Picker.Item label="Mes" value={null} disabled={true} />
+			                <Picker.Item label="Enero" value="0" />
+			                <Picker.Item label="Febrero" value="1" />
+											<Picker.Item label="Marzo" value="2" />
+											<Picker.Item label="Abril" value="3" />
+											<Picker.Item label="Mayo" value="4" />
+											<Picker.Item label="Junio" value="5" />
+											<Picker.Item label="Julio" value="6" />
+											<Picker.Item label="Agosto" value="7" />
+											<Picker.Item label="Septiembre" value="8" />
+											<Picker.Item label="Octubre" value="9" />
+											<Picker.Item label="Noviembre" value="10" />
+											<Picker.Item label="Diciembre" value="11" />
+			              </Picker>
+			            </View>
+			          </View>
+
+								<View style={styles.formRow}>
+			            <View style={[styles.inputContainer, styles.input]}>
+			              <Picker
+			                style={styles.selectInput}
+			                placeholder="Dia"
+			              >
+			                <Picker.Item label="Dia" value={null} disabled={true} />
+			                <Picker.Item label="1" value="0" />
+			                <Picker.Item label="2" value="1" />
+			              </Picker>
+			            </View>
+			          </View>
+
+
+
+
+
+								<View style={styles.buttonContainer}>
+									<TouchableOpacity style={styles.button} onPress={h}>
+										<Text style={styles.buttonText}>Realizar Busqueda</Text>
+									</TouchableOpacity>
+								</View>
 
 
 
@@ -336,6 +391,37 @@ const styles = StyleSheet.create({
 		textHeaderSub:{
         color:'white',
         fontSize:12
+    },
+		button:{
+			width:'40%',
+			height:'90%',
+			backgroundColor:'#828B95',
+			alignItems:'center',
+			justifyContent:'center'
+		},
+		buttonText:{
+			color:'white',
+			fontSize:15
+		},
+		buttonContainer:{
+			flex:2,
+			backgroundColor:'white',
+			alignItems:'center'
+		},
+		formRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 30
+    },
+		inputContainer:{
+        flex: 1,
+    },
+		input: {
+			borderBottomColor:'#828B95',
+			borderBottomWidth:1
+    },
+		selectInput: {
+        fontSize: 10
     },
 });
 

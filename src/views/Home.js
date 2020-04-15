@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     header:{
         backgroundColor: 'white',
         width: '100%',
-        height: '25%',
+        height: '15%',
+        //  height: '25%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems:'center'
@@ -138,8 +139,10 @@ const styles = StyleSheet.create({
         flexDirection:'column'
     },
     menuContainer:{
-        width:'70%',
-        height:'50%',
+        width:'100%',
+        //width:'70%',
+        height:'25%',
+        //height:'50%',
         backgroundColor:'white'
     },
     menuHeaderContainer:{
@@ -160,13 +163,16 @@ const styles = StyleSheet.create({
     },
     menuLogo:{
         marginLeft:'10%',
-				width: wp('30%'),//80
-        height: hp('20%'),//
+        width:'80%',
+        height:'100%'
+				//width: wp('30%'),//80
+        //height: hp('20%'),//
     },
     menuText:{
         fontSize:20,
         color:'white',
-        marginLeft:'10%'
+        marginLeft:'5%'
+        //marginLeft:'10%'
     },
     primaryGray:{
         flex:1,
@@ -186,8 +192,10 @@ const styles = StyleSheet.create({
 				//justifyContent:'center',
     },
     logo:{
-        width: wp('30%'),
-        height: hp('20%'),
+      width: '70%',
+        height: '60%'
+        //width: wp('30%'),
+        //height: hp('20%'),
     },
     headerIcon:{
         marginRight: '2%'
@@ -195,9 +203,10 @@ const styles = StyleSheet.create({
     sectionTouch:{
         marginTop:'3%',
         backgroundColor:'rgba(119,211,83,0.5)',
-
-				width: wp('100%'),
-				height: hp('12%'),
+        width:'100%',
+        height:'15%',
+				//width: wp('100%'),
+				//height: hp('12%'),
 
         flexDirection:'row',
         alignItems:'center',
@@ -205,10 +214,14 @@ const styles = StyleSheet.create({
 				justifyContent:'center',
     },
     sectionTouchText:{
-        //marginTop:'1%',
-        marginLeft:'10%',
-        fontSize: hp('4%'),
+      marginTop:'3%',
+        marginLeft:'5%',
+        fontSize:15,
         color:'white'
+        //marginTop:'1%',
+        //marginLeft:'10%',
+        //fontSize: hp('4%'),
+        //color:'white'
     }
 
 });

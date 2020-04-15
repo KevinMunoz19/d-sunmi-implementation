@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Mar 27 11:16:13 CST 2020
+#Wed Apr 15 12:51:22 CST 2020
 60.set=NATIVE_RESOURCE
 52.set=ASSET
 53.base=C\:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
