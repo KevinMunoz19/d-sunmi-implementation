@@ -11,13 +11,17 @@ import {
     TouchableOpacity,
     ImageBackground,
     Modal,
-		Picker
+		Picker,
+		Alert,
 }	from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import DteBox from '../components/DteBox';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import PdfView from "../components/PdfView";
 import IosHeader from '../components/IosHeader';
+
+import DatePicker from 'react-native-date-picker';
+
 
 const Dtes = () =>{
 
@@ -45,44 +49,48 @@ const Dtes = () =>{
 		const [todayDay,setTodayDay] = useState('');
 		const [todayDay2,setTodayDay2] = useState('');
 
+		const [selectedDate1, setSelectedDate1] = useState(new Date());
+		const [selectedDate2, setSelectedDate2] = useState(new Date());
 
 
-		useEffect(()=>{
-        var query = `select * from dte where payment = 0`;
-        select(query,[],(dtes)=>{
-            setDteListCash(dtes);
-        })
-    },[])
 
-    useEffect(()=>{
-        var queryc = `select * from dte where payment = 1`;
-        select(queryc,[],(dtesc)=>{
-            setDteListCheck(dtesc);
-        })
-    },[])
+		//useEffect(()=>{
+    //    var query = `select * from dte where payment = 0`;
+    //    select(query,[],(dtes)=>{
+    //        setDteListCash(dtes);
+    //    })
+    //},[])
 
-		useEffect(()=>{
-        var queryt = `select * from dte where payment = 2`;
-        select(queryt,[],(dtest)=>{
-            setDteListCard(dtest);
-        })
-    },[])
+    //useEffect(()=>{
+    //    var queryc = `select * from dte where payment = 1`;
+    //    select(queryc,[],(dtesc)=>{
+    //        setDteListCheck(dtesc);
+    //    })
+    //},[])
 
-		useEffect(()=>{
-			var qt = `select count(id) ct, payment from dte group by payment`;
-			select(qt,[],(tt)=>{
-					setCount0(tt[0].ct)
-					setCount1(tt[1].ct)
-					setCount2(tt[2].ct)
-			})
+		//useEffect(()=>{
+    //    var queryt = `select * from dte where payment = 2`;
+    //    select(queryt,[],(dtest)=>{
+    //        setDteListCard(dtest);
+    //    })
+    //},[])
 
-			var qa = `select sum(amount) at, payment from dte group by payment`;
-			select(qa,[],(ta)=>{
-				setAmount0(ta[0].at);
-				setAmount1(ta[1].at);
-				setAmount2(ta[2].at);
-			})
-    },[])
+		//useEffect(()=>{
+		//	var qt = `select count(id) ct, payment from dte group by payment`;
+		//	select(qt,[],(tt)=>{
+		//			setCount0(tt[0].ct)
+		//			setCount1(tt[1].ct)
+		//			setCount2(tt[2].ct)
+		//	})
+
+		//	var qa = `select sum(amount) at, payment from dte group by payment`;
+		//	select(qa,[],(ta)=>{
+		//		setAmount0(ta[0].at);
+		//		setAmount1(ta[1].at);
+		//		setAmount2(ta[2].at);
+		//	})
+	//},[])
+
 
 		useEffect(()=>{
 			var tzoffset = (new Date()).getTimezoneOffset()*60000;
@@ -113,6 +121,12 @@ const Dtes = () =>{
     },[])
 
 
+		function PadLeft(value, length) {
+			return (value.toString().length < length) ? PadLeft("0" + value, length) :
+			value;
+		}
+
+
 
 
 
@@ -129,7 +143,54 @@ const Dtes = () =>{
 		setPdfModalVisible(false);
 	}
 
-	function h() {
+	function searchbydate() {
+
+		setDteListCash([]);
+
+		if ((selectedDate1 <= selectedDate2) || (selectedDate1.getDate() == selectedDate2.getDate() && selectedDate1.getMonth() == selectedDate2.getMonth() && selectedDate1.getFullYear() == selectedDate2.getFullYear())) {
+			console.log("Fecha inicial")
+			console.log(selectedDate1)
+			console.log("Fecha inicial dia")
+			console.log(PadLeft(selectedDate1.getDate(),2))
+			console.log("Fecha inicial mes")
+			console.log(PadLeft((selectedDate1.getMonth() + 1),2))
+			console.log("Fecha inicial ano")
+			console.log(selectedDate1.getFullYear())
+			console.log("Fecha final")
+			console.log(selectedDate2)
+
+			var iDay = PadLeft(selectedDate1.getDate(),2);
+			var iMonth = PadLeft((selectedDate1.getMonth() + 1),2);
+			var iYear = selectedDate1.getFullYear();
+
+			var fDay = PadLeft(selectedDate2.getDate() + 1,2);
+			var fMonth = PadLeft((selectedDate2.getMonth() + 1),2);
+			var fYear = selectedDate2.getFullYear();
+
+			var query = `select * from dte where payment = 0 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
+			console.log("Print Query")
+			console.log(query)
+			select(query,[],(dtes)=>{
+				console.log("Fecha en DTE")
+				console.log(dtes[0].date)
+	    	setDteListCash(dtes);
+	    })
+			//var queryc = `select * from dte where payment = 1`;
+			//select(queryc,[],(dtesc)=>{
+			//	setDteListCheck(dtesc);
+			//})
+
+
+		} else {
+			console.log("Fecha inicial")
+			console.log(selectedDate1)
+			console.log("Fecha inicial")
+			console.log(selectedDate2)
+			Alert.alert(`La fecha inicial debe ser menor a la fecha final`);
+		}
+
+
+
 
 	}
 
@@ -169,53 +230,33 @@ const Dtes = () =>{
 
 								<View style={styles.headerContainerSub}>
 										<View style={styles.textHeaderContainerSub}>
-												<Text style={styles.textHeaderSub}>Ordenar Por</Text>
+												<Text style={styles.textHeaderSub}>Desde</Text>
 										</View>
 								</View>
 
-								<View style={styles.formRow}>
-			            <View style={[styles.inputContainer, styles.input]}>
-			              <Picker
-			                style={styles.selectInput}
-			                placeholder="Mes"
-			              >
-			                <Picker.Item label="Mes" value={null} disabled={true} />
-			                <Picker.Item label="Enero" value="0" />
-			                <Picker.Item label="Febrero" value="1" />
-											<Picker.Item label="Marzo" value="2" />
-											<Picker.Item label="Abril" value="3" />
-											<Picker.Item label="Mayo" value="4" />
-											<Picker.Item label="Junio" value="5" />
-											<Picker.Item label="Julio" value="6" />
-											<Picker.Item label="Agosto" value="7" />
-											<Picker.Item label="Septiembre" value="8" />
-											<Picker.Item label="Octubre" value="9" />
-											<Picker.Item label="Noviembre" value="10" />
-											<Picker.Item label="Diciembre" value="11" />
-			              </Picker>
-			            </View>
-			          </View>
+								<DatePicker
+									date = {selectedDate1}
+									onDateChange = {setSelectedDate1}
+									mode="date"
+									locale = "es"
+								/>
 
-								<View style={styles.formRow}>
-			            <View style={[styles.inputContainer, styles.input]}>
-			              <Picker
-			                style={styles.selectInput}
-			                placeholder="Dia"
-			              >
-			                <Picker.Item label="Dia" value={null} disabled={true} />
-			                <Picker.Item label="1" value="0" />
-			                <Picker.Item label="2" value="1" />
-			              </Picker>
-			            </View>
-			          </View>
+								<View style={styles.headerContainerSub}>
+										<View style={styles.textHeaderContainerSub}>
+												<Text style={styles.textHeaderSub}>Hasta</Text>
+										</View>
+								</View>
 
-
-
-
+								<DatePicker
+									date = {selectedDate2}
+									onDateChange = {setSelectedDate2}
+									mode="date"
+									locale = "es"
+								/>
 
 								<View style={styles.buttonContainer}>
-									<TouchableOpacity style={styles.button} onPress={h}>
-										<Text style={styles.buttonText}>Realizar Busqueda</Text>
+									<TouchableOpacity style={styles.button} onPress={searchbydate}>
+										<Text style={styles.buttonText}>Buscar</Text>
 									</TouchableOpacity>
 								</View>
 

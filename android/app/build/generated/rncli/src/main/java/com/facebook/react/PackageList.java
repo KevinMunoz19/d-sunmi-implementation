@@ -15,6 +15,8 @@ import com.digifactbeta.R;
 
 // @react-native-community/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+// react-native-date-picker
+import com.henninghall.date_picker.DatePickerPackage;
 // react-native-document-picker
 import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 // react-native-image-picker
@@ -61,6 +63,7 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(),
       new AsyncStoragePackage(),
+      new DatePickerPackage(),
       new DocumentPickerPackage(),
       new ImagePickerPackage(),
       new RCTPdfView(),

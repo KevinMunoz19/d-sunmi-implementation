@@ -32,9 +32,9 @@ public class MainApplication extends Application implements ReactApplication {
 
 
       //return Arrays.asList(
-              //new MainReactPackage(),
-            new RNFetchBlobPackage();
-            //new RNSendIntentPackage(),
+      //new MainReactPackage(),
+      new RNFetchBlobPackage();
+      //new RNSendIntentPackage(),
       //        new MyModulePackage()
 
       //);

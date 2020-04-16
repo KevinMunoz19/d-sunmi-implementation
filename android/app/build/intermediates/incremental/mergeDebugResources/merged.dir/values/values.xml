@@ -903,6 +903,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="overlay">overlay</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
@@ -2818,6 +2819,13 @@
     <item name="android:windowEnterAnimation">@anim/catalyst_slide_up</item>
     <item name="android:windowExitAnimation">@anim/catalyst_slide_down</item>
   </style>
+    <style name="Dialog_Full_Screen">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
     <style name="EmptyTheme"/>
     <style name="MaterialAlertDialog.MaterialComponents" parent="AlertDialog.AppCompat">
     <item name="android:layout">@layout/mtrl_alert_dialog</item>
@@ -6696,6 +6704,44 @@
     <declare-styleable name="Navigator">
         <attr name="android:id"/>
         <attr name="android:label"/>
+    </declare-styleable>
+    <declare-styleable name="NumberPickerView">
+        <!--set number of item displayed, default is 3-->
+        <attr format="reference|integer" name="npv_ShownCount"/>
+        <!--set if show divider, default is true-->
+        <attr format="reference|boolean" name="npv_ShowDivider"/>
+        <attr format="reference|color" name="npv_DividerColor"/>
+        <attr format="reference|dimension" name="npv_DividerMarginLeft"/>
+        <attr format="reference|dimension" name="npv_DividerMarginRight"/>
+        <attr format="reference|dimension" name="npv_DividerHeight"/>
+        <attr format="reference|color" name="npv_TextColorNormal"/>
+        <attr format="reference|color" name="npv_TextColorSelected"/>
+        <attr format="reference|color" name="npv_TextColorHint"/>
+        <attr format="reference|dimension" name="npv_TextSizeNormal"/>
+        <attr format="reference|dimension" name="npv_TextSizeSelected"/>
+        <attr format="reference|dimension" name="npv_TextSizeHint"/>
+        <attr format="reference" name="npv_TextArray"/>
+        <attr format="reference|integer" name="npv_MinValue"/>
+        <attr format="reference|integer" name="npv_MaxValue"/>
+        <attr format="reference|boolean" name="npv_WrapSelectorWheel"/>
+        <attr format="reference|boolean" name="npv_RespondChangeOnDetached"/>
+        <attr format="reference|string" name="npv_HintText"/>
+        <attr format="reference|string" name="npv_EmptyItemHint"/>
+        <attr format="reference|dimension" name="npv_MarginStartOfHint"/>
+        <attr format="reference|dimension" name="npv_MarginEndOfHint"/>
+        <attr format="reference|dimension" name="npv_ItemPaddingHorizontal"/>
+        <attr format="reference|dimension" name="npv_ItemPaddingVertical"/>
+        <attr format="reference|boolean" name="npv_RespondChangeInMainThread"/>
+        <attr format="reference|string" name="npv_TextEllipsize"/>
+
+        <!--just used to measure maxWidth for wrap_content without hint,
+            the string array will never be displayed.
+            you can set this attr if you want to keep the wraped numberpickerview
+            width unchanged when alter the content list-->
+        <attr format="reference" name="npv_AlternativeTextArrayWithMeasureHint"/>
+        <attr format="reference" name="npv_AlternativeTextArrayWithoutMeasureHint"/>
+        <!--the max length of hint content-->
+        <attr format="reference|string" name="npv_AlternativeHint"/>
     </declare-styleable>
     <declare-styleable name="PopupWindow">
         <!-- Whether the popup window should overlap its anchor view. -->

@@ -9,6 +9,7 @@ MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\kevin\.gradle\caches\tra
 MERGED from [:rn-fetch-blob] C:\Users\kevin\github\d-sunmi-implementation\node_modules\rn-fetch-blob\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-47:12
 MERGED from [:react-native-sqlite-storage] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:@react-native-community_async-storage] C:\Users\kevin\github\d-sunmi-implementation\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-date-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-date-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-document-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-document-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-image-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:react-native-pdf] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -70,6 +71,8 @@ MERGED from [androidx.lifecycle:lifecycle-service:2.0.0] C:\Users\kevin\.gradle\
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\ece507071898a883af9965fbc12d6b7c\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\bb5b945f45b79a3b9372aa4bd9e5bbec\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\3f1a45543b62ce31bd04f9ee63a0c592\AndroidManifest.xml:17:1-24:12
+MERGED from [com.henninghall.android:NumberPickerView:1.1.2] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\8f04f8490953d285544887fe7d5fcd6c\AndroidManifest.xml:2:1-11:12
+MERGED from [net.time4j:time4j-android:4.2-2018i] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\47e6b41c3dc56b6cd0902681e6da58db\AndroidManifest.xml:2:1-13:12
 MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\fc654281a79c2ac65875f52438691c74\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\Users\kevin\github\d-sunmi-implementation\android\app\src\debug\AndroidManifest.xml:2:1-8:12
 INJECTED from C:\Users\kevin\github\d-sunmi-implementation\android\app\src\debug\AndroidManifest.xml:2:1-8:12
@@ -149,6 +152,8 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ke
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\5225be3a5d949c13f3973cef93a809d6\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\4fbeeabd70a469a1ffd33e8fc36de61e\AndroidManifest.xml:22:5-28:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\4fbeeabd70a469a1ffd33e8fc36de61e\AndroidManifest.xml:22:5-28:19
+MERGED from [net.time4j:time4j-android:4.2-2018i] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\47e6b41c3dc56b6cd0902681e6da58db\AndroidManifest.xml:11:5-20
+MERGED from [net.time4j:time4j-android:4.2-2018i] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\47e6b41c3dc56b6cd0902681e6da58db\AndroidManifest.xml:11:5-20
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\da036d8bfee70a6a1c4357fe57bcdc4d\AndroidManifest.xml:24:18-86
 	android:label
@@ -245,6 +250,8 @@ MERGED from [:react-native-sqlite-storage] C:\Users\kevin\github\d-sunmi-impleme
 MERGED from [:react-native-sqlite-storage] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:@react-native-community_async-storage] C:\Users\kevin\github\d-sunmi-implementation\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\kevin\github\d-sunmi-implementation\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-date-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-date-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-date-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-date-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-document-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-document-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-document-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-document-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-image-picker] C:\Users\kevin\github\d-sunmi-implementation\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
@@ -367,6 +374,10 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\kevin\.gradl
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\bb5b945f45b79a3b9372aa4bd9e5bbec\AndroidManifest.xml:20:5-44
 MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\3f1a45543b62ce31bd04f9ee63a0c592\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\3f1a45543b62ce31bd04f9ee63a0c592\AndroidManifest.xml:20:5-22:41
+MERGED from [com.henninghall.android:NumberPickerView:1.1.2] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\8f04f8490953d285544887fe7d5fcd6c\AndroidManifest.xml:7:5-9:41
+MERGED from [com.henninghall.android:NumberPickerView:1.1.2] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\8f04f8490953d285544887fe7d5fcd6c\AndroidManifest.xml:7:5-9:41
+MERGED from [net.time4j:time4j-android:4.2-2018i] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\47e6b41c3dc56b6cd0902681e6da58db\AndroidManifest.xml:7:5-9:41
+MERGED from [net.time4j:time4j-android:4.2-2018i] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\47e6b41c3dc56b6cd0902681e6da58db\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\fc654281a79c2ac65875f52438691c74\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\kevin\.gradle\caches\transforms-2\files-2.1\fc654281a79c2ac65875f52438691c74\AndroidManifest.xml:5:5-7:41
 INJECTED from C:\Users\kevin\github\d-sunmi-implementation\android\app\src\debug\AndroidManifest.xml

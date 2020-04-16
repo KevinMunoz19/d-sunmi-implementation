@@ -548,6 +548,34 @@ attr navigationContentDescription
 attr navigationIcon
 attr navigationMode
 attr navigationViewStyle
+attr npv_AlternativeHint
+attr npv_AlternativeTextArrayWithMeasureHint
+attr npv_AlternativeTextArrayWithoutMeasureHint
+attr npv_DividerColor
+attr npv_DividerHeight
+attr npv_DividerMarginLeft
+attr npv_DividerMarginRight
+attr npv_EmptyItemHint
+attr npv_HintText
+attr npv_ItemPaddingHorizontal
+attr npv_ItemPaddingVertical
+attr npv_MarginEndOfHint
+attr npv_MarginStartOfHint
+attr npv_MaxValue
+attr npv_MinValue
+attr npv_RespondChangeInMainThread
+attr npv_RespondChangeOnDetached
+attr npv_ShowDivider
+attr npv_ShownCount
+attr npv_TextArray
+attr npv_TextColorHint
+attr npv_TextColorNormal
+attr npv_TextColorSelected
+attr npv_TextEllipsize
+attr npv_TextSizeHint
+attr npv_TextSizeNormal
+attr npv_TextSizeSelected
+attr npv_WrapSelectorWheel
 attr nullable
 attr number
 attr numericModifiers
@@ -1460,6 +1488,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable overlay
 drawable redbox_top_border_background
 drawable side_nav_bar
 drawable src_img_fel
@@ -1542,6 +1571,7 @@ id add
 id alertTitle
 id all
 id always
+id ampm
 id async
 id auto
 id barrier
@@ -1580,7 +1610,9 @@ id coordinator
 id custom
 id customPanel
 id cut
+id date
 id date_picker_actions
+id day
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1597,6 +1629,11 @@ id dropdown_menu
 id editText
 id editTextAuth
 id edit_query
+id empty1
+id empty2
+id empty3
+id emptyEnd
+id emptyStart
 id end
 id end_padder
 id enterAlways
@@ -1630,6 +1667,7 @@ id groups
 id hideable
 id home
 id homeAsUp
+id hour
 id icon
 id icon_group
 id ifRoom
@@ -1652,7 +1690,9 @@ id media_actions
 id message
 id middle
 id mini
+id minutes
 id mobile_navigation
+id month
 id month_grid
 id month_navigation_bar
 id month_navigation_fragment_toggle
@@ -1700,6 +1740,9 @@ id notification_main_column_container
 id off
 id on
 id outline
+id overlay_bottom
+id overlay_image
+id overlay_top
 id packed
 id parallax
 id parent
@@ -1708,6 +1751,7 @@ id parent_matrix
 id password_toggle
 id peekHeight
 id percent
+id pickerWrapper
 id pin
 id progress_circular
 id progress_horizontal
@@ -1826,6 +1870,7 @@ id visible
 id withText
 id wrap
 id wrap_content
+id year
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -1894,6 +1939,7 @@ layout activity_main3
 layout app_bar_home_nav
 layout content_home_nav
 layout custom_dialog
+layout datepicker_view
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar
@@ -2115,6 +2161,7 @@ string nav_header_subtitle
 string nav_header_title
 string navigation_drawer_close
 string navigation_drawer_open
+string overlay
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
@@ -2371,6 +2418,7 @@ style ClockTimePickerStyle
 style DefaultExplainingPermissionsTheme
 style DialogAnimationFade
 style DialogAnimationSlide
+style Dialog_Full_Screen
 style EmptyTheme
 style MaterialAlertDialog_MaterialComponents
 style MaterialAlertDialog_MaterialComponents_Body_Text
@@ -2916,6 +2964,7 @@ styleable NavHostFragment defaultNavHost navGraph
 styleable NavInclude graph
 styleable NavigationView android_background android_fitsSystemWindows android_maxWidth elevation headerLayout itemBackground itemHorizontalPadding itemIconPadding itemIconSize itemIconTint itemMaxLines itemShapeAppearance itemShapeAppearanceOverlay itemShapeFillColor itemShapeInsetBottom itemShapeInsetEnd itemShapeInsetStart itemShapeInsetTop itemTextAppearance itemTextColor menu
 styleable Navigator android_label android_id
+styleable NumberPickerView npv_AlternativeHint npv_AlternativeTextArrayWithMeasureHint npv_AlternativeTextArrayWithoutMeasureHint npv_DividerColor npv_DividerHeight npv_DividerMarginLeft npv_DividerMarginRight npv_EmptyItemHint npv_HintText npv_ItemPaddingHorizontal npv_ItemPaddingVertical npv_MarginEndOfHint npv_MarginStartOfHint npv_MaxValue npv_MinValue npv_RespondChangeInMainThread npv_RespondChangeOnDetached npv_ShowDivider npv_ShownCount npv_TextArray npv_TextColorHint npv_TextColorNormal npv_TextColorSelected npv_TextEllipsize npv_TextSizeHint npv_TextSizeNormal npv_TextSizeSelected npv_WrapSelectorWheel
 styleable PopupWindow android_popupBackground android_popupAnimationStyle overlapAnchor
 styleable PopupWindowBackgroundState state_above_anchor
 styleable RecycleListView paddingBottomNoButtons paddingTopNoTitle

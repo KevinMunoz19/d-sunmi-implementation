@@ -309,4 +309,11 @@ javax/inject/Named.class
 javax/inject/Qualifier.class
 javax/inject/Scope.class
 javax/inject/Singleton.class
+net/time4j/android/ApplicationStarter.class
+net/time4j/android/TimeApplication.class
+net/time4j/engine/FormattableElement.class
+net/time4j/format/CalendarType.class
 okhttp3/internal/annotations/EverythingIsNonNull.class
+org/apache/commons/lang3/builder/EqualsExclude.class
+org/apache/commons/lang3/builder/HashCodeExclude.class
+org/apache/commons/lang3/builder/ToStringExclude.class
