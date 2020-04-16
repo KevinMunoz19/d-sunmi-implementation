@@ -25,173 +25,101 @@ import DatePicker from 'react-native-date-picker';
 
 const Dtes = () =>{
 
-    const [pdfModalVisible,setPdfModalVisible] = useState(false);
-    const [pdfSource,setPdfSource] = useState(null);
-    const [dteList,setDteList] = useState([]);
-    const [loading,setLoading] = useState(false);
-    const {select} = DB();
+  const [pdfModalVisible,setPdfModalVisible] = useState(false);
+  const [pdfSource,setPdfSource] = useState(null);
+  const [dteList,setDteList] = useState([]);
+  const [loading,setLoading] = useState(false);
+  const {select} = DB();
 
-		const [dteListCash,setDteListCash] = useState([]);
-		const [dteListCheck,setDteListCheck] = useState([]);
-		const [dteListCard,setDteListCard] = useState([]);
+	const [dteListCash,setDteListCash] = useState([]);
+	const [dteListCheck,setDteListCheck] = useState([]);
+	const [dteListCard,setDteListCard] = useState([]);
 
-		const [count0,setCount0] = useState('');
-		const [count1,setCount1] = useState('');
-		const [count2,setCount2] = useState('');
+	const [count0,setCount0] = useState('');
+	const [count1,setCount1] = useState('');
+	const [count2,setCount2] = useState('');
 
-		const [amount0,setAmount0] = useState('');
-		const [amount1,setAmount1] = useState('');
-		const [amount2,setAmount2] = useState('');
+	const [amount0,setAmount0] = useState('');
+	const [amount1,setAmount1] = useState('');
+	const [amount2,setAmount2] = useState('');
 
-		const [tot,setTot] = useState([]);
-		const [amount,setAmount] = useState([]);
+	const [tot,setTot] = useState([]);
+	const [amount,setAmount] = useState([]);
 
-		const [todayDay,setTodayDay] = useState('');
-		const [todayDay2,setTodayDay2] = useState('');
+	const [todayDay,setTodayDay] = useState('');
+	const [todayDay2,setTodayDay2] = useState('');
 
-		const [selectedDate1, setSelectedDate1] = useState(new Date());
-		const [selectedDate2, setSelectedDate2] = useState(new Date());
+	const [selectedDate1, setSelectedDate1] = useState(new Date());
+	const [selectedDate2, setSelectedDate2] = useState(new Date());
 
+	function PadLeft(value, length) {
+		return (value.toString().length < length) ? PadLeft("0" + value, length) :
+		value;
+	}
 
-
-		//useEffect(()=>{
-    //    var query = `select * from dte where payment = 0`;
-    //    select(query,[],(dtes)=>{
-    //        setDteListCash(dtes);
-    //    })
-    //},[])
-
-    //useEffect(()=>{
-    //    var queryc = `select * from dte where payment = 1`;
-    //    select(queryc,[],(dtesc)=>{
-    //        setDteListCheck(dtesc);
-    //    })
-    //},[])
-
-		//useEffect(()=>{
-    //    var queryt = `select * from dte where payment = 2`;
-    //    select(queryt,[],(dtest)=>{
-    //        setDteListCard(dtest);
-    //    })
-    //},[])
-
-		//useEffect(()=>{
-		//	var qt = `select count(id) ct, payment from dte group by payment`;
-		//	select(qt,[],(tt)=>{
-		//			setCount0(tt[0].ct)
-		//			setCount1(tt[1].ct)
-		//			setCount2(tt[2].ct)
-		//	})
-
-		//	var qa = `select sum(amount) at, payment from dte group by payment`;
-		//	select(qa,[],(ta)=>{
-		//		setAmount0(ta[0].at);
-		//		setAmount1(ta[1].at);
-		//		setAmount2(ta[2].at);
-		//	})
-	//},[])
-
-
-		useEffect(()=>{
-			var tzoffset = (new Date()).getTimezoneOffset()*60000;
-	    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
-			var nowDate = localISOTime.slice(0,10);
-        var querybyday = `select * from dte where payment = 0 and date >= date('${nowDate.trim()} 00:00:00')`;
-        select(querybyday,[],(dteday)=>{
-					setTodayDay(dteday[0].date);
-					//console.log(todayDay.slice(0,10).trim());
-        })
-    },[])
-
-		useEffect(()=>{
-			var tzoffset = (new Date()).getTimezoneOffset()*60000;
-	    var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
-			var nowDate = localISOTime.slice(0,10);
-			var nowYear = localISOTime.slice(0,4);
-			var nowMonth = localISOTime.slice(5,7);
-
-        var querybyday2 = `select * from dte where payment = 0 and date >= date('${nowYear.trim()}-${nowMonth.trim()}-01 00:00:00')`;
-        select(querybyday2,[],(dteday2)=>{
-					setTodayDay2(dteday2[0].date);
-					//console.log(todayDay.slice(0,10).trim());
-        })
-				console.log("query string");
-				console.log(querybyday2);
-
-    },[])
-
-
-		function PadLeft(value, length) {
-			return (value.toString().length < length) ? PadLeft("0" + value, length) :
-			value;
-		}
-
-
-
-
-
-
-
-    useEffect(()=>{
+  useEffect(()=>{
 		if(pdfSource != null){
 			setLoading(false);
 			setPdfModalVisible(true);
 		}
-    },[pdfSource]);
+  },[pdfSource]);
 
-    const onClosePdf = ()=>{
+  const onClosePdf = ()=>{
 		setPdfModalVisible(false);
 	}
 
 	function searchbydate() {
 
 		setDteListCash([]);
+		setDteListCheck([]);
+		setDteListCard([]);
+		setCount0('');
+		setCount1('');
+		setCount2('');
+		setAmount0('');
+		setAmount1('');
+		setAmount2('');
 
 		if ((selectedDate1 <= selectedDate2) || (selectedDate1.getDate() == selectedDate2.getDate() && selectedDate1.getMonth() == selectedDate2.getMonth() && selectedDate1.getFullYear() == selectedDate2.getFullYear())) {
-			console.log("Fecha inicial")
-			console.log(selectedDate1)
-			console.log("Fecha inicial dia")
-			console.log(PadLeft(selectedDate1.getDate(),2))
-			console.log("Fecha inicial mes")
-			console.log(PadLeft((selectedDate1.getMonth() + 1),2))
-			console.log("Fecha inicial ano")
-			console.log(selectedDate1.getFullYear())
-			console.log("Fecha final")
-			console.log(selectedDate2)
 
 			var iDay = PadLeft(selectedDate1.getDate(),2);
 			var iMonth = PadLeft((selectedDate1.getMonth() + 1),2);
 			var iYear = selectedDate1.getFullYear();
-
 			var fDay = PadLeft(selectedDate2.getDate() + 1,2);
 			var fMonth = PadLeft((selectedDate2.getMonth() + 1),2);
 			var fYear = selectedDate2.getFullYear();
 
 			var query = `select * from dte where payment = 0 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
-			console.log("Print Query")
-			console.log(query)
 			select(query,[],(dtes)=>{
-				console.log("Fecha en DTE")
-				console.log(dtes[0].date)
 	    	setDteListCash(dtes);
 	    })
-			//var queryc = `select * from dte where payment = 1`;
-			//select(queryc,[],(dtesc)=>{
-			//	setDteListCheck(dtesc);
-			//})
 
+			var queryc = `select * from dte where payment = 1 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
+	    select(queryc,[],(dtesc)=>{
+	    	setDteListCheck(dtesc);
+	    })
 
+			var queryt = `select * from dte where payment = 2`;
+	    select(queryt,[],(dtest)=>{
+	    	setDteListCard(dtest);
+	    })
+
+			var qt = `select count(id) ct, payment from dte where date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59') group by payment`;
+			select(qt,[],(tt)=>{
+				setCount0(tt[0].ct)
+				setCount1(tt[1].ct)
+				setCount2(tt[2].ct)
+			})
+
+			var qa = `select sum(amount) at, payment from dte where date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59') group by payment`;
+			select(qa,[],(ta)=>{
+				setAmount0(ta[0].at);
+				setAmount1(ta[1].at);
+				setAmount2(ta[2].at);
+			})
 		} else {
-			console.log("Fecha inicial")
-			console.log(selectedDate1)
-			console.log("Fecha inicial")
-			console.log(selectedDate2)
 			Alert.alert(`La fecha inicial debe ser menor a la fecha final`);
 		}
-
-
-
-
 	}
 
 
@@ -218,15 +146,9 @@ const Dtes = () =>{
             <View style={styles.bodyContainer}>
                 <ScrollView style={styles.scroll}>
 
-
-
-
 								<Text>Efectivo #{count0} Q{amount0}</Text>
 								<Text>Cheque #{count1} Q{amount1}</Text>
 								<Text>Tarjeta #{count2} Q{amount2}</Text>
-								<Text>Fecha{todayDay}</Text>
-								<Text>Fecha{todayDay2}</Text>
-
 
 								<View style={styles.headerContainerSub}>
 										<View style={styles.textHeaderContainerSub}>
