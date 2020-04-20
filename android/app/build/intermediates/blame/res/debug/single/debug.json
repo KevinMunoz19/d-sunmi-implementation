@@ -8,28 +8,28 @@
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
-        "source": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\src\\main\\res\\drawable-hdpi\\node_modules_reactnavigationstack_dist_views_assets_backicon.png"
-    },
-    {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_node_modules_reactnavigationstack_dist_views_assets_backicon.png.flat",
+        "source": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\src\\main\\res\\drawable-hdpi\\node_modules_reactnavigationstack_dist_views_assets_backicon.png"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21_mtrl_bottom_sheet_slide_in.xml.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\anim-v21\\mtrl_bottom_sheet_slide_in.xml"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_seekbar_tick_mark_material.xml.flat",
-        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_mtrl_tabs_default_indicator.xml.flat",
+        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\drawable\\mtrl_tabs_default_indicator.xml"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_part_time.xml.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\da036d8bfee70a6a1c4357fe57bcdc4d\\res\\layout\\notification_template_part_time.xml"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_mtrl_tabs_default_indicator.xml.flat",
-        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\drawable\\mtrl_tabs_default_indicator.xml"
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_seekbar_tick_mark_material.xml.flat",
+        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_datepicker_view.xml.flat",
@@ -112,32 +112,32 @@
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\layout\\mtrl_alert_select_dialog_multichoice.xml"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-ldrtl-xxhdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_redbox_item_title.xml.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\764edde24b176354bc47f597add725da\\res\\layout\\redbox_item_title.xml"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_mtrl_picker_header_selection_text.xml.flat",
-        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\layout\\mtrl_picker_header_selection_text.xml"
-    },
-    {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\color_mtrl_popupmenu_overlay_color.xml.flat",
-        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\color\\mtrl_popupmenu_overlay_color.xml"
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_mtrl_picker_header_selection_text.xml.flat",
+        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\layout\\mtrl_picker_header_selection_text.xml"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable-ldrtl-xxxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\color_mtrl_popupmenu_overlay_color.xml.flat",
+        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\06a82f152e6ef65bb0b8d90268c2e4e3\\res\\color\\mtrl_popupmenu_overlay_color.xml"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
@@ -156,12 +156,12 @@
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\color\\abc_primary_text_material_dark.xml"
     },
     {
-        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_dark.xml.flat",
-        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable\\tooltip_frame_dark.xml"
-    },
-    {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_cascading_menu_item_layout.xml.flat",
         "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\layout\\abc_cascading_menu_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_dark.xml.flat",
+        "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\drawable\\tooltip_frame_dark.xml"
     },
     {
         "merged": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",

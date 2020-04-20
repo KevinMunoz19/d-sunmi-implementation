@@ -302,6 +302,20 @@ const Dte = () =>{
 			Alert.alert(`Ocurrio un error enviando el documento por correo, por favor intete luego`);
 		});
 	}
+	const nativeComponent = () => {
+		activityStarter.navigateToExample(JSON.stringify(documento),JSON.stringify(user),JSON.stringify(products));
+
+		const eventEmitter = new NativeEventEmitter(eventEmitterModule);
+		eventEmitter.addListener(eventEmitterModule.MyEventName, (params) => {
+			onGenerate();
+			console.log(params);
+			console.log(payment);
+			eventEmitter.removeListener();
+		})
+
+	}
+
+
 
 	return(
 		// <ImageBackground source={require('../img/Fondo.png')} style={{width: '100%', height: '100%'}} >
@@ -530,6 +544,11 @@ const Dte = () =>{
 							<Text >Generar Factura</Text>
 						</TouchableOpacity>
 					</View>
+
+					<Button
+	        	onPress={nativeComponent}
+	        	title='Start example activity'
+        	/>
 
 					<View style={styles.generateBillButtonContainer}>
 					{visibleButton &&

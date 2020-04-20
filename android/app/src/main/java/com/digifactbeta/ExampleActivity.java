@@ -2,6 +2,12 @@ package com.digifactbeta;
 
 import com.facebook.react.ReactActivity;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,10 +37,17 @@ public class ExampleActivity extends ReactActivity {
     private EditText autorizacion;
 
 
+
+
     @Override
     @CallSuper
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
         setContentView(R.layout.activity_example);
 
         Intent intent = getIntent();
@@ -56,6 +69,7 @@ public class ExampleActivity extends ReactActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.digifactbeta");
                 if (launchIntent != null) {
                     startActivity(launchIntent);
@@ -74,13 +88,20 @@ public class ExampleActivity extends ReactActivity {
             }
         });
 
+        findViewById(R.id.sendEventBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventEmitterModule.emitEvent("Message From Java");
+            }
+        });
+
     }
-
-
 
     public void imprimirDocumento(){
 
     }
+
+
 
 
 
