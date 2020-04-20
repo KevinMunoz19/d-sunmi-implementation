@@ -109,9 +109,9 @@ const Dte = () =>{
 	]
 
 	const radioPaymentType = [
-		{label: 'Efectivo', value: 0 },
-		{label: 'Cheque', value: 1 },
-		{label: 'Tarjeta', value: 2 }
+		{label: 'Efectivo ', value: 0 },
+		{label: 'Cheque   ', value: 1 },
+		{label: 'Tarjeta  ', value: 2 }
 	];
 
 	useEffect(()=>{
@@ -321,7 +321,7 @@ const Dte = () =>{
 						<TouchableOpacity  onPress={()=>createClient(false)} style={styles.createModalButton}>
 							<Icon
 								name="add-circle"
-                color="rgb(119,211,83)"
+                color="rgb(234, 103, 46)"
                 size={50}
                 style={styles.icon}
 							/>
@@ -332,7 +332,7 @@ const Dte = () =>{
 						<TouchableOpacity  onPress={()=>setCreateClientModalVisible(false)} style={styles.actionButton}>
 							<Icon
 								name="arrow-back"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
@@ -384,7 +384,7 @@ const Dte = () =>{
 								radio_props={radioProps}
 								formHorizontal={true}
 								initial={0}
-								buttonColor={'#26A657'}
+								buttonColor={'#f06f17'}
 								onPress={(value) => {setCf(value)}}
 								/>
 						</View>
@@ -441,7 +441,7 @@ const Dte = () =>{
 								radio_props={radioIVA}
 								formHorizontal={true}
 								initial={0}
-								buttonColor={'#26A657'}
+								buttonColor={'#f06f17'}
 								onPress={(value) => {setIva(value)}}
 							/> */}
 						{/* <TextInput
@@ -471,7 +471,7 @@ const Dte = () =>{
 								radio_props={radioPaymentType}
 								formHorizontal={true}
 								initial={0}
-								buttonColor={'#26A657'}
+								buttonColor={'#f06f17'}
 								onPress={(value) => {setPayment(value)}}
 								/>
 						</View>
@@ -490,7 +490,7 @@ const Dte = () =>{
 								<Text>Agregar producto</Text>
 								<Icon
 									name="add-circle"
-									color="#26A657"
+									color="#f06f17"
 									size={30}
 									style={styles.addButtoIcon}
 								/>
@@ -517,13 +517,13 @@ const Dte = () =>{
 					</View>
 
 					{ (loading) && (
-						<ActivityIndicator visible={false} size='large' color='#26A657'/>
+						<ActivityIndicator visible={false} size='large' color='#f06f17'/>
 					)}
 					<View style={styles.generateBillButtonContainer}>
 						<TouchableOpacity onPress={onGenerate} style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
@@ -538,7 +538,7 @@ const Dte = () =>{
 							style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
@@ -553,7 +553,7 @@ const Dte = () =>{
 							style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
@@ -593,7 +593,7 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		height:'5%',
 		width:'100%',
-		backgroundColor:'#26A657',
+		backgroundColor:'#f06f17',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -682,8 +682,8 @@ const styles = StyleSheet.create({
 		marginTop:5,
     flexDirection:'row',
     backgroundColor:'white',
-    borderBottomColor:'#26A657',
-    borderTopColor:'#26A657',
+    borderBottomColor:'#f06f17',
+    borderTopColor:'#f06f17',
     borderBottomWidth:1,
     borderTopWidth:1,
     justifyContent:'center',

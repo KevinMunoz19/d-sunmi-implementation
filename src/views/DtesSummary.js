@@ -21,6 +21,7 @@ import PdfView from "../components/PdfView";
 import IosHeader from '../components/IosHeader';
 
 import DatePicker from 'react-native-date-picker';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
 const Dtes = () =>{
@@ -35,13 +36,13 @@ const Dtes = () =>{
 	const [dteListCheck,setDteListCheck] = useState([]);
 	const [dteListCard,setDteListCard] = useState([]);
 
-	const [count0,setCount0] = useState('');
-	const [count1,setCount1] = useState('');
-	const [count2,setCount2] = useState('');
+	const [count0,setCount0] = useState('0');
+	const [count1,setCount1] = useState('0');
+	const [count2,setCount2] = useState('0');
 
-	const [amount0,setAmount0] = useState('');
-	const [amount1,setAmount1] = useState('');
-	const [amount2,setAmount2] = useState('');
+	const [amount0,setAmount0] = useState('0');
+	const [amount1,setAmount1] = useState('0');
+	const [amount2,setAmount2] = useState('0');
 
 	const [tot,setTot] = useState([]);
 	const [amount,setAmount] = useState([]);
@@ -51,6 +52,25 @@ const Dtes = () =>{
 
 	const [selectedDate1, setSelectedDate1] = useState(new Date());
 	const [selectedDate2, setSelectedDate2] = useState(new Date());
+	// const [st] = useState({
+  //     tableHead: ['Visite Date', 'Member', 'you ...', 'etc..'],
+  //     tableData: [
+  //       ['07/29/2016', 'JEFF', '$46.80', '...'],
+  //       ['07/29/2016', 'JEFF', '$46.80', '...'],
+  //       ['07/29/2016', 'JEFF', '$46.80', '...'],
+  //       ['07/29/2016', 'JEFF', '$46.80', '...']
+  //     ]
+  //   })
+	const [st,setSt] = useState({
+      tableHead: ['Visite Date', 'Member', 'you ...', 'etc..'],
+      tableData: [
+        ['07/29/2016', 'JEFF', '$46.80', '...'],
+        ['07/29/2016', 'JEFF', '$46.80', '...'],
+        ['07/29/2016', 'JEFF', '$46.80', '...'],
+        ['07/29/2016', 'JEFF', '$46.80', '...']
+      ]
+    })
+
 
 	function PadLeft(value, length) {
 		return (value.toString().length < length) ? PadLeft("0" + value, length) :
@@ -79,6 +99,15 @@ const Dtes = () =>{
 		setAmount0('');
 		setAmount1('');
 		setAmount2('');
+		setSt({
+				tableHead: ['', 'Cantidad', 'Total'],
+				tableData: [
+					['Efectivo', `0`, `Q. 00.00`],
+					['Cheque', `0`, `Q. 00.00`],
+					['Tarjeta', `0`, `Q. 00.00`]
+
+				]
+			})
 
 		if ((selectedDate1 <= selectedDate2) || (selectedDate1.getDate() == selectedDate2.getDate() && selectedDate1.getMonth() == selectedDate2.getMonth() && selectedDate1.getFullYear() == selectedDate2.getFullYear())) {
 
@@ -99,7 +128,7 @@ const Dtes = () =>{
 	    	setDteListCheck(dtesc);
 	    })
 
-			var queryt = `select * from dte where payment = 2`;
+			var queryt = `select * from dte where payment = 2 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
 	    select(queryt,[],(dtest)=>{
 	    	setDteListCard(dtest);
 	    })
@@ -117,6 +146,15 @@ const Dtes = () =>{
 				setAmount1(ta[1].at);
 				setAmount2(ta[2].at);
 			})
+
+				// setSt({
+			  //     tableHead: ['', 'Cantidad', 'Total'],
+			  //     tableData: [
+			  //       ['Efectivo', `${count0}`, `Q. ${amount0}`],
+			  //       ['Cheque', `${count1}`, `Q. ${amount1}`],
+			  //       ['Tarjeta', `${count2}`, `Q. ${amount2}`]
+			  //     ]
+			  //   })
 		} else {
 			Alert.alert(`La fecha inicial debe ser menor a la fecha final`);
 		}
@@ -146,10 +184,6 @@ const Dtes = () =>{
             <View style={styles.bodyContainer}>
                 <ScrollView style={styles.scroll}>
 
-								<Text>Efectivo #{count0} Q{amount0}</Text>
-								<Text>Cheque #{count1} Q{amount1}</Text>
-								<Text>Tarjeta #{count2} Q{amount2}</Text>
-
 								<View style={styles.headerContainerSub}>
 										<View style={styles.textHeaderContainerSub}>
 												<Text style={styles.textHeaderSub}>Desde</Text>
@@ -161,6 +195,7 @@ const Dtes = () =>{
 									onDateChange = {setSelectedDate1}
 									mode="date"
 									locale = "es"
+									style={styles.dp}
 								/>
 
 								<View style={styles.headerContainerSub}>
@@ -174,6 +209,8 @@ const Dtes = () =>{
 									onDateChange = {setSelectedDate2}
 									mode="date"
 									locale = "es"
+									style={styles.dp}
+
 								/>
 
 								<View style={styles.buttonContainer}>
@@ -183,11 +220,16 @@ const Dtes = () =>{
 								</View>
 
 
-
-
-
-
-
+								<View style={styles.containert}>
+					        <Table borderStyle={{borderWidth: 2, borderColor: '#e78b4d'}}>
+					          <Row data={['', 'Cantidad', 'Total']} style={styles.headt} textStyle={styles.textt}/>
+					          <Rows data={[
+							        ['Efectivo', `${count0}`, `Q. ${amount0}`],
+							        ['Cheque', `${count1}`, `Q. ${amount1}`],
+							        ['Tarjeta', `${count2}`, `Q. ${amount2}`]
+							      ]} textStyle={styles.textt}/>
+					        </Table>
+					      </View>
 
 									<View style={styles.headerContainerSub}>
 			                <View style={styles.textHeaderContainerSub}>
@@ -288,16 +330,15 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'white'
-
     },
     textHeader:{
         color:'white',
-        fontSize:20
+        fontSize:15
     },
     textHeaderContainer:{
-        width:'50%',
+        width:'60%',
         height:'50%',
-        backgroundColor:'rgb(119,211,83)',
+        backgroundColor:'rgb(234, 103, 46)',
         alignItems:'center',
         justifyContent:'center'
     },
@@ -342,7 +383,7 @@ const styles = StyleSheet.create({
 		textHeaderContainerSub:{
         width:'30%',
         height:'80%',
-        backgroundColor:'rgb(119,211,83)',
+        backgroundColor:'rgb(234, 103, 46)',
         alignItems:'center',
         justifyContent:'center'
     },
@@ -386,6 +427,26 @@ const styles = StyleSheet.create({
 		selectInput: {
         fontSize: 10
     },
+		containert: {
+			flex: 1,
+			padding: 16,
+			paddingTop: 30,
+			backgroundColor: '#fff'
+		},
+	  headt: {
+			height: 30,
+			backgroundColor: '#f06f17'
+		},
+	  textt: {
+			margin: 6
+		},
+		dp: {
+			alignItems:'center',
+			justifyContent:'center',
+			height: 80,
+			//padding: 10,
+			marginLeft: 30
+		}
 });
 
 export default Dtes;

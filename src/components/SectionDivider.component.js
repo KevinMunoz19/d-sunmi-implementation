@@ -9,12 +9,12 @@ const SectionDivider = ({sectionName,width}) => {
     );
 };
 
-const styles = StyleSheet.create({	
+const styles = StyleSheet.create({
 	sectionHeader:{
 		flex: 1,
 		flexDirection:'row',
 		height:'5%',
-        backgroundColor:'rgb(119,211,83)',
+        backgroundColor:'rgb(234, 103, 46)',
 		justifyContent: 'center',
 		alignItems: 'center'
     },

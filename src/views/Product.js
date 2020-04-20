@@ -35,7 +35,6 @@ const Product = ({id,product,action,onSelect}) =>{
 		}
 		if(onSelect!=null)handleInputChange('quantity',1);
 		handleInputChange('code',(Math.random()*100000).toFixed(0));
-		
 	}, [])
 
 	return(
@@ -43,37 +42,35 @@ const Product = ({id,product,action,onSelect}) =>{
 			<View style={{backgroundColor:'white'}}>
 				{(onSelect==null) && (
 					<IosHeader textHeader={'DTE'}/>
-				)}	
+				)}
 				<View style={{
-							height:80,
-							justifyContent:'flex-end',
-							alignItems:'center'
+					height:80,
+					justifyContent:'flex-end',
+					alignItems:'center'
+				}}>
+					<View style={{
+						backgroundColor:'rgb(234, 103, 46)',
+						width:'50%',
+						height:'50%',
+						justifyContent:'center',
+						alignItems:'center'
+					}}>
+						<Text style={{
+							color:'white',
+							fontSize:20
 						}}>
-						<View style={{
-							backgroundColor:'rgb(119,211,83)',
-							width:'50%',
-							height:'50%',
-							justifyContent:'center',
-							alignItems:'center'
-						}}>
-							<Text style={{
-								color:'white',
-								fontSize:20
-							}}
-							>
-								Producto
-							</Text>
-						</View>
+							Producto
+						</Text>
+					</View>
 				</View>
 				<View style={styles.inputContainer}>
-						<Text>Nombre</Text>
-						<TextInput
-							style={styles.input}
-							onChangeText={(e)=>{handleInputChange('name',e)}}
-							value={inputs.name}
-						/>
+					<Text>Nombre</Text>
+					<TextInput
+						style={styles.input}
+						onChangeText={(e)=>{handleInputChange('name',e)}}
+						value={inputs.name}
+					/>
 				</View>
-
 				{/* <View style={styles.inputContainer}>
 						<Text>Codigo</Text>
 						<TextInput
@@ -82,16 +79,15 @@ const Product = ({id,product,action,onSelect}) =>{
 							value={`${inputs.code |''}`}
 						/>
 				</View> */}
-
 				<View style={styles.inputContainer}>
-						<Text>Precio con IVA</Text>
-						<TextInput
-							style={styles.input}
-							onChangeText={(e)=>{handleInputChange('price',e)}}
-							value={inputs.price == null?'':String(inputs.price)}
-							keyboardType = 'decimal-pad'
-						/>
-				</View>		
+					<Text>Precio con IVA</Text>
+					<TextInput
+						style={styles.input}
+						onChangeText={(e)=>{handleInputChange('price',e)}}
+						value={inputs.price == null?'':String(inputs.price)}
+						keyboardType = 'decimal-pad'
+					/>
+				</View>
 				{(onSelect!=null) &&(
 					<View style={styles.inputContainer}>
 						<Text>Cantidad</Text>
@@ -104,15 +100,15 @@ const Product = ({id,product,action,onSelect}) =>{
 					</View>
 				)}
 				{(action == 'edit') && (
-						<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
-							<Icon
-								name="edit"
-								color="#26A657"
-								size={50}
-								style={styles.icon}
-							/>
-							<Text >EDITAR</Text>
-						</TouchableOpacity>
+					<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
+						<Icon
+							name="edit"
+							color="#26A657"
+							size={50}
+							style={styles.icon}
+						/>
+						<Text >EDITAR</Text>
+					</TouchableOpacity>
 					)}
 					{(action == 'edit') && (
 						<TouchableOpacity onPress={()=>handleSubmit({action:'delete'})} style={styles.actionButton}>
@@ -129,13 +125,13 @@ const Product = ({id,product,action,onSelect}) =>{
 						<TouchableOpacity onPress={()=>handleSubmit({action:'create',onSelect:onSelect}) } style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
 							<Text >REGISTRAR</Text>
 						</TouchableOpacity>
-					)}			
+					)}
 			</View>
 		</ScrollView>
 
@@ -154,19 +150,18 @@ const styles = StyleSheet.create({
 		borderBottomColor:'#DDD',
 		borderBottomWidth:1
 	},
-
 	actionButton:{
 		marginTop:5,
-        flexDirection:'row',
-        backgroundColor:'white',
-        borderBottomColor:'#26A657',
-        borderTopColor:'#26A657',
-        borderBottomWidth:1,
-        borderTopWidth:1,
-        justifyContent:'center',
-        alignItems:'center'
+    flexDirection:'row',
+    backgroundColor:'white',
+    borderBottomColor:'#f06f17',
+    borderTopColor:'#f06f17',
+    borderBottomWidth:1,
+    borderTopWidth:1,
+    justifyContent:'center',
+    alignItems:'center'
     }
-	
+
 });
 
 export default Product;

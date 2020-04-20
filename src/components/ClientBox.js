@@ -21,8 +21,8 @@ const ClientBox = (props) =>{
 
 	return(
 		<View style={styles.clientBox}>
-            
-            <View style={styles.valuesColumn}>                
+
+            <View style={styles.valuesColumn}>
                 <Text style={styles.valuesText}>{client.name}</Text>
                 {/* <View style={styles.detailsContainer}> */}
                     {/* <Text style={styles.valuesText}># {client.nit}</Text>
@@ -33,7 +33,7 @@ const ClientBox = (props) =>{
                 <TouchableOpacity onPress={()=>onAction(client)} style={styles.actionColumn}>
                     <Icon
                         name="edit"
-                        color="rgb(119,211,83)"
+                        color="rgb(234, 103, 46)"
                         size={50}
                         style={styles.icon}
 				    />
@@ -43,12 +43,12 @@ const ClientBox = (props) =>{
                 <TouchableOpacity onPress={()=>onSelect(client)} style={styles.actionColumn}>
                     <Icon
                         name="check"
-                        color="rgb(119,211,83)"
+                        color="rgb(234, 103, 46)"
                         size={50}
                         style={styles.icon}
 				    />
                 </TouchableOpacity>
-            )}            
+            )}
         </View>
 	);
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // padding:5,
         borderTopWidth:1,
-        borderTopColor:'rgb(119,211,83)',
+        borderTopColor:'rgb(234, 103, 46)',
         marginTop:10,
         alignItems: 'center'
     },

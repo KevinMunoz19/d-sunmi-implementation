@@ -69,10 +69,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     sectionTouch:{
-        marginLeft:'20%',
+        // marginLeft:'20%',
         marginTop:'6%',
-        backgroundColor:'rgba(119,211,83,0.5)',
-        width:'60%',
+        backgroundColor:'rgba(234, 103, 46, 0.5)',
+        width:'100%',
+        // width:'60%',
         height:'12%',
         flexDirection:'row',
         alignItems:'center',
@@ -83,8 +84,9 @@ const styles = StyleSheet.create({
     },
     sectionTouchText:{
         marginBottom:'5%',
-        //marginLeft:'10%',
-        fontSize:40,
+        marginLeft:'5%',
+        //fontSize:40,
+        fontSize:20,
         color:'white'
     }
   });

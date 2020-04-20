@@ -1491,6 +1491,7 @@ drawable notify_panel_notification_icon_bg
 drawable overlay
 drawable redbox_top_border_background
 drawable side_nav_bar
+drawable src_img_docutec_logo
 drawable src_img_fel
 drawable src_img_homebackground
 drawable src_img_initbackground

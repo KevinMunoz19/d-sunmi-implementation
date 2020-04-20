@@ -317,7 +317,7 @@ const DteBox = ({dte,setPdfSource}) =>{
                     style={styles.icon}
                 />
                 {(loading)&&(
-                    <ActivityIndicator visible={false} size='large' color='#26A657'/>
+                    <ActivityIndicator visible={false} size='large' color='#f06f17'/>
                 )}
             </TouchableOpacity>
         </View>
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // padding:5,
         borderTopWidth:1,
-        borderTopColor:'rgb(119,211,83)',
+        borderTopColor:'rgb(234, 103, 46)',
         marginTop:10,
         alignItems: 'center'
     },

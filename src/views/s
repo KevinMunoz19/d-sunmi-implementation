@@ -1,0 +1,6 @@
+<View style={styles.containert}>
+  <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+    <Row data={st.tableHead} style={styles.headt} textStyle={styles.textt}/>
+    <Rows data={st.tableData} textStyle={styles.textt}/>
+  </Table>
+</View>

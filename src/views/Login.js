@@ -43,8 +43,7 @@ const Login = () =>{
 	function handlerSend(){
 		setLoading(true);
 		function PadLeft(value, length) {
-			return (value.toString().length < length) ? PadLeft("0" + value, length) :
-			value;
+			return (value.toString().length < length) ? PadLeft("0" + value, length) : value;
 		}
 
 		login({
@@ -92,89 +91,62 @@ const Login = () =>{
 
 
 	return(
-		// <ImageBackground source={require('../img/Fondo.png')} style={{width: '100%', height: '100%'}} >
-		// 	<View style={styles.container}>
-		// 		<Image source={require('../img/logo.png')} style={styles.logo}/>
-
-		// 		<TextInput style = {styles.input}
-		// 			placeholder="Nit"
-		// 			onChangeText={(e)=>{setNit(e)}}
-		// 		/>
-		// 		<TextInput style = {styles.input}
-		// 			placeholder="Username "
-		// 			onChangeText={(e)=>{setUsername(e)}}
-		// 		/>
-		// 		<TextInput style = {styles.input}
-		// 			placeholder="Password"
-		// 			onChangeText={(e)=>{setPassword(e)}}
-		// 			secureTextEntry={true}
-		// 		/>
-		// 		{(loading)&&(
-		// 			<ActivityIndicator visible={false} size='large' color='#26A657'/>
-		// 		)}
-		// 		<TouchableOpacity style={styles.sendButton}	onPress={handlerSend}>
-		// 			<Text style={{color:'white',textAlign:'center'}}>Login</Text>
-		// 		</TouchableOpacity>
-		// 	</View>
-		// </ImageBackground >
 		<ScrollView style={{backgroundColor:'white',flex:1}}>
-		<View style={loginStyles.primaryContainer}>
-			<View style={loginStyles.headerContainer}>
-
-			</View>
-			<View style={loginStyles.imageContainer}>
-
-				<Image source={require('../img/logo.png')} style={loginStyles.logo}/>
-			</View>
-			<View style={loginStyles.formContainer}>
-				<View style={loginStyles.inputContainer}>
-					<Icon
-						name="fingerprint"
-						color="#828B95"
-						size={20}/>
-					<TextInput
-						placeholder='NIT'
-						style={loginStyles.input}
-						onChangeText={(e)=>{setNit(e)}}
-					/>
+			<View style={loginStyles.primaryContainer}>
+				<View style={loginStyles.headerContainer}>
 				</View>
-				<View style={loginStyles.inputContainer}>
-					<Icon
-						name="person-pin"
-						color="#828B95"
-						size={20}/>
-					<TextInput
-						placeholder='USUARIO'
-						style={loginStyles.input}
-						onChangeText={(e)=>{setUsername(e)}}
-					/>
+				<View style={loginStyles.imageContainer}>
+					<Image source={require('../img/logo.png')} style={loginStyles.logo}/>
 				</View>
-				<View style={loginStyles.inputContainer}>
-					{/* <View style={{flexDirection:'row',alignItems:'center'}}> */}
+				<View style={loginStyles.formContainer}>
+					<View style={loginStyles.inputContainer}>
 						<Icon
-							name="lock"
+							name="fingerprint"
 							color="#828B95"
-							size={20}
-						/>
+							size={20}/>
 						<TextInput
-							placeholder='CLAVE'
+							placeholder='NIT'
 							style={loginStyles.input}
-							onChangeText={(e)=>{setPassword(e)}}
-							secureTextEntry={true}
+							onChangeText={(e)=>{setNit(e)}}
 						/>
-					{/* </View> */}
+					</View>
+					<View style={loginStyles.inputContainer}>
+						<Icon
+							name="person-pin"
+							color="#828B95"
+							size={20}/>
+						<TextInput
+							placeholder='USUARIO'
+							style={loginStyles.input}
+							onChangeText={(e)=>{setUsername(e)}}
+						/>
+					</View>
+					<View style={loginStyles.inputContainer}>
+						{/* <View style={{flexDirection:'row',alignItems:'center'}}> */}
+							<Icon
+								name="lock"
+								color="#828B95"
+								size={20}
+							/>
+							<TextInput
+								placeholder='CLAVE'
+								style={loginStyles.input}
+								onChangeText={(e)=>{setPassword(e)}}
+								secureTextEntry={true}
+							/>
+						{/* </View> */}
 
+					</View>
+				</View>
+				{(loading)&&(
+					<ActivityIndicator visible={false} size='large' color='#f06f17'/>
+				)}
+				<View style={loginStyles.buttonContainer}>
+					<TouchableOpacity style={loginStyles.button} onPress={handlerSend}>
+						<Text style={loginStyles.buttonText}>INICIAR SESION</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
-			{(loading)&&(
-				<ActivityIndicator visible={false} size='large' color='#26A657'/>
-			)}
-			<View style={loginStyles.buttonContainer}>
-				<TouchableOpacity style={loginStyles.button} onPress={handlerSend}>
-					<Text style={loginStyles.buttonText}>INICIAR SESION</Text>
-				</TouchableOpacity>
-			</View>
-		</View>
 		</ScrollView>
 	);
 }
@@ -185,7 +157,7 @@ const loginStyles = StyleSheet.create({
 	},
 	headerContainer:{
 		flex:0.5,
-		backgroundColor:'rgb(119,211,83)'
+		backgroundColor:'rgb(234, 103, 46)'
 	},
 	imageContainer:{
 		flex:2,
@@ -194,15 +166,17 @@ const loginStyles = StyleSheet.create({
 		alignItems:'center'
 	},
 	logo:{
-		width: wp('60%'),
-		height: hp('20%'),
+		width:'100%',
+		height:'60%'
+		// width: wp('60%'),
+		// height: hp('20%'),
 	},
 	formContainer:{
 		flex:3,
 		backgroundColor:'white',
 		alignItems:'center',
 		justifyContent:'space-around',
-		height: hp('60%'),
+		// height: hp('60%'),
 	},
 	buttonContainer:{
 		flex:2,
@@ -211,20 +185,23 @@ const loginStyles = StyleSheet.create({
 	},
 	inputContainer:{
 		paddingTop:'2%',
-		width: wp('30%'),
-		//width:'70%',
+		// width: wp('30%'),
+		width:'70%',
 		textAlign:'center',
 		flexDirection:'row',
 		alignItems:'center',
-		borderBottomColor:'rgb(119,211,83)',
+		borderBottomColor:'rgb(234, 103, 46)',
 		borderBottomWidth:1,
 	},
 	input:{
-		width: wp('20%')
+		width:'100%'
+		// width: wp('20%')
 	},
 	button:{
-		width:'50%',
-		height:'90%',
+		// width:'50%',
+		// height:'90%',
+		width:'60%',
+		height:'30%',
 		backgroundColor:'#828B95',
 		alignItems:'center',
 		justifyContent:'center'
@@ -261,7 +238,7 @@ const styles = StyleSheet.create({
 		resizeMode: 'contain',
 	},
 	sendButton:{
-		backgroundColor:'#26A657',
+		backgroundColor:'#f06f17',
 		width:'40%',
 		height:'15%',
 		textAlign: 'center',

@@ -107,7 +107,7 @@ const Client = ({id,client,action,onSelect}) =>{
 						alignItems:'center'
 					}}>
 						<View style={{
-							backgroundColor:'rgb(119,211,83)',
+							backgroundColor:'rgb(234, 103, 46)',
 							width:'50%',
 							height:'50%',
 							justifyContent:'center',
@@ -176,7 +176,7 @@ const Client = ({id,client,action,onSelect}) =>{
 					}
 					</View>
 					{(loading)&&(
-						<ActivityIndicator visible={false} size='large' color='#26A657'/>
+						<ActivityIndicator visible={false} size='large' color='#f06f17'/>
 					)}
 					<View style={styles.inputContainer}>
 						<Text>Nombre</Text>
@@ -238,7 +238,7 @@ const Client = ({id,client,action,onSelect}) =>{
 						<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
 							<Icon
 								name="edit"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
@@ -260,7 +260,7 @@ const Client = ({id,client,action,onSelect}) =>{
 						<TouchableOpacity onPress={()=>handleSubmit({action:'create',onSelect:onSelect})} style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#26A657"
+								color="#f06f17"
 								size={50}
 								style={styles.icon}
 							/>
@@ -292,8 +292,8 @@ const styles = StyleSheet.create({
 		marginTop:5,
     flexDirection:'row',
     backgroundColor:'white',
-    borderBottomColor:'#26A657',
-    borderTopColor:'#26A657',
+    borderBottomColor:'#f06f17',
+    borderTopColor:'#f06f17',
     borderBottomWidth:1,
     borderTopWidth:1,
     justifyContent:'center',

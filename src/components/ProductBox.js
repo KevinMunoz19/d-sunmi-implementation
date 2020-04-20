@@ -20,7 +20,7 @@ const ProductBox = (props) =>{
     const {product,action,onSelect,onRemove} = props;
     const [quantityModalVisible,setQuantityModalVisible] = useState(false);
     const [selectedProduct,setSelectedProduct] = useState(product);
-    
+
     const onAction = (product) =>{
         Actions.product({product:product,action:'edit'});
     }
@@ -57,7 +57,7 @@ const ProductBox = (props) =>{
                             width: 300,
                             height: 100}}>
                         <Text>CANTIDAD</Text>
-                        <TextInput onChangeText={(e)=>{onQuantityDefined(e)}} 
+                        <TextInput onChangeText={(e)=>{onQuantityDefined(e)}}
                              value={`${selectedProduct.quantity}`}
                              keyboardType='decimal-pad'
                              style={{
@@ -87,12 +87,12 @@ const ProductBox = (props) =>{
                     <Text style={styles.descripcionText}>Nombre: </Text>
                     <Text style={styles.valuesText}>{product.name}</Text>
                 </View>
-                
+
                 <View style={styles.infoRow}>
                     <Text style={styles.descripcionText}>Codigo: </Text>
                     <Text style={styles.valuesText}>{product.code}</Text>
                 </View>
-                
+
                 <View style={styles.infoRow}>
                     <Text style={styles.descripcionText}>Precio: </Text>
                     <Text style={styles.valuesText}>{product.price}</Text>
@@ -110,13 +110,13 @@ const ProductBox = (props) =>{
                     {/* <Text style={styles.valuesText}>#{product.code}</Text> */}
                     <Text style={styles.valuesText}>Q {String(parseFloat(product.price).toFixed(2))}</Text>
                 </View>
-                
+
             </View>
             {(action=='manage') && (
                 <TouchableOpacity onPress={()=>onAction(product)} style={styles.actionColumn}>
                     <Icon
                         name="edit"
-                        color="rgb(119,211,83)"
+                        color="rgb(234, 103, 46)"
                         size={50}
                         style={styles.icon}
 				    />
@@ -126,7 +126,7 @@ const ProductBox = (props) =>{
                 <TouchableOpacity onPress={()=>onProductSelect()} style={styles.actionColumn}>
                     <Icon
                         name="check"
-                        color="rgb(119,211,83)"
+                        color="rgb(234, 103, 46)"
                         size={50}
                         style={styles.icon}
 				    />
@@ -137,8 +137,8 @@ const ProductBox = (props) =>{
                 <View style={styles.quantity}>
                     <Text style={styles.quantity} >X{product.quantity}</Text>
                 </View>
-                
-            )} 
+
+            )}
             {(action=='item')&&(
                 <TouchableOpacity onPress={()=>onRemove(product)} style={styles.actionColumn}>
                     <Icon
@@ -148,8 +148,8 @@ const ProductBox = (props) =>{
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-            )} 
-            
+            )}
+
         </View>
 	);
 
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // padding:5,
         borderTopWidth:1,
-        borderTopColor:'rgb(119,211,83)',
+        borderTopColor:'rgb(234, 103, 46)',
         marginTop:10,
         alignItems: 'center'
     },

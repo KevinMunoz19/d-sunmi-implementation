@@ -12,91 +12,85 @@ import {
 import useUser from './../utils/useUser';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-/*
-    Puesto que con hooks no hay manera de ejecutar algo antes de montar el componente (?)
-    Se podria renderizar condicionalmente este componente, mientras que se verifica si hay una sesion en el storage.
-    Por default, habra un loader con "Por favor espere", una vez que getUsers termine de traer la data, o se redirige o se muestra la pagina de inicio
-*/
-
 const ContractMessage = () => {
-    const [loading,setLoading] = useState(true);  
-    const [user,setUser] = useState(null);    
-    const { getUser } = useUser();
+  const [loading,setLoading] = useState(true);
+  const [user,setUser] = useState(null);
+  const { getUser } = useUser();
 
-    useEffect(()=>{
+  useEffect(()=>{
 		getUser((users)=>{
-            if(users == null){
-                Actions.login();
-                setLoading(false);
-            }else if(users.contact_name == null){
-                Actions.firstTimeForm();
-            }else if(users.confirm_contract == null){
-                Actions.contract();
-            }else{
-                setUser(users);
-                setLoading(false);
-            }
-        });
+      if(users == null){
+        Actions.login();
+        setLoading(false);
+      }else if(users.contact_name == null){
+        Actions.firstTimeForm();
+      }else if(users.confirm_contract == null){
+        Actions.contract();
+      }else{
+        setUser(users);
+        setLoading(false);
+      }
+    });
 	});
 
-    return (
-        <View style={styles.container}>
-            {loading && (
-                <View style={styles.loaderContainer}>
-                    <ActivityIndicator visible={false} size='large' color='#26A657'/>
-                    <Text>Cargando...</Text>
-                </View>
-            )}
-            {!loading && (
-                <React.Fragment>
-                    <View style={styles.imageContainer}>
-                        <Image
-                            style={styles.image}
-                            source={require('../img/logo.png')}
-                        />
-                    </View>
-                    <View style={styles.iconContainer}>
-                            <Icon
-                                name="check-circle"
-                                color="rgb(119,211,83)"
-                                size={80}
-                                style={styles.icon}
-                            />
-                    </View>
-                    <View style={styles.messageSectionContainer}>
-                        <View style={styles.messageContainer}>
-                            <Text style={styles.messageText}>
-                                Bienvenido, {user!=null && user.contact_name} {"\n"}{"\n"}
-                            </Text>
-                            <Text style={styles.messageText}>
-                                Esta es la aplicacion movil{"\n"}
-                                que hara que tu factura sea  {"\n"}
-                                rapida, sencilla y sin contratiempos.
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button} onPress={()=>Actions.home()}>
-                            <Text style={styles.buttonText}>COMENZAR</Text>
-                        </TouchableOpacity>
-                    </View>
-                </React.Fragment>
-            )} 
+  return (
+    <View style={styles.container}>
+	    {loading && (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator visible={false} size='large' color='#f06f17'/>
+          <Text>Cargando...</Text>
         </View>
-    );
+	    )}
+      {!loading && (
+        <React.Fragment>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={require('../img/docutec_logo.jpeg')}
+            />
+          </View>
+          <View style={styles.iconContainer}>
+            <Icon
+	            name="check-circle"
+	            color="rgb(234, 103, 46)"
+	            size={80}
+	            style={styles.icon}
+            />
+          </View>
+          <View style={styles.messageSectionContainer}>
+            <View style={styles.messageContainer}>
+              <Text style={styles.messageText}>
+                Bienvenido, {user!=null && user.contact_name} {"\n"}{"\n"}
+              </Text>
+              <Text style={styles.messageText}>
+                Esta es la aplicacion movil{"\n"}
+                que hara que tu factura sea  {"\n"}
+                rapida, sencilla y sin contratiempos.
+              </Text>
+            </View>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={()=>Actions.home()}>
+              <Text style={styles.buttonText}>COMENZAR</Text>
+            </TouchableOpacity>
+          </View>
+        </React.Fragment>
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor:'white'
-    },
-    iconContainer:{
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    button:{
+  container: {
+    flex: 1,
+    backgroundColor:'white'
+  },
+  iconContainer:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  button:{
 		width:'50%',
 		height:'30%',
 		backgroundColor:'#828B95',
@@ -107,70 +101,69 @@ const styles = StyleSheet.create({
 		color:'white',
 		fontSize:20
 	},
-    messageText:{
-        color:'#828B95',
-        fontSize:20,
-        textAlign:'center'
-    },
-    subMessageText:{
-        color:'white',
-        fontSize:12,
-        textAlign:'center'
-    },
-    messageContainer:{
-        width:'80%',
-        height:'85%',
-        alignItems:'center',
-        
-    },
-    messageSectionContainer:{
-        flex:2,
-        alignItems:'center'
-    },
-    buttonContainer:{
-        flex:2
-    },
-    loaderContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    imageContainer: {
-        flex: 2,
-        backgroundColor:'white',
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    logoContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: '100%', 
-        height: '100%'
-    },
-    image: {
-        // borderWidth: 2,
-        // borderColor: 'yellow',
-        width:'90%',
+  messageText:{
+    color:'#828B95',
+    fontSize:20,
+    textAlign:'center'
+  },
+  subMessageText:{
+    color:'white',
+    fontSize:12,
+    textAlign:'center'
+  },
+  messageContainer:{
+    width:'80%',
+    height:'85%',
+    alignItems:'center',
+  },
+  messageSectionContainer:{
+    flex:2,
+    alignItems:'center'
+  },
+  buttonContainer:{
+    flex:2
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  imageContainer: {
+    flex: 2,
+    backgroundColor:'white',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%'
+  },
+  image: {
+    // borderWidth: 2,
+    // borderColor: 'yellow',
+    width:'90%',
 		height:'90%',
 		resizeMode: 'contain'
-    },
-    bodyContainer:{
-        flex:4,
-        justifyContent:'flex-end'
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
-    },
-    sendButton:{
-		backgroundColor:'rgba(119,211,83,0.5)',
+  },
+  bodyContainer:{
+    flex:4,
+    justifyContent:'flex-end'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
+  },
+  sendButton:{
+		backgroundColor:'rgba(234, 103, 46, 0.5)',
 		width:'100%',
 		height:'20%',
-        textAlign: 'center',
-        justifyContent: 'center',
-        alignItems: 'center'
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
 	}
 });
 

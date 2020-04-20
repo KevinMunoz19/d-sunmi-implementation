@@ -10,127 +10,111 @@ import {
 	StyleSheet,
 	Image,
 	ImageBackground,
-    ActivityIndicator,
-    TextInput,
-    ScrollView,
-    Alert,
-    Picker
+  ActivityIndicator,
+  TextInput,
+  ScrollView,
+  Alert,
+  Picker
 }	from 'react-native';
 
 import useUser from './../utils/useUser';
 import { validateEmail } from '../utils/emailValidator';
 
 const FirstTimeForm = () => {
-    const {setUserInfo}  = useUser();
-    const [loading,setLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        contactName: "DigifactApp",
-        id: "123456",
-        nation: "Guatemala",
-        job: "null",
-        certificate: "null",
-        certificateName:"null",
-        cellphone: '+ 502 12345678',
-        email: 'digifactapp@gmail.com',
-        logo: "null",
-        logoName:"null"
-    });
+  const {setUserInfo}  = useUser();
+  const [loading,setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    contactName: "DigifactApp",
+    id: "123456",
+    nation: "Guatemala",
+    job: "null",
+    certificate: "null",
+    certificateName:"null",
+    cellphone: '+ 502 12345678',
+    email: 'digifactapp@gmail.com',
+    logo: "null",
+    logoName:"null"
+  });
 
-    const handleInputChange = (newValue, key) => {
-        const objectCopy = formData;
-        const newData = { ...objectCopy };
-        newData[key] = newValue;
+  const handleInputChange = (newValue, key) => {
+    const objectCopy = formData;
+    const newData = { ...objectCopy };
+    newData[key] = newValue;
+    setFormData(newData);
+  };
+
+  const submitForm = () => {
+    setLoading(true);
+    const { contactName, id, nation, job, certificate, cellphone, logo} = formData;
+    if(formData.email.trim().length > 0 ? validateEmail(formData.email) : false) {
+      if(contactName && id && nation && job && cellphone && logo && certificate) { //&& logo && certificate comentado para iphone
+        setUserInfo(formData);
+        setLoading(false);
+        Actions.contract();
+      } else {
+        setLoading(false);
+        Alert.alert('Verifica los datos!', 'Todos los campos son requeridos.');
+      }
+    } else {
+      setLoading(false);
+      Alert.alert('Verifica los datos!', 'El correo ingresado no tiene una forma valida.');
+    }
+  };
+
+  const findLogo = ()=>{
+  	const options = {
+      title: 'Select Avatar',
+      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      storageOptions: {
+	      skipBackup: true,
+	      path: 'images',
+    	},
+    };
+    ImagePicker.launchImageLibrary(options,(response) => {
+		  console.log('Response = ', response);
+		  console.warn(response);
+		  if (response.didCancel) {
+		    console.log('User cancelled image picker');
+		  } else if (response.error) {
+		    console.log('ImagePicker Error: ', response.error);
+		  } else if (response.customButton) {
+		    console.log('User tapped custom button: ', response.customButton);
+		  } else {
+		    var copy = formData;
+		    var newData = { ...copy };
+		    newData.logo = response.data;
+		    newData.logoName = response.fileName;
+		    setFormData(newData);
+		    Alert.alert('Logo seleccionado');
+		  }
+  	});
+	}
+
+  const findCertificate = async ()=>{
+    try {
+	    const res = await DocumentPicker.pick({
+				type: [DocumentPicker.types.images],
+	    });
+      var extension = res.name.split(".");
+      console.log(extension[extension.length-1]);
+      if(extension[extension.length-1].toLowerCase() == "png".toLowerCase()){
+        var copy = formData;
+        var newData = { ...copy };
+        newData.certificate = res.name;
+        newData.certificateName = res.name;
         setFormData(newData);
-    };
-    const submitForm = () => {
-        setLoading(true);
-        const { contactName, id, nation, job, certificate, cellphone, logo} = formData;
-        if(formData.email.trim().length > 0 ? validateEmail(formData.email) : false) {
-            if(contactName && id && nation && job && cellphone && logo && certificate) { //&& logo && certificate comentado para iphone
-                setUserInfo(formData);
-                setLoading(false);
-                Actions.contract();
-            } else {
-                setLoading(false);
-                Alert.alert('Verifica los datos!', 'Todos los campos son requeridos.');
-            }
-
-        } else {
-            setLoading(false);
-            Alert.alert('Verifica los datos!', 'El correo ingresado no tiene una forma valida.');
-        }
-    };
-
-    const findLogo = ()=>{
-        const options = {
-            title: 'Select Avatar',
-            customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-            storageOptions: {
-              skipBackup: true,
-              path: 'images',
-            },
-          };
-        ImagePicker.launchImageLibrary(options,(response) => {
-            console.log('Response = ', response);
-            console.warn(response);
-            if (response.didCancel) {
-              console.log('User cancelled image picker');
-            } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
-            } else {
-
-                var copy = formData;
-                var newData = { ...copy };
-                newData.logo = response.data;
-                newData.logoName = response.fileName;
-                setFormData(newData);
-                Alert.alert('Logo seleccionado');
-              // You can also display the image using data:
-              // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-            }
-          });
+        Alert.alert('Certificado seleccionado');
+      }else{
+        Alert.alert('Formato de certificado incorrecto');
+      }
+	  } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        throw err;
+      }
     }
-
-    const findCertificate = async ()=>{
-        try {
-            const res = await DocumentPicker.pick({
-              //type: [DocumentPicker.types.allFiles],
-							type: [DocumentPicker.types.images],
-            });
-            console.log('aca la respuesta completa->',res);
-            console.log(
-              res.uri,
-              res.type, // mime type
-              res.name,
-              res.size
-            );
-            var extension = res.name.split(".");
-            console.log(extension[extension.length-1]);
-            if(extension[extension.length-1].toLowerCase() == "png".toLowerCase()){
-						//if(extension[extension.length-1].toLowerCase() == "p12".toLowerCase()
-                //|| extension[extension.length-1].toLowerCase() == "pfx".toLowerCase()
-								//|| extension[extension.length-1].toLowerCase() == "txt".toLowerCase()
-								//|| extension[extension.length-1].toLowerCase() == "png".toLowerCase()){
-                    var copy = formData;
-                    var newData = { ...copy };
-                    newData.certificate = res.name;
-                    newData.certificateName = res.name;
-                    setFormData(newData);
-                    Alert.alert('Certificado seleccionado');
-            }else{
-                Alert.alert('Formato de certificado incorrecto');
-            }
-
-          } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-              // User cancelled the picker, exit any dialogs or menus and move on
-            } else {
-              throw err;
-            }
-          }
-    }
+  }
 
   return (
   	<ScrollView style={styles.scrollContainer}>
@@ -275,61 +259,61 @@ const FirstTimeForm = () => {
 };
 
 const styles = StyleSheet.create({
-    scrollContainer: {
-        flex: 1,
-        backgroundColor:'white'
-    },
-    container: {
-        flex: 1,
-        paddingHorizontal: 25,
-        paddingVertical: 2,
-        backgroundColor: '#fff'
-    },
-    logoRow: {
-        flex: 1,
-        alignItems: 'center'
-    },
-    logoContainer: {
-        flex: 0.5,
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    logo:{
+  scrollContainer: {
+    flex: 1,
+    backgroundColor:'white'
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: 25,
+    paddingVertical: 2,
+    backgroundColor: '#fff'
+  },
+  logoRow: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  logoContainer: {
+    flex: 0.5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  logo:{
 		width: 250,
 		height: 125,
-        resizeMode: 'contain',
-	},
-    formContainer: {
-        flex: 4
-    },
-    formLabel: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        backgroundColor: '#77D353',
-        marginBottom: 10
-    },
-    formRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 30
-    },
-    inputContainer:{
-        flex: 1,
-    },
-    inputHalfcontainer: {
-        flex: 0.45
-    },
+    resizeMode: 'contain',
+},
+  formContainer: {
+    flex: 4
+  },
+  formLabel: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#77D353',
+    marginBottom: 10
+  },
+  formRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 30
+  },
+  inputContainer:{
+    flex: 1,
+  },
+  inputHalfcontainer: {
+    flex: 0.45
+  },
 	input: {
 		borderBottomColor:'#828B95',
 		borderBottomWidth:1
-    },
-    selectInput: {
-        fontSize: 10
-    },
-    buttonRow: {
-        flexDirection: 'row',
-        justifyContent: 'center'
-    }
+  },
+  selectInput: {
+    fontSize: 10
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  }
 });
 
 export default FirstTimeForm;
