@@ -43,7 +43,7 @@ const Init = () => {
           <View style={styles.imageContainer}>
             <Image
             	style={styles.image}
-            	source={require('../img/logo.png')}
+            	source={require('../img/docutec_logo.jpeg')}
             />
           </View>
           <ImageBackground style={styles.bodyContainer} source={require('../img/init-background.jpg')}>

@@ -93,12 +93,12 @@ const Dtes = () =>{
 		setDteListCash([]);
 		setDteListCheck([]);
 		setDteListCard([]);
-		setCount0('');
-		setCount1('');
-		setCount2('');
-		setAmount0('');
-		setAmount1('');
-		setAmount2('');
+		setCount0('0');
+		setCount1('0');
+		setCount2('0');
+		setAmount0('0');
+		setAmount1('0');
+		setAmount2('0');
 		setSt({
 				tableHead: ['', 'Cantidad', 'Total'],
 				tableData: [

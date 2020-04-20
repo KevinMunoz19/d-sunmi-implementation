@@ -1,8 +1,5 @@
 import React, {Fragment,useState,useEffect} from 'react';
 
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-
 import {
 	Text,
 	View,
@@ -16,6 +13,8 @@ import {
 	ActivityIndicator,
 	ScrollView,
 }	from 'react-native';
+
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -96,7 +95,7 @@ const Login = () =>{
 				<View style={loginStyles.headerContainer}>
 				</View>
 				<View style={loginStyles.imageContainer}>
-					<Image source={require('../img/logo.png')} style={loginStyles.logo}/>
+					<Image source={require('../img/docutec_logo.jpeg')} style={loginStyles.logo}/>
 				</View>
 				<View style={loginStyles.formContainer}>
 					<View style={loginStyles.inputContainer}>
@@ -166,27 +165,27 @@ const loginStyles = StyleSheet.create({
 		alignItems:'center'
 	},
 	logo:{
-		width:'100%',
-		height:'60%'
-		// width: wp('60%'),
-		// height: hp('20%'),
+		//width:'50%',
+		//height:'20%',
+		width: wp('90%'),
+		height: hp('15%'),
 	},
 	formContainer:{
 		flex:3,
 		backgroundColor:'white',
 		alignItems:'center',
 		justifyContent:'space-around',
-		// height: hp('60%'),
+		height: hp('60%'),
 	},
 	buttonContainer:{
 		flex:2,
 		backgroundColor:'white',
-		alignItems:'center'
+		alignItems:'center',
 	},
 	inputContainer:{
 		paddingTop:'2%',
-		// width: wp('30%'),
-		width:'70%',
+		width: wp('70%'),
+		// width:'70%',
 		textAlign:'center',
 		flexDirection:'row',
 		alignItems:'center',
@@ -194,58 +193,56 @@ const loginStyles = StyleSheet.create({
 		borderBottomWidth:1,
 	},
 	input:{
-		width:'100%'
-		// width: wp('20%')
+		// width:'100%',
+		width: wp('20%')
 	},
 	button:{
-		// width:'50%',
-		// height:'90%',
-		width:'60%',
-		height:'30%',
+		width:'50%',
+		height:'90%',
+		// width:'60%',
+		// height:'30%',
 		backgroundColor:'#828B95',
 		alignItems:'center',
 		justifyContent:'center'
 	},
 	buttonText:{
 		color:'white',
-		fontSize:20
+		fontSize:20,
 	}
-
-})
+});
 //
-const styles = StyleSheet.create({
-	container:{
-		flex: 1,
-		flexDirection:'column',
-        alignItems: 'center',
-		justifyContent: 'flex-start',
-	},
-	input:{
-		textAlign: 'center',
-		width:'80%',
-		marginTop:'5%',
-		marginBottom:'5%',
-		backgroundColor : 'rgb(235, 235, 235)',
-		borderRadius:9,
-		shadowOpacity: 0.75,
-        shadowRadius: 5,
-        shadowColor: 'red',
-        shadowOffset: { height: 0, width: 0 }
-	},
-	logo:{
-		width:'80%',
-		height:'20%',
-		resizeMode: 'contain',
-	},
-	sendButton:{
-		backgroundColor:'#f06f17',
-		width:'40%',
-		height:'15%',
-		textAlign: 'center',
-		justifyContent: 'center',
-		borderRadius:9
-	},
-
- })
+	// const styles = StyleSheet.create({
+	// container:{
+	// 	flex: 1,
+	// 	flexDirection:'column',
+	//   alignItems: 'center',
+	// 	justifyContent: 'flex-start',
+	// },
+	// input:{
+	// 	textAlign: 'center',
+	// 	width:'80%',
+	// 	marginTop:'5%',
+	// 	marginBottom:'5%',
+	// 	backgroundColor : 'rgb(235, 235, 235)',
+	// 	borderRadius:9,
+	// 	shadowOpacity: 0.75,
+	//   shadowRadius: 5,
+	//   shadowColor: 'red',
+	//   shadowOffset: { height: 0, width: 0 }
+	// },
+	// logo:{
+	// 	width:'80%',
+	// 	height:'20%',
+	// 	resizeMode: 'contain',
+	// },
+	// sendButton:{
+	// 	backgroundColor:'#f06f17',
+	// 	width:'40%',
+	// 	height:'15%',
+	// 	textAlign: 'center',
+	// 	justifyContent: 'center',
+	// 	borderRadius:9
+	// },
+	// })
 
 export default Login;
