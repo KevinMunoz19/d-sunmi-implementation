@@ -10,6 +10,7 @@ import {
 	ActivityIndicator
 }	from 'react-native';
 import useUser from './../utils/useUser';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 /*
     Puesto que con hooks no hay manera de ejecutar algo antes de montar el componente (?)
@@ -18,7 +19,7 @@ import useUser from './../utils/useUser';
 */
 
 const Welcome = () => {
-    const [loading,setLoading] = useState(true);    
+    const [loading,setLoading] = useState(true);
     const { getUser } = useUser();
 
     useEffect(()=>{
@@ -39,16 +40,16 @@ const Welcome = () => {
         <View style={styles.container}>
             {loading && (
                 <View style={styles.loaderContainer}>
-                    <ActivityIndicator visible={false} size='large' color='#26A657'/>
+                    <ActivityIndicator visible={false} size='large' color='#f06f17'/>
                     <Text>Cargando...</Text>
                 </View>
             )}
             {!loading && (
                 <React.Fragment>
-                    <View style={styles.imageContainer}>
+                    <View style={styles.imageContainerN}>
                         <Image
-                            style={styles.image}
-                            source={require('../img/logo.png')}
+                            style={styles.logoN}
+                            source={require('../img/docutec_logo.jpeg')}
                         />
                     </View>
                     <View style={styles.messageSectionContainer}>
@@ -69,12 +70,24 @@ const Welcome = () => {
                         </TouchableOpacity>
                     </View>
                 </React.Fragment>
-            )} 
+            )}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+	imageContainerN:{
+		flex:2,
+		backgroundColor:'white',
+		justifyContent:'center',
+		alignItems:'center'
+	},
+	logoN:{
+		//width:'50%',
+		//height:'20%',
+		width: wp('70%'),
+		height: hp('15%'),
+	},
     container: {
         flex: 1,
         backgroundColor:'white'
@@ -101,7 +114,7 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     messageContainer:{
-        backgroundColor:'rgba(119,211,83,0.5)',
+        backgroundColor:'rgba(234, 103, 46, 0.5)',
         width:'80%',
         height:'85%',
         alignItems:'center',
@@ -134,7 +147,7 @@ const styles = StyleSheet.create({
     logoContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        width: '100%', 
+        width: '100%',
         height: '100%'
     },
     image: {
@@ -155,7 +168,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     sendButton:{
-		backgroundColor:'rgba(119,211,83,0.5)',
+		backgroundColor:'rgba(234, 103, 46, 0.5)',
 		width:'100%',
 		height:'20%',
         textAlign: 'center',

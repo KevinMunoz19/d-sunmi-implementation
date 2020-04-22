@@ -13,10 +13,7 @@ import {
 	ActivityIndicator,
 	ScrollView,
 }	from 'react-native';
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {Actions} from 'react-native-router-flux';
 import useUser from './../utils/useUser';
@@ -145,6 +142,19 @@ const Login = () =>{
 						<Text style={loginStyles.buttonText}>INICIAR SESION</Text>
 					</TouchableOpacity>
 				</View>
+
+				<View style={loginStyles.headerContainer}>
+					<View style={loginStyles.textHeaderContainer}>
+						<Text style={loginStyles.textHeader}>Powered By</Text>
+					</View>
+				</View>
+
+				<View style={loginStyles.imageContainerSub}>
+					<Image source={require('../img/logo.png')} style={loginStyles.logoSub}/>
+				</View>
+
+
+
 			</View>
 		</ScrollView>
 	);
@@ -167,7 +177,7 @@ const loginStyles = StyleSheet.create({
 	logo:{
 		//width:'50%',
 		//height:'20%',
-		width: wp('90%'),
+		width: wp('70%'),
 		height: hp('15%'),
 	},
 	formContainer:{
@@ -175,15 +185,16 @@ const loginStyles = StyleSheet.create({
 		backgroundColor:'white',
 		alignItems:'center',
 		justifyContent:'space-around',
-		height: hp('60%'),
+		height: hp('40%'),
 	},
 	buttonContainer:{
 		flex:2,
 		backgroundColor:'white',
 		alignItems:'center',
+		marginBottom:20,
 	},
 	inputContainer:{
-		paddingTop:'2%',
+		// paddingTop:'2%',
 		width: wp('70%'),
 		// width:'70%',
 		textAlign:'center',
@@ -194,7 +205,7 @@ const loginStyles = StyleSheet.create({
 	},
 	input:{
 		// width:'100%',
-		width: wp('20%')
+		width: wp('100%')
 	},
 	button:{
 		width:'50%',
@@ -208,7 +219,36 @@ const loginStyles = StyleSheet.create({
 	buttonText:{
 		color:'white',
 		fontSize:20,
-	}
+	},
+	textHeader:{
+    color:'black',
+    fontSize:15,
+		fontWeight: 'bold',
+  },
+  textHeaderContainer:{
+    width:'50%',
+    height:'50%',
+    backgroundColor:'rgb(255, 255, 255)',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  headerContainer:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+	imageContainerSub:{
+		flex:2,
+		backgroundColor:'white',
+		justifyContent:'center',
+		alignItems:'center'
+	},
+	logoSub:{
+		//width:'50%',
+		//height:'20%',
+		width: wp('40%'),
+		height: hp('10%'),
+	},
 });
 //
 	// const styles = StyleSheet.create({

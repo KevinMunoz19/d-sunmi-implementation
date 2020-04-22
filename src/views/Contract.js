@@ -33,7 +33,7 @@ const Contract = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logoRow}>
-        <Image source={require('../img/logo.png')} style={styles.logo}/>
+        <Image source={require('../img/docutec_logo.jpeg')} style={styles.logo}/>
       </View>
       <View style={styles.contentContainer}>
         <View style={[styles.viewLabel]}>

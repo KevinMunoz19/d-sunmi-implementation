@@ -11,6 +11,7 @@ import {
 }	from 'react-native';
 import useUser from './../utils/useUser';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const ContractMessage = () => {
   const [loading,setLoading] = useState(true);
@@ -43,9 +44,9 @@ const ContractMessage = () => {
 	    )}
       {!loading && (
         <React.Fragment>
-          <View style={styles.imageContainer}>
+          <View style={styles.imageContainerN}>
             <Image
-              style={styles.image}
+              style={styles.logoN}
               source={require('../img/docutec_logo.jpeg')}
             />
           </View>
@@ -70,7 +71,7 @@ const ContractMessage = () => {
             </View>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={()=>Actions.home()}>
+            <TouchableOpacity style={styles.button} onPress={()=>Actions.infouser()}>
               <Text style={styles.buttonText}>COMENZAR</Text>
             </TouchableOpacity>
           </View>
@@ -81,6 +82,18 @@ const ContractMessage = () => {
 };
 
 const styles = StyleSheet.create({
+	imageContainerN:{
+		flex:2,
+		backgroundColor:'white',
+		justifyContent:'center',
+		alignItems:'center'
+	},
+	logoN:{
+		//width:'50%',
+		//height:'20%',
+		width: wp('70%'),
+		height: hp('15%'),
+	},
   container: {
     flex: 1,
     backgroundColor:'white'

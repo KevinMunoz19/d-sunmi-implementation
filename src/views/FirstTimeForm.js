@@ -120,7 +120,7 @@ const FirstTimeForm = () => {
   	<ScrollView style={styles.scrollContainer}>
     	<View style={styles.container}>
         <View style={styles.logoRow}>
-        	<Image source={require('../img/logo.png')} style={styles.logo}/>
+        	<Image source={require('../img/docutec_logo.jpeg')} style={styles.logo}/>
         </View>
         <View style={styles.formContainer}>
         	<View style={[styles.formLabel]}>
@@ -239,13 +239,13 @@ const FirstTimeForm = () => {
           </View>
           <View style={styles.buttonRow}>
             {loading &&(
-              <ActivityIndicator visible={false} size='large' color='#26A657'  style={ {justifyContent: 'center'} }/>
+              <ActivityIndicator visible={false} size='large' color='#f06f17'  style={ {justifyContent: 'center'} }/>
             )}
             {!loading && (
               <TouchableOpacity onPress={submitForm} style={styles.sectionTouch}>
                 <Icon
                   name="done"
-                  color="#26A657"
+                  color="#f06f17"
                   size={50}
                   style={styles.icon}
                 />
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   formLabel: {
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#77D353',
+    backgroundColor: '#f06f17',
     marginBottom: 10
   },
   formRow: {

@@ -20,13 +20,10 @@ import {
 	requireNativeComponent,
 	NativeModules,
 	NativeEventEmitter,
-
-
 }	from 'react-native';
 
 
 import AppLink from 'react-native-app-link';
-
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {Actions} from 'react-native-router-flux';
@@ -127,14 +124,15 @@ const Dte = () =>{
 
 	useEffect(()=>{
 		getUser((userInfo)=>{
+			setNumEstablecimiento(0);
 			setUser(userInfo);
+
 		})
 	},[])
 
-	useEffect(()=>{
-		console.log('Cambio de user:');
-		setNumEstablecimiento(0);
-	},[user])
+	// useEffect(()=>{
+	// 	setNumEstablecimiento(0);
+	// },[user])
 
 
 
@@ -167,6 +165,7 @@ const Dte = () =>{
 	}
 
 	const onProductSelect = (product)=>{
+
 		console.warn('pasa el producto a la vista de dte');
 		setTimeout(()=>{
 			if(createProductModalVisible)setCreateProductModalVisible(false);
@@ -208,6 +207,20 @@ const Dte = () =>{
 				Alert.alert(err);
 			}
 		});
+
+
+		console.log("numero de establecimiento seleccionado");
+		var n = parseInt(user.requestor,10)
+		console.log(n);
+		console.log(typeof n);
+		setNumEstablecimiento(n);
+
+		console.log("numero de establecimiento inicial");
+		console.log(numEstablecimiento);
+		console.log(typeof numEstablecimiento);
+
+
+
 	}
 
 	const onProductRemove = (productToRemove)=>{
@@ -545,12 +558,12 @@ const Dte = () =>{
 						</TouchableOpacity>
 					</View>
 
-					<Button
+					{/*<Button
 	        	onPress={nativeComponent}
 	        	title='Start example activity'
-        	/>
+        	/>*/}
 
-					<View style={styles.generateBillButtonContainer}>
+					{/*<View style={styles.generateBillButtonContainer}>
 					{visibleButton &&
 						<TouchableOpacity
 							onPress={onPrint}
@@ -564,7 +577,7 @@ const Dte = () =>{
 							<Text >Imprimir Factura</Text>
 						</TouchableOpacity>
 					}
-					</View>
+					</View>*/}
 					<View style={styles.generateBillButtonContainer}>
 					{visibleButton &&
 						<TouchableOpacity

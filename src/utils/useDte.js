@@ -58,6 +58,13 @@ const useDte = (props) => {
         var ncArray = nombreComercial.trim().split('|');
         var dcArray = direccionComercial.trim().split('|');
         var dcClean = dcArray[numeroEstablecimiento].replace(/ +(?= )/g,'');
+
+        var nombreComercialClean = ncArray[numeroEstablecimiento].toString().trim();
+
+        while (nombreComercialClean.substring(0,1) == "<" || (nombreComercialClean.substring(0,1) >='0' && nombreComercialClean.substring(0,1) <='9')) {
+          nombreComercialClean = nombreComercialClean.substring(1);
+        }
+
         var num = numeroEstablecimiento+1;
         var numeroEstablecimientoString = num.toString();
         var issueName=user.name;
@@ -93,7 +100,7 @@ const useDte = (props) => {
                     <dte:DatosEmision ID="DatosEmision">
                         <dte:DatosGenerales CodigoMoneda="GTQ" FechaHoraEmision="${localISOTime}" Tipo="FACT"/>
                         <dte:Emisor AfiliacionIVA="${afiliacion}"
-                            NombreComercial="${ncArray[numeroEstablecimiento].substring(3)}"
+                            NombreComercial="${nombreComercialClean}"
                             CodigoEstablecimiento="${numeroEstablecimientoString}"
                             NombreEmisor="${nn}"
                             NITEmisor="${issueNit}">

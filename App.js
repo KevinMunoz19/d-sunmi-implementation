@@ -32,6 +32,7 @@ import Products from './src/views/Products';
 import Product from './src/views/Product';
 import Dtes from './src/views/Dtes';
 import DtesSummary from './src/views/DtesSummary';
+import InfoUser from './src/views/infoUser';
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
         <Scene key="product" component={Product} hideNavBar={true} title="Product"/>
         <Scene key="dtes" component={Dtes} hideNavBar={true} title="Dtes"/>
         <Scene key="dtessummary" component={DtesSummary} hideNavBar={true} title="DtesSummary"/>
+        <Scene key="infouser" component={InfoUser} hideNavBar={true} title="InfoUser"/>
     	</Scene>
     </Router>
   );

@@ -30,6 +30,7 @@ const Home = () => {
 			case 'dte':Actions.dte(); break;
 			case 'dtes':Actions.dtes(); break;
       case 'dtessummary':Actions.dtessummary(); break;
+      case 'info':Actions.infouser(); break;
 		}
   }
 
@@ -66,6 +67,9 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>handlePress('products')} style={styles.menuTouch}>
               <Text style={styles.menuText}>Productos</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>handlePress('info')} style={styles.menuTouch}>
+              <Text style={styles.menuText}>Informacion de Usuario</Text>
             </TouchableOpacity>
             <View style={styles.menuLine}></View>
             <TouchableOpacity onPress={()=>onLogout()} style={styles.menuTouch}>

@@ -231,9 +231,9 @@ const Dtes = () =>{
 					        </Table>
 					      </View>
 
-									<View style={styles.headerContainerSub}>
-			                <View style={styles.textHeaderContainerSub}>
-			                    <Text style={styles.textHeaderSub}>PAGO CON EFECTIVO</Text>
+									<View style={styles.headerContainerSubT}>
+			                <View style={styles.textHeaderContainerSubT}>
+			                    <Text style={styles.textHeaderSubT}>PAGO CON EFECTIVO</Text>
 			                </View>
 			            </View>
                     {(dteListCash.length>0) &&(
@@ -254,9 +254,9 @@ const Dtes = () =>{
                     )}
 
 
-										<View style={styles.headerContainerSub}>
-				                <View style={styles.textHeaderContainerSub}>
-				                    <Text style={styles.textHeaderSub}>PAGO CON CHEQUE</Text>
+										<View style={styles.headerContainerSubT}>
+				                <View style={styles.textHeaderContainerSubT}>
+				                    <Text style={styles.textHeaderSubT}>PAGO CON CHEQUE</Text>
 				                </View>
 				            </View>
 	                    {(dteListCheck.length>0) &&(
@@ -277,9 +277,9 @@ const Dtes = () =>{
 	                    )}
 
 
-											<View style={styles.headerContainerSub}>
-					                <View style={styles.textHeaderContainerSub}>
-					                    <Text style={styles.textHeaderSub}>PAGO CON TARJETA</Text>
+											<View style={styles.headerContainerSubT}>
+					                <View style={styles.textHeaderContainerSubT}>
+					                    <Text style={styles.textHeaderSubT}>PAGO CON TARJETA</Text>
 					                </View>
 					            </View>
 		                    {(dteListCard.length>0) &&(
@@ -379,7 +379,6 @@ const styles = StyleSheet.create({
         width:'100%',
         alignItems:'center'
     },
-
 		textHeaderContainerSub:{
         width:'30%',
         height:'80%',
@@ -446,7 +445,23 @@ const styles = StyleSheet.create({
 			height: 80,
 			//padding: 10,
 			marginLeft: 30
-		}
+		},
+		textHeaderContainerSubT:{
+        width:'45%',
+        height:'80%',
+        backgroundColor:'rgb(234, 103, 46)',
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    headerContainerSubT:{
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+		textHeaderSubT:{
+        color:'white',
+        fontSize:12
+    },
 });
 
 export default Dtes;
