@@ -105,8 +105,8 @@ const useDte = (props) => {
                             NombreEmisor="${nn}"
                             NITEmisor="${issueNit}">
                             <dte:DireccionEmisor>
-                                <dte:Direccion>${dcClean}</dte:Direccion>
-                                <dte:CodigoPostal>${zcArray[numeroEstablecimiento]}</dte:CodigoPostal>
+                                <dte:Direccion>${dcClean.trim()}</dte:Direccion>
+                                <dte:CodigoPostal>${zcArray[numeroEstablecimiento].trim()}</dte:CodigoPostal>
                                 <dte:Municipio>${issueMunicipality}</dte:Municipio>
                                 <dte:Departamento>${issueDepartment}</dte:Departamento>
                                 <dte:Pais>GT</dte:Pais>

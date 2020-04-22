@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Modal,
-	Picker
+	Picker,
+	Alert,
 }	from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -63,7 +64,7 @@ const infoUser = () =>{
 
 
       var newnitfetch = userInfo.string_nit.replace(/0+(?!$)/,'')
-      var nitPrueba = '35355913';
+      // var nitPrueba = '35355913';
       getInfo(newnitfetch, (nom)=>{
         setNn(nom.toString())
       },(ca)=>{
@@ -123,11 +124,17 @@ const infoUser = () =>{
   }
 
   const onSaveInfo = () => {
-    var query = `update users set requestor = ? where is_logged = ?;`;
-    insert(query,[estNumber,1],(result)=>{
-      console.log('result Update Logo',result);
-    })
-    Actions.home()
+
+		// if (!estNumber){
+			// Alert.alert('Seleccionar un establecimiento valido');
+		// } else {
+			var query = `update users set requestor = ? where is_logged = ?;`;
+	    insert(query,[estNumber,1],(result)=>{
+	      console.log('result Update Logo',result);
+	    })
+	    Actions.home()
+		// }
+
 
   }
 
