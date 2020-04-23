@@ -17,6 +17,7 @@ import DteBox from '../components/DteBox';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import PdfView from "../components/PdfView";
 import IosHeader from '../components/IosHeader';
+import useUser from '../utils/useUser';
 
 const Dtes = () =>{
 
@@ -30,14 +31,29 @@ const Dtes = () =>{
 	const [dteListCard,setDteListCard] = useState([]);
 	const [dteListCheck,setDteListCheck] = useState([]);
 
+
+	const {getUser} = useUser();
+	const [user,setUser] = useState();
+
+	const [num,setNum] = useState('');
+
 	var flag = 1;
 
-  useEffect(()=>{
-    var query = `select * from dte`;
+  // useEffect(()=>{
+  //   var query = `select * from dte`;
+	// 	select(query,[],(dtes)=>{
+  //   	setDteList(dtes);
+  //   })
+  // },[])
+
+
+	useEffect(()=>{
+	  // var query = `select * from dte where string_nit = '${nit}'`;
+		var query = `select * from dte where string_nit = '${num}'`;
 		select(query,[],(dtes)=>{
-    	setDteList(dtes);
-    })
-  },[])
+	  	setDteList(dtes);
+	  })
+	},[num])
 
   useEffect(()=>{
 	if(pdfSource != null){
@@ -45,6 +61,17 @@ const Dtes = () =>{
 		setPdfModalVisible(true);
 	}
   },[pdfSource]);
+
+	useEffect(()=>{
+		getUser((userInfo)=>{
+			setUser(userInfo);
+			var x = userInfo.string_nit;
+			setNum(x);
+		})
+	},[])
+
+
+
 
   const onClosePdf = ()=>{
 		setPdfModalVisible(false);

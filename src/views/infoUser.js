@@ -62,7 +62,6 @@ const infoUser = () =>{
       console.log("Usuario use effect")
       console.log(userInfo)
 
-
       var newnitfetch = userInfo.string_nit.replace(/0+(?!$)/,'')
       // var nitPrueba = '35355913';
       getInfo(newnitfetch, (nom)=>{
@@ -103,36 +102,48 @@ const infoUser = () =>{
   },[])
 
 
-  const onGetInfoBtn = () => {
-    setTimeout(()=>{
-      console.log("Entrada a onGetInfoBtn")
-      var zcArray = zipc.trim().split('|');
-      setArrayZc(zcArray);
-      var ncArray = nombreComercial.trim().split('|');
-      setArrayNc(ncArray);
-      var dcArray = direccionComercial.trim().split('|');
-      setArrayDc(dcArray);
-      if (arrayDc.length > 0 && arrayZc.length > 0){
-        setDisplaydir(arrayDc[estNumber].toString());
-        setDisplayzip(arrayZc[estNumber].toString());
-      }
-    },500);
-    // var query = `update users set requestor = ? where is_logged = ?;`;
-    // insert(query,["AAA",1],(result)=>{
-    //   console.log('result Update Logo',result);
-    // })
-  }
+	useEffect(()=>{
+		var zcArray = zipc.trim().split('|');
+		setArrayZc(zcArray);
+		var ncArray = nombreComercial.trim().split('|');
+		setArrayNc(ncArray);
+		var dcArray = direccionComercial.trim().split('|');
+		setArrayDc(dcArray);
+		if (arrayDc.length > 0 && arrayZc.length > 0){
+			setDisplaydir(arrayDc[estNumber].toString());
+			setDisplayzip(arrayZc[estNumber].toString());
+		}
+	},[zipc,nombreComercial,direccionComercial])
+
+
+  // const onGetInfoBtn = () => {
+  //   setTimeout(()=>{
+  //     console.log("Entrada a onGetInfoBtn")
+  //     var zcArray = zipc.trim().split('|');
+  //     setArrayZc(zcArray);
+  //     var ncArray = nombreComercial.trim().split('|');
+  //     setArrayNc(ncArray);
+  //     var dcArray = direccionComercial.trim().split('|');
+  //     setArrayDc(dcArray);
+  //     if (arrayDc.length > 0 && arrayZc.length > 0){
+  //       setDisplaydir(arrayDc[estNumber].toString());
+  //       setDisplayzip(arrayZc[estNumber].toString());
+  //     }
+  //   },500);
+  // }
 
   const onSaveInfo = () => {
 
-		// if (!estNumber){
-			// Alert.alert('Seleccionar un establecimiento valido');
-		// } else {
-			var query = `update users set requestor = ? where is_logged = ?;`;
-	    insert(query,[estNumber,1],(result)=>{
-	      console.log('result Update Logo',result);
-	    })
-	    Actions.home()
+		if (estNumber == "default" || !estNumber){
+			Alert.alert('Se utilizara el establecimiento predeterminado');
+			setEstNumber(0)
+		}
+
+		var query = `update users set requestor = ? where is_logged = ?;`;
+    insert(query,[estNumber,1],(result)=>{
+      console.log('result Update Logo',result);
+    })
+    Actions.home()
 		// }
 
 
@@ -166,12 +177,13 @@ const infoUser = () =>{
         <ScrollView style={styles.scroll}>
 
 
-
+{/*
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={onGetInfoBtn}>
             <Text style={styles.buttonText}>Obtener Direcciones</Text>
           </TouchableOpacity>
         </View>
+*/}
 
 
         <View style={[styles.inputContainer, styles.input]}>
@@ -181,7 +193,7 @@ const infoUser = () =>{
   					selectedValue={estNumber}
   					onValueChange={(itemValue, itemIndex) => setEstNumber(itemValue)}
   				>
-  					<Picker.Item label="Establecimientos" value={null} disabled={true} />
+  					<Picker.Item label="" value={"default"} disabled={true} />
   					{arrayNc.map((usr,i)=>{
               var stringname = usr.toString().trim();
               while (stringname.substring(0,1) == "<" || (stringname.substring(0,1) >='0' && stringname.substring(0,1) <='9')) {

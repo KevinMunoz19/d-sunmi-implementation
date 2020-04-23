@@ -50,7 +50,7 @@ const useDte = (props) => {
     const generateString = (products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion, zipcode, nombreComercial, direccionComercial,numeroEstablecimiento,payment, res,rej)=>{
         var {itemsString,totalAmount,totalTaxAmount } = generateItemString(products,client,cf,iva);
         var issueNit=user.string_nit.replace(/0+(?!$)/,'');
-        //var issueNit=user.string_nit;
+        var saveNit = user.string_nit;
         var {frasesString} = generateFrasesString(frases);
         var tzoffset = (new Date()).getTimezoneOffset()*60000;
         var localISOTime = (new Date(Date.now() - tzoffset)).toISOString();
@@ -143,7 +143,7 @@ const useDte = (props) => {
         console.log(xmlString);
         sendBill(xmlString,user.string_nit,user.token,(response)=>{
             console.log(response.ResponseDATA3);
-            saveDte(response.ResponseDATA1,receiverName,receiverNit,payment);
+            saveDte(response.ResponseDATA1,receiverName,receiverNit,payment,saveNit);
             res(response.ResponseDATA3)
         },(err)=>{
             rej(err);
@@ -216,7 +216,7 @@ const useDte = (props) => {
       })
   }
 
-  const saveDte = (encode,receiverName,receiverNit,payment)=>{
+  const saveDte = (encode,receiverName,receiverNit,payment,issueNit)=>{
     let xmlString = base64.decode(encode);
     let xml = new DOMParser().parseFromString(xmlString, "text/xml").documentElement;
     var authNumberTag = xml.getElementsByTagName("dte:NumeroAutorizacion")[0];
@@ -228,8 +228,8 @@ const useDte = (props) => {
     var fecha = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).replace("T"," ");
     //var fechaformated = (new Date(Date.now() - tzoffset)).toISOString().slice(0,-1).split('T')[0];
     //var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number) values (?,?,DATETIME('now'),?,?,?,?)`;
-    var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number,payment) values (?,?,?,?,?,?,?,?)`;
-    insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment],(result)=>{
+    var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number,payment,string_nit) values (?,?,?,?,?,?,?,?,?)`;
+    insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment,issueNit],(result)=>{
       console.log('DTE registrado con exito');
     },(err)=>{
       console.log('ocurrio un error registrando el dte', err);

@@ -126,7 +126,6 @@ const Dte = () =>{
 		getUser((userInfo)=>{
 			setNumEstablecimiento(0);
 			setUser(userInfo);
-
 		})
 	},[])
 

@@ -19,6 +19,7 @@ import DteBox from '../components/DteBox';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import PdfView from "../components/PdfView";
 import IosHeader from '../components/IosHeader';
+import useUser from '../utils/useUser';
 
 import DatePicker from 'react-native-date-picker';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
@@ -52,6 +53,12 @@ const Dtes = () =>{
 
 	const [selectedDate1, setSelectedDate1] = useState(new Date());
 	const [selectedDate2, setSelectedDate2] = useState(new Date());
+
+
+	const {getUser} = useUser();
+	const [user,setUser] = useState();
+
+	const [num,setNum] = useState('');
 	// const [st] = useState({
   //     tableHead: ['Visite Date', 'Member', 'you ...', 'etc..'],
   //     tableData: [
@@ -83,6 +90,16 @@ const Dtes = () =>{
 			setPdfModalVisible(true);
 		}
   },[pdfSource]);
+
+	useEffect(()=>{
+		getUser((userInfo)=>{
+			setUser(userInfo);
+			var x = userInfo.string_nit;
+			setNum(x);
+		})
+	},[])
+
+
 
   const onClosePdf = ()=>{
 		setPdfModalVisible(false);
@@ -118,29 +135,29 @@ const Dtes = () =>{
 			var fMonth = PadLeft((selectedDate2.getMonth() + 1),2);
 			var fYear = selectedDate2.getFullYear();
 
-			var query = `select * from dte where payment = 0 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
+			var query = `select * from dte where string_nit = '${num}' and payment = 0 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
 			select(query,[],(dtes)=>{
 	    	setDteListCash(dtes);
 	    })
 
-			var queryc = `select * from dte where payment = 1 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
+			var queryc = `select * from dte where string_nit = '${num}' and payment = 1 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
 	    select(queryc,[],(dtesc)=>{
 	    	setDteListCheck(dtesc);
 	    })
 
-			var queryt = `select * from dte where payment = 2 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
+			var queryt = `select * from dte where string_nit = '${num}' and payment = 2 and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59')`;
 	    select(queryt,[],(dtest)=>{
 	    	setDteListCard(dtest);
 	    })
 
-			var qt = `select count(id) ct, payment from dte where date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59') group by payment`;
+			var qt = `select count(id) ct, payment from dte where string_nit = '${num}' and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59') group by payment`;
 			select(qt,[],(tt)=>{
 				setCount0(tt[0].ct)
 				setCount1(tt[1].ct)
 				setCount2(tt[2].ct)
 			})
 
-			var qa = `select sum(amount) at, payment from dte where date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59') group by payment`;
+			var qa = `select sum(amount) at, payment from dte where string_nit = '${num}' and date >= date('${iYear}-${iMonth}-${iDay} 00:00:00') and date <= date('${fYear}-${fMonth}-${fDay} 23:59:59') group by payment`;
 			select(qa,[],(ta)=>{
 				setAmount0(ta[0].at);
 				setAmount1(ta[1].at);
