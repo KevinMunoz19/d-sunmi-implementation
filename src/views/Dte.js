@@ -95,9 +95,19 @@ const Dte = () =>{
 
 	const [payment,setPayment] = useState(0);
 
+	const [estNumber, setEstNumber] = useState(0);
+	const [arrayZc,setArrayZc] = useState([]);
+  const [arrayNc,setArrayNc] = useState([]);
+  const [arrayDc,setArrayDc] = useState([]);
+
+	const [visibleUniqueProduct,setVisibleUniqueProduct] = useState(false);
+	const [cantidadUniqueProduct,setCantidadUniqueProduct] = useState(0);
+	const [precioUniqueProduct,setPrecioUniqueProduct] = useState(0);
+	const [nombreUniqueProduct,setNombreUniqueProduct] = useState('');
+
 	const radioProps = [
 		{label: 'Nit  ', value: false },
-		{label: 'Consumidor Final	', value: true }
+		{label: 'CF	', value: true }
 	];
 
 	const radioIVA = [
@@ -126,12 +136,59 @@ const Dte = () =>{
 		getUser((userInfo)=>{
 			setNumEstablecimiento(0);
 			setUser(userInfo);
+			setNitTemporal(userInfo.string_nit.replace(/0+(?!$)/,''));
 		})
 	},[])
 
-	// useEffect(()=>{
-	// 	setNumEstablecimiento(0);
-	// },[user])
+	useEffect(()=>{
+		// getInfo(newnitfetch, (nom)=>{
+		getInfo(nitTemporal, (nom)=>{
+			setNn(nom.toString())
+		},(ca)=>{
+			setCalle(ca.toString())
+		},
+		(dir)=>{
+			setDireccion(dir.toString())
+		},
+		(zon)=>{
+			setZona(zon.toString())
+		},
+		(fr)=>{
+			setFrases(fr.toString())
+		},
+		(af)=>{
+			setAfiliacion(af.toString())
+		},
+		(zpc)=>{
+			setZipc(zpc.toString())
+		},
+		(nomc)=>{
+			setNombreComercial(nomc.toString())
+		},
+		(dirc)=>{
+			setDireccionComercial(dirc.toString())
+		},
+		(err)=>{
+			if(err==200){
+				Alert.alert('Error de conexion');
+			}else{
+				Alert.alert(err);
+			}
+		});
+	},[nitTemporal])
+
+	useEffect(()=>{
+		var zcArray = zipc.trim().split('|');
+		setArrayZc(zcArray);
+		var ncArray = nombreComercial.trim().split('|');
+		setArrayNc(ncArray);
+		var dcArray = direccionComercial.trim().split('|');
+		setArrayDc(dcArray);
+		// if (arrayDc.length > 0 && arrayZc.length > 0){
+		// 	setDisplaydir(arrayDc[estNumber].toString());
+		// 	setDisplayzip(arrayZc[estNumber].toString());
+		// }
+	},[zipc,nombreComercial,direccionComercial])
 
 
 
@@ -171,54 +228,75 @@ const Dte = () =>{
 			if(productModalVisible) setProductModalVisible(false);
 		},500)
 		setProducts([...products,product]);
-		var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
 
-		getInfo(newnitfetch, (nom)=>{
-			setNn(nom.toString())
-		},(ca)=>{
-			setCalle(ca.toString())
-		},
-		(dir)=>{
-			setDireccion(dir.toString())
-		},
-		(zon)=>{
-			setZona(zon.toString())
-		},
-		(fr)=>{
-			setFrases(fr.toString())
-		},
-		(af)=>{
-			setAfiliacion(af.toString())
-		},
-		(zpc)=>{
-			setZipc(zpc.toString())
-		},
-		(nomc)=>{
-			setNombreComercial(nomc.toString())
-		},
-		(dirc)=>{
-			setDireccionComercial(dirc.toString())
-		},
-		(err)=>{
-			if(err==200){
-				Alert.alert('Error de conexion');
-			}else{
-				Alert.alert(err);
-			}
-		});
+		//
+		// var newnitfetch = user.string_nit.replace(/0+(?!$)/,'')
+		//
+		// getInfo(newnitfetch, (nom)=>{
+		// 	setNn(nom.toString())
+		// },(ca)=>{
+		// 	setCalle(ca.toString())
+		// },
+		// (dir)=>{
+		// 	setDireccion(dir.toString())
+		// },
+		// (zon)=>{
+		// 	setZona(zon.toString())
+		// },
+		// (fr)=>{
+		// 	setFrases(fr.toString())
+		// },
+		// (af)=>{
+		// 	setAfiliacion(af.toString())
+		// },
+		// (zpc)=>{
+		// 	setZipc(zpc.toString())
+		// },
+		// (nomc)=>{
+		// 	setNombreComercial(nomc.toString())
+		// },
+		// (dirc)=>{
+		// 	setDireccionComercial(dirc.toString())
+		// },
+		// (err)=>{
+		// 	if(err==200){
+		// 		Alert.alert('Error de conexion');
+		// 	}else{
+		// 		Alert.alert(err);
+		// 	}
+		// });
 
 
 		console.log("numero de establecimiento seleccionado");
-		var n = parseInt(user.requestor,10)
-		console.log(n);
-		console.log(typeof n);
-		setNumEstablecimiento(n);
+		console.log(estNumber);
+		console.log(typeof estNumber);
 
-		console.log("numero de establecimiento inicial");
-		console.log(numEstablecimiento);
-		console.log(typeof numEstablecimiento);
+	}
 
+	const onUniqueProduct = ()=> {
+		console.log("Entrada a onUniqueProduct")
+		setVisibleUniqueProduct(true);
+	}
 
+	const onUniqueProductAdd = ()=> {
+		console.log("Entrada a onUniqueProductAdd")
+		setVisibleUniqueProduct(false);
+		addUP();
+	}
+
+	function addUP() {
+		if (cantidadUniqueProduct <= 0.0 || precioUniqueProduct <= 0.0 || nombreUniqueProduct.trim() == ""){
+			Alert.alert('Verifica los datos! Todos los datos son requeridos');
+		} else {
+			var uniqueProduct = { price: precioUniqueProduct, code: "uniqueproduct", name: nombreUniqueProduct, id: 150, quantity: cantidadUniqueProduct };
+			console.log("Precio DB");
+			console.log(uniqueProduct);
+			setProducts([...products,uniqueProduct]);
+		}
+
+		setCantidadUniqueProduct(0);
+		setPrecioUniqueProduct(0);
+		setNombreUniqueProduct("");
 
 	}
 
@@ -503,12 +581,119 @@ const Dte = () =>{
 						</View>
 					</View>
 
+
+
+
+
+
+
+					<View style={{width:'100%',alignItems:'center'}}>
+						<SectionDivider width={'80%'} sectionName={'ESTABLECIMIENTO'}/>
+					</View>
+
+					<View style={[styles.inputContainer, styles.input]}>
+	  				<Picker
+	  					style={styles.selectInput}
+	  					placeholder="Seleccionar Establecimiento"
+	  					selectedValue={estNumber}
+	  					onValueChange={(itemValue, itemIndex) => setEstNumber(itemValue)}
+	  				>
+	  					<Picker.Item label="" value={"default"} disabled={true} />
+	  					{arrayNc.map((usr,i)=>{
+	              var stringname = usr.toString().trim();
+	              while (stringname.substring(0,1) == "<" || (stringname.substring(0,1) >='0' && stringname.substring(0,1) <='9')) {
+	                stringname = stringname.substring(1);
+	              }
+	  						var st = `${usr.toString()}`;
+	  						var num = `${usr.toString()}`;
+	  							return(
+	  									<Picker.Item label= {stringname} value={i} />
+	  							)
+	  					})}
+	  				</Picker>
+	  			</View>
+
+
+
+
+
+
+
+
+
 					<View style={{width:'100%',alignItems:'center'}}>
 						<SectionDivider width={'80%'} sectionName={'PRODUCTOS O SERVICIOS'}/>
 					</View>
 
 					<View style={styles.contentContainer}>
 						<View style={{alignItems:'center'}}>
+
+
+						{!visibleUniqueProduct &&
+						<TouchableOpacity
+							style={styles.addProductContainer}
+							onPress={onUniqueProduct}
+						>
+							<Text>Agregar producto unico</Text>
+							<Icon
+								name="add-circle"
+								color="#f06f17"
+								size={30}
+								style={styles.addButtoIcon}
+							/>
+						</TouchableOpacity>
+
+						}
+
+
+							{visibleUniqueProduct &&
+								<TextInput
+									onChangeText={(e)=>{setNombreUniqueProduct(e)}}
+									placeholder="Nombre Producto"
+									placeholderTextColor="black"
+									style={styles.inputBorder}
+								/>
+							}
+
+							{visibleUniqueProduct &&
+								<TextInput
+									onChangeText={(e)=>{setPrecioUniqueProduct(e)}}
+									placeholder="Precio Unitario"
+									placeholderTextColor="black"
+									style={styles.inputBorder}
+									keyboardType = 'numeric'
+								/>
+							}
+
+							{visibleUniqueProduct &&
+								<TextInput
+									onChangeText={(e)=>{setCantidadUniqueProduct(e)}}
+									placeholder="Cantidad"
+									placeholderTextColor="black"
+									style={styles.inputBorder}
+									keyboardType = 'numeric'
+								/>
+							}
+
+
+						{visibleUniqueProduct &&
+							<TouchableOpacity
+								onPress={onUniqueProductAdd}
+								style={styles.actionButton}>
+								<Icon
+									name="add"
+									color="#f06f17"
+									size={50}
+									style={styles.icon}
+								/>
+								<Text >Agregar</Text>
+							</TouchableOpacity>
+						}
+
+
+
+
+
 							<TouchableOpacity
 								style={styles.addProductContainer}
 								onPress={() => setProductModalVisible(true)}
@@ -521,7 +706,6 @@ const Dte = () =>{
 									style={styles.addButtoIcon}
 								/>
 							</TouchableOpacity>
-
 						</View>
 						<View>
 							{/* Products */}
@@ -599,6 +783,26 @@ const Dte = () =>{
 }
 
 const styles = StyleSheet.create({
+	inputContainer:{
+		marginLeft: 50,
+		flexDirection:'column',
+		justifyContent: 'center',
+		// justifyContent:'flex-end',
+		width: '75%',
+		flex: 1,
+		// paddingLeft: 10,
+		// paddingRight: 10,
+		paddingTop: 10,
+		// paddingBottom: 20,
+	},
+	input: {
+		justifyContent: 'center',
+		borderBottomColor:'#828B95',
+		borderBottomWidth:1
+	},
+	selectInput: {
+		fontSize: 10
+  },
 	container: {
 		backgroundColor: '#fff',
 		flex: 1

@@ -252,7 +252,6 @@ const styles = StyleSheet.create({
 	  justifyContent: 'center',
 		width: '60%',
 		flex: 1,
-
   },
   input: {
     borderBottomColor:'#828B95',
