@@ -17,6 +17,7 @@
     "react-native-app-link": "^1.0.0",
     "react-native-base64": "0.0.2",
     "react-native-date-picker": "^2.7.9",
+    "react-native-dialog-input": "^1.0.7",
     "react-native-document-picker": "^3.2.4",
     "react-native-image-picker": "^1.1.0",
     "react-native-modal": "^11.4.0",

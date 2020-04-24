@@ -12,8 +12,6 @@ import {
     Alert,
     ActivityIndicator,
 		requireNativeComponent,
-
-
 		NativeModules,
 		NativeEventEmitter,
 }	from 'react-native';
@@ -25,6 +23,9 @@ import useDte from "../utils/useDte";
 import useUser from '../utils/useUser';
 import DteOptions from './DteOptions.component';
 import base64 from 'react-native-base64';
+import { validateEmail } from '../utils/emailValidator';
+
+import DialogInput from 'react-native-dialog-input';
 
 import fb from 'rn-fetch-blob'
 const printer = NativeModules.PrintModule;
@@ -32,7 +33,7 @@ const printer = NativeModules.PrintModule;
 const DteBox = ({dte,setPdfSource}) =>{
 
     const {getBill,getBillXML, getInfo} = useApi();
-    const {cancelDte} = useDte();
+    const {cancelDte,generateEmailStringBox} = useDte();
     const {getUser} = useUser();
 
     const [loading,setLoading] = useState(false);
@@ -55,6 +56,9 @@ const DteBox = ({dte,setPdfSource}) =>{
 		const [fl,setFl] = useState(false);
 
 		const [numEstablecimiento,setNumEstablecimiento] = useState();
+
+		const [showDialogInput,setShowDialogInput] = useState(false);
+		const [emailSend,setEmailSend] = useState('');
 
     useEffect(()=>{
 		getUser((userInfo)=>{
@@ -275,9 +279,37 @@ const DteBox = ({dte,setPdfSource}) =>{
                 ]
             );
         },200)
-
-
     }
+
+		const onEmailDte = ()=> {
+			setShowDialogInput(true);
+			// Alert.alert("Entrada a Enviar Correo");
+		}
+		// const closeDialogInput = () => {
+		// 	setShowDialogInput(false);
+		// }
+
+		const onSendDte = (emailString) => {
+			console.log("dtebox onSendDte")
+			console.log(emailString.trim())
+
+			if (emailString.trim().length > 0 ? validateEmail(emailString) : true){
+				generateEmailStringBox(user,dte.auth_number,emailString.trim(), (res)=>{
+					console.log('res ->',res)
+				},(err)=>{
+					console.log('error',err);
+					setLoading(false);
+					Alert.alert(`Ocurrio un error enviando el documento por correo, por favor intete luego`);
+				});
+
+				setShowDialogInput(false);
+			} else {
+				Alert.alert("Correo No Valido");
+			}
+
+
+
+		}
 
 
 		//const onImprimirDte = () => {
@@ -298,6 +330,7 @@ const DteBox = ({dte,setPdfSource}) =>{
                     onReprintDte = {onReprintDte}
                     onCloseModal = {onCloseModal}
                     dteStatus = {dte.status}
+										onEmailDte = {onEmailDte}
                 />
             }
             <View style={styles.valuesColumn}>
@@ -308,6 +341,19 @@ const DteBox = ({dte,setPdfSource}) =>{
                 </View>
                 <Text style={styles.valuesText}>{(dte.status == 0) && 'Anulada'}{(dte.status == 1) && 'Vigente'}</Text>
             </View>
+
+
+
+						<DialogInput isDialogVisible={showDialogInput}
+	            title={"Envio de Documento por Email"}
+	            message={"Ingrese Correo Electronico"}
+	            hintInput ={"Email"}
+							submitInput={ (inputText) => {onSendDte(inputText)} }
+							closeDialog={ () => {setShowDialogInput(false)}}>
+						</DialogInput>
+
+
+
 
             <TouchableOpacity onPress={()=>onAction()} style={styles.actionColumn}>
                 <Icon

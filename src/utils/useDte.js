@@ -216,6 +216,61 @@ const useDte = (props) => {
       })
   }
 
+
+
+
+  const generateEmailStringBox = (user,doc,email,res,rej)=>{
+    // var id = JSON.stringify(doc);
+    // var idjsonstring = id.replace("[","").replace("]","");
+    // var idjson = JSON.parse(id.replace("[","").replace("]",""));
+    // console.log("json parse");
+    // console.log(JSON.parse(id));
+    // console.log("Value");
+    // console.log(idjson.auth_number);
+      var nit = user.string_nit;
+      var guid = doc;
+      var stringdata1 =
+        `
+        <Dictionary name="StoredXmlSelector"><Entry k="Store" v="issued"/><Entry k="IssuerCountryCode" v="GT"/><Entry k="IssuerTaxId" v="${nit}"/><Entry k="DocumentGUID" v="${guid}"/></Dictionary>
+        `;
+      var stringEncoded = base64.encode(stringdata1);
+
+      var stringdata2 =
+        `
+        <Procesamiento><Dictionary name="email"><Entry k="from" v="pruebaemail@documentagface.com"/><Entry k="fromName" v="usuarioTESTdocumentagface"/><Entry k="to" v="${email}"/><Entry k="subject" v="Factura Electronica"/><Entry k="formats" v="pdf"/><Entry k="body template name" v="mail_default_${nit}.html"/></Dictionary></Procesamiento>
+        `;
+      var stringEncoded2 = base64.encode(stringdata2);
+      var xmlStringEmail =
+      `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Body>
+          <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+          <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+          <Transaction>QUEUE_FOR_DISTRIBUTION</Transaction>
+          <Country>GT</Country>
+          <Entity>000000123456</Entity>
+          <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+          <UserName>GT.000000123456.admon</UserName>
+          <Data1>${stringEncoded}</Data1>
+          <Data2>${stringEncoded2}</Data2>
+          <Data3></Data3>
+          </RequestTransaction>
+      </soap:Body>
+      </soap:Envelope>`
+      ;
+      sendemailBill(xmlStringEmail,(response)=>{
+          res(response)
+      },(err)=>{
+          rej(err);
+      })
+  }
+
+
+
+
+
+
+
   const saveDte = (encode,receiverName,receiverNit,payment,issueNit)=>{
     let xmlString = base64.decode(encode);
     let xml = new DOMParser().parseFromString(xmlString, "text/xml").documentElement;
@@ -307,6 +362,7 @@ const useDte = (props) => {
         generateString,
         cancelDte,
         generateEmailString,
+        generateEmailStringBox,
 	};
 
 }

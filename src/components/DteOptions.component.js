@@ -19,6 +19,7 @@ const DteOptions = ({
     onReprintDte,
     onCloseModal,
     dteStatus,
+    onEmailDte,
 }) => {
     return(
         <View style={styles.container}>
@@ -43,6 +44,12 @@ const DteOptions = ({
                 <Text style={styles.sectionTouchText}>ANULAR DOCUMENTO</Text>
             </TouchableOpacity>
             }
+            {(dteStatus == 1 ) &&
+            <TouchableOpacity  onPress={()=>onEmailDte()} style={styles.sectionTouch}>
+                <Text style={styles.sectionTouchText}>ENVIAR DOCUMENTO</Text>
+            </TouchableOpacity>
+            }
+
             <TouchableOpacity  onPress={()=>onCloseModal()} style={styles.sectionTouch}>
                 <Text style={styles.sectionTouchText}>CERRAR</Text>
             </TouchableOpacity>
