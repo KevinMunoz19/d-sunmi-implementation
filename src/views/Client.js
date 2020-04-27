@@ -131,7 +131,6 @@ const Client = ({id,client,action,onSelect}) =>{
 							//value={`${inputs.nit | '' }`}
 							value={inputs.nit}
 							style={styles.input}
-							keyboardType = 'numeric'
 						/>
 						{/*
 							{!kValue &&
