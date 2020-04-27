@@ -133,21 +133,23 @@ const Client = ({id,client,action,onSelect}) =>{
 							style={styles.input}
 							keyboardType = 'numeric'
 						/>
-						{!kValue &&
-						<TouchableOpacity
-							//onPress={()=>setKValue(true)}
-							onPress={()=>changeNitK(nit)}
-							style={styles.clientListButton}
-						>
-							<Icon
-								name="description"
-								color="black"
-								size={20}
-								style={styles.listIcon}
-							/>
-							<Text fonSize={10} style={styles.fontSize}>Agregar K</Text>
-						</TouchableOpacity>
-					}
+						{/*
+							{!kValue &&
+							<TouchableOpacity
+								//onPress={()=>setKValue(true)}
+								onPress={()=>changeNitK(nit)}
+								style={styles.clientListButton}
+							>
+								<Icon
+									name="description"
+									color="black"
+									size={20}
+									style={styles.listIcon}
+								/>
+								<Text fonSize={10} style={styles.fontSize}>Agregar K</Text>
+							</TouchableOpacity>
+						}
+					*/}
 					<TouchableOpacity
 						onPress={()=>defaultValues()}
 						style={styles.clientListButton}
