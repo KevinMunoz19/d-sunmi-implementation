@@ -137,6 +137,8 @@ const Dte = () =>{
 			setNumEstablecimiento(0);
 			setUser(userInfo);
 			setNitTemporal(userInfo.string_nit.replace(/0+(?!$)/,''));
+			console.log("token usuario")
+			console.log(userInfo.token)
 		})
 	},[])
 
@@ -373,8 +375,10 @@ const Dte = () =>{
 	}
 
 	const onPrint = () => {
-		printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
+		// printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
 		// reprint
+		console.log("entrada a onPrint");
+		console.log(documento);
 		setTimeout(()=>{
 			printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
 		},5000);
@@ -746,7 +750,7 @@ const Dte = () =>{
 	        	title='Start example activity'
         	/>*/}
 
-					{/*<View style={styles.generateBillButtonContainer}>
+					<View style={styles.generateBillButtonContainer}>
 					{visibleButton &&
 						<TouchableOpacity
 							onPress={onPrint}
@@ -760,7 +764,7 @@ const Dte = () =>{
 							<Text >Imprimir Factura</Text>
 						</TouchableOpacity>
 					}
-					</View>*/}
+					</View>
 					<View style={styles.generateBillButtonContainer}>
 					{visibleButton &&
 						<TouchableOpacity

@@ -235,7 +235,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 						console.log(typeof nombreComercial);
 						setTimeout(()=>{
 							printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
-						},500);
+						},1000);
 					}catch(error){
 						Alert.alert("No se encuentra una impresora Bluetooth conectada");
 					}

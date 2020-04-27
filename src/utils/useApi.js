@@ -127,7 +127,9 @@ const useApi = ()=>{
   }
 
   const getBillXML = (token,nit,id,cant,desc,prec,res,rej)=>{
+  // const getBillXML = (token,nit,id,cant,prec,desc,res,rej)=>{
     console.log("entrada get bill xml");
+
     loginOld({username:null,password:null},()=>{
       fetch(`https://felgtaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=XML&GUID=${id}`,{
       // fetch(`https://felgttestaws.digifact.com.gt/guestapi/api/FELRequest?NIT=${nit}&TIPO=GET_DOCUMENT&FORMAT=PDF&GUID=${id}`,{
@@ -146,9 +148,6 @@ const useApi = ()=>{
           var xmlString = base64.decode(response.ResponseDATA1);
           let domparser = new DOMParser();
           let xmlStringF = domparser.parseFromString(xmlString, "text/xml");
-          console.log("xml decoded F")
-          //console.log(xmlStringF)
-          console.log(typeof xmlStringF)
           console.log(xmlStringF.getElementsByTagName('dte:Direccion')[0].firstChild.data); //emisor
           console.log(xmlStringF.getElementsByTagName('dte:NumeroAutorizacion')[0].firstChild.data);
           console.log(xmlStringF.getElementsByTagName('dte:FechaHoraCertificacion')[0].firstChild.data);
@@ -161,7 +160,7 @@ const useApi = ()=>{
           let y = x[0].getElementsByTagName("dte:Cantidad")[0].childNodes[0].nodeValue;
           for (i = 0; i < x.length; i++) {
             let canti = x[i].getElementsByTagName("dte:Cantidad")[0].childNodes[0].nodeValue;
-            let preci = x[i].getElementsByTagName("dte:Precio")[0].childNodes[0].nodeValue;
+            let preci = x[i].getElementsByTagName("dte:PrecioUnitario")[0].childNodes[0].nodeValue;
             let descri = x[i].getElementsByTagName("dte:Descripcion")[0].childNodes[0].nodeValue;
             cantidades = cantidades+`${canti},`;
             precios = precios+`${preci},`;
