@@ -341,7 +341,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
                 BluetoothSocket socket = null;
                 socket = PrintModule.getSocket(device);
 
-                String nombreComercialNuevo = nombrecomercial.substring(2);
+//                String nombreComercialNuevo = nombrecomercial.substring(2);
+                String nombreComercialNuevo = nombrecomercial;
                 String formatedTitleVenta = String.format("%-6s %-6s %-6s %-6s", "Cant.", "Des.", "Uni.",  "Tot.");
                 String formatedTotalVenta = String.format("%8s     %12s      ", "Total", "Q"+total);
 
@@ -350,8 +351,10 @@ public class PrintModule extends ReactContextBaseJavaModule{
                 String[] arrayprecio = precios.split(",");
 
                 sendStringDataBT(nombre,1,1,0);
-                sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
-                sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
+                sendStringDataBT(nombreComercialNuevo,1,0,0);
+                sendStringDataBT(direccioncomercial,1,0,0);
+//                sendStringDataBT("LA FATTORIA PIZZERIA",1,0,0);
+//                sendStringDataBT("16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA",1,0,0);
                 sendStringDataBT("NIT: "+nitcomercial,1,0,0);
                 //sendStringDataBT(direccionComercio,1,0,0);
                 sendStringDataBT(separador,1,0,1);

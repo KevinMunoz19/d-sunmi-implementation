@@ -224,8 +224,11 @@ const DteBox = ({dte,setPdfSource}) =>{
 				console.log("entrada a reprint");
 				//var newnitfetch = user.string_nit.replace(/0+(?!$)/,'');
 				var newnitfetch = user.string_nit;
-				var nombreComercial = "LA FATTORIA PIZZERIA";
-				var direccionComercial = "16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA";
+				// var nombreComercial = "LA FATTORIA PIZZERIA";
+				// var direccionComercial = "16 CALLE Y 6 AVENIDA ZONA 10 CENTRO COMERCIAL LA ESTACION GUATEMALA, GUATEMALA";
+				var nombreComercial = dte.string_nombre_comercial;
+				var direccionComercial = dte.string_direccion_comercial;
+				var newnn = dte.string_nn;
 				console.log(`resultados cantidades ${cantidadesString}`)
 				getBill(user.token,user.string_nit,dte.auth_number,(source)=>{
 					setXmldata(source);
@@ -234,7 +237,7 @@ const DteBox = ({dte,setPdfSource}) =>{
 						console.log(nombreComercial);
 						console.log(typeof nombreComercial);
 						setTimeout(()=>{
-							printer.reprint(nn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
+							printer.reprint(newnn.toString(),nombreComercial.toString(),direccionComercial.toString(), newnitfetch.toString(), numeroserie.toString(), numero.toString(), numeroaut.toString(), fechadte.toString(), nombrereceptor.toString(),nitreceptor.toString(),cantidadesString.toString(),descripcionesString.toString(),preciosString.toString(),totaldte.toString());
 						},1000);
 					}catch(error){
 						Alert.alert("No se encuentra una impresora Bluetooth conectada");
