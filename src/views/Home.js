@@ -68,9 +68,11 @@ const Home = () => {
             <TouchableOpacity onPress={()=>handlePress('products')} style={styles.menuTouch}>
               <Text style={styles.menuText}>Productos</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>handlePress('info')} style={styles.menuTouch}>
-              <Text style={styles.menuText}>Informacion de Usuario</Text>
-            </TouchableOpacity>
+            {/*
+              <TouchableOpacity onPress={()=>handlePress('info')} style={styles.menuTouch}>
+                <Text style={styles.menuText}>Informacion de Usuario</Text>
+              </TouchableOpacity>
+            */}
             <View style={styles.menuLine}></View>
             <TouchableOpacity onPress={()=>onLogout()} style={styles.menuTouch}>
               <Text style={styles.menuText}>Cerrar Sesion</Text>

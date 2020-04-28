@@ -286,7 +286,7 @@ const useDte = (props) => {
     // var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number,payment,string_nit) values (?,?,?,?,?,?,?,?,?)`;
     // insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment,issueNit],(result)=>{
     var query =    `INSERT INTO dte(receiver_name,receiver_nit,date,amount,serie,number,auth_number,payment,string_nit,string_nombre_comercial,string_direccion_comercial,string_nn) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
-    insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment,issueNit,nnG,nombreComercialG,direccionComercialG],(result)=>{
+    insert(query,[receiverName,receiverNit,fecha,total,serie,dteNumber,authNumber,payment,issueNit,nombreComercialG,direccionComercialG,nnG],(result)=>{
       console.log('DTE registrado con exito');
     },(err)=>{
       console.log('ocurrio un error registrando el dte', err);

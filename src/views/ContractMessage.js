@@ -71,7 +71,7 @@ const ContractMessage = () => {
             </View>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={()=>Actions.infouser()}>
+            <TouchableOpacity style={styles.button} onPress={()=>Actions.home()}>
               <Text style={styles.buttonText}>COMENZAR</Text>
             </TouchableOpacity>
           </View>
