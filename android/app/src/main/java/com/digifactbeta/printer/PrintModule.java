@@ -218,7 +218,8 @@ public class PrintModule extends ReactContextBaseJavaModule{
                     String direccionCertificador = "Edificio Paladium";
                     String separador = "                            ";
 
-                    String nombreComercialNuevo = nombreComercial.substring(2);
+//                    String nombreComercialNuevo = nombreComercial.substring(2);
+                    String nombreComercialNuevo = nombreComercial;
 
 
                     BluetoothAdapter btAdapter = PrintModule.getBTAdapter();

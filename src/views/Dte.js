@@ -100,6 +100,10 @@ const Dte = () =>{
   const [arrayNc,setArrayNc] = useState([]);
   const [arrayDc,setArrayDc] = useState([]);
 
+	const [nnPrint,setNnPrint] = useState('');
+	const [nombreComercialPrint,setNombreComercialPrint] = useState('');
+	const [direccionComercialPrint,setDireccionComercialPrint] = useState('');
+
 	const [visibleUniqueProduct,setVisibleUniqueProduct] = useState(false);
 	const [cantidadUniqueProduct,setCantidadUniqueProduct] = useState(0);
 	const [precioUniqueProduct,setPrecioUniqueProduct] = useState(0);
@@ -186,10 +190,7 @@ const Dte = () =>{
 		setArrayNc(ncArray);
 		var dcArray = direccionComercial.trim().split('|');
 		setArrayDc(dcArray);
-		// if (arrayDc.length > 0 && arrayZc.length > 0){
-		// 	setDisplaydir(arrayDc[estNumber].toString());
-		// 	setDisplayzip(arrayZc[estNumber].toString());
-		// }
+
 	},[zipc,nombreComercial,direccionComercial])
 
 
@@ -318,12 +319,23 @@ const Dte = () =>{
 
 	const onGenerate = ()=>{
 		setLoading(true);
+		var direccionComercialArray = direccionComercial.trim().split('|');
+		var direccionComercialClean = direccionComercialArray[estNumber].replace(/ +(?= )/g,'');
+		var nombreComercialArray = nombreComercial.trim().split('|');
+		var nombreComercialClean = nombreComercialArray[estNumber].toString().trim();
+		while (nombreComercialClean.substring(0,1) == "<" || (nombreComercialClean.substring(0,1) >='0' && nombreComercialClean.substring(0,1) <='9')) {
+			nombreComercialClean = nombreComercialClean.substring(1);
+		}
+		setNombreComercialPrint(nombreComercialClean);
+		setDireccionComercialPrint(direccionComercialClean);
+		setNnPrint(nn);
 		if (user) {
 			if (email.trim().length > 0 ? validateEmail(email) : true){
 				if (products.length > 0) {
 					if((!cf && client.nit.trim().length > 0) || cf) {
 						if(iva == 0 || iva == 12){
-							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial, direccionComercial, numEstablecimiento,payment, (res)=>{
+							generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial, direccionComercial, estNumber,payment, (res)=>{
+							// generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial, direccionComercial, numEstablecimiento,payment, (res)=>{
 							//generateString(products,client,cf,iva,email,user, nn, calle, direccion, zona, frases, afiliacion,zipc, nombreComercial,direccionComercial, (res)=>{
 								console.log("productos");
 								console.log(typeof products)
@@ -375,13 +387,13 @@ const Dte = () =>{
 	}
 
 	const onPrint = () => {
-		// printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
-		// reprint
+
 		console.log("entrada a onPrint");
 		console.log(documento);
 		setTimeout(()=>{
-			printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
-		},5000);
+			// printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nn.toString(),nombreComercial.toString(),direccionComercial.toString());
+			printer.print(JSON.stringify(documento),JSON.stringify(userSend),JSON.stringify(productsSend),nnPrint.toString(),nombreComercialPrint.toString(),direccionComercialPrint.toString());
+		},2000);
 		// Actions.home();
 	}
 
@@ -396,7 +408,6 @@ const Dte = () =>{
 	}
 	const nativeComponent = () => {
 		activityStarter.navigateToExample(JSON.stringify(documento),JSON.stringify(user),JSON.stringify(products));
-
 		const eventEmitter = new NativeEventEmitter(eventEmitterModule);
 		eventEmitter.addListener(eventEmitterModule.MyEventName, (params) => {
 			onGenerate();
@@ -600,7 +611,7 @@ const Dte = () =>{
 	  					selectedValue={estNumber}
 	  					onValueChange={(itemValue, itemIndex) => setEstNumber(itemValue)}
 	  				>
-	  					<Picker.Item label="" value={"default"} disabled={true} />
+	  					<Picker.Item label="" value={0} disabled={true} />
 	  					{arrayNc.map((usr,i)=>{
 	              var stringname = usr.toString().trim();
 	              while (stringname.substring(0,1) == "<" || (stringname.substring(0,1) >='0' && stringname.substring(0,1) <='9')) {
