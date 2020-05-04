@@ -26,6 +26,7 @@ const Login = () =>{
 	const {setUser,getUser} = useUser();
 	const {login} = useApi();
 	const [loading,setLoading] = useState(false);
+	const [vis, setVis] = useState(true);
 
 	useEffect(()=>{
 		getUser((users)=>{
@@ -36,11 +37,23 @@ const Login = () =>{
 		})
 	},[])
 
+	changeVisibility = ()=> {
+			if (!vis) {
+				setVis(true);
+			}else{
+				setVis(false);
+			}
+
+
+	}
+
 	function handlerSend(){
 		setLoading(true);
 		function PadLeft(value, length) {
 			return (value.toString().length < length) ? PadLeft("0" + value, length) : value;
 		}
+
+
 
 		login({
 			Username:`GT.${PadLeft(nit,12)}.${username}`,
@@ -59,13 +72,13 @@ const Login = () =>{
 						setLoading(false);
 						console.log('aqui el que necesito',userInfo);
 						console.log(userInfo.contact_name);
-						if(userInfo.contact_name == null){
-							Actions.welcome();
-						}else if(userInfo.confirm_contract == null){
-							Actions.contract();
-						}else{
+						// if(userInfo.contact_name == null){
+						// 	Actions.welcome();
+						// }else if(userInfo.confirm_contract == null){
+						// 	Actions.contract();
+						// }else{
 							Actions.home();
-						}
+						// }
 					});
 
 				}else{
@@ -117,7 +130,9 @@ const Login = () =>{
 							onChangeText={(e)=>{setUsername(e)}}
 						/>
 					</View>
-					<View style={loginStyles.inputContainer}>
+
+
+					<View style={loginStyles.inputContainerHalf}>
 						{/* <View style={{flexDirection:'row',alignItems:'center'}}> */}
 							<Icon
 								name="lock"
@@ -126,13 +141,35 @@ const Login = () =>{
 							/>
 							<TextInput
 								placeholder='CLAVE'
-								style={loginStyles.input}
+								style={loginStyles.inputHalf}
 								onChangeText={(e)=>{setPassword(e)}}
-								secureTextEntry={true}
+								secureTextEntry={vis}
 							/>
 						{/* </View> */}
 
+						<TouchableOpacity
+							onPress={changeVisibility}
+							style={loginStyles.halfListButton}
+						>
+							<Icon
+								name="visibility"
+								color="black"
+								size={20}
+								style={loginStyles.listIcon}
+							/>
+
+						</TouchableOpacity>
+
 					</View>
+
+
+
+
+
+
+
+
+
 				</View>
 				{(loading)&&(
 					<ActivityIndicator visible={false} size='large' color='#f06f17'/>
@@ -203,9 +240,25 @@ const loginStyles = StyleSheet.create({
 		borderBottomColor:'rgb(234, 103, 46)',
 		borderBottomWidth:1,
 	},
+	inputContainerHalf:{
+		// paddingTop:'2%',
+		width: wp('70%'),
+		// width:'70%',
+		textAlign:'center',
+		flexDirection:'row',
+		alignItems:'center',
+		borderBottomColor:'rgb(234, 103, 46)',
+		borderBottomWidth:1,
+	},
 	input:{
 		// width:'100%',
 		width: wp('100%')
+	},
+	inputHalf: {
+		flex: 3,
+		//marginRight: 20,
+		borderBottomColor: '#DDDDDD',
+		//borderBottomWidth: 1,
 	},
 	button:{
 		width:'50%',
@@ -248,6 +301,25 @@ const loginStyles = StyleSheet.create({
 		//height:'20%',
 		width: wp('40%'),
 		height: hp('10%'),
+	},
+	halfInput: {
+		flex: 3,
+		marginRight: 20,
+		borderBottomColor: '#DDDDDD',
+		borderBottomWidth: 1,
+	},
+	halfListButton: {
+		padding: 10,
+		flex: 1.5,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	listIcon: {
+		alignSelf: 'center'
+	},
+	fontSize: {
+		fontSize: 10
 	},
 });
 //

@@ -273,7 +273,6 @@ const Dte = () =>{
 		console.log("numero de establecimiento seleccionado");
 		console.log(estNumber);
 		console.log(typeof estNumber);
-
 	}
 
 	const onUniqueProduct = ()=> {
@@ -443,7 +442,6 @@ const Dte = () =>{
                 style={styles.icon}
 							/>
 						</TouchableOpacity>
-
 					</Modal>
 					<Modal visible={createClientModalVisible}>
 						<TouchableOpacity  onPress={()=>setCreateClientModalVisible(false)} style={styles.actionButton}>
@@ -467,6 +465,18 @@ const Dte = () =>{
               />
 						</TouchableOpacity>
 						<Products action='select' onSelect={onProductSelect}></Products>
+
+
+						<TouchableOpacity  onPress={()=>createProduct()} style={styles.createModalButton}>
+							<Icon
+                name="add-circle"
+                color="rgb(119,211,83)"
+                size={50}
+                style={styles.icon}
+              />
+						</TouchableOpacity>
+
+
 					</Modal>
 					<Modal visible={createProductModalVisible}>
 						<TouchableOpacity  onPress={()=>setCreateProductModalVisible(false)} style={styles.closeModalButton}>
@@ -507,6 +517,8 @@ const Dte = () =>{
 						</View>
 
 						<View style={{alignItems:'center'}}>
+
+
 							<View style={styles.nitContainer}>
 								{/* Fila 1: nit y boton */}
 								{/* Dos columnas */}
@@ -533,6 +545,9 @@ const Dte = () =>{
 									</TouchableOpacity>
 								)}
 							</View>
+
+
+
 						</View>
 
 						{/* <View > */}
