@@ -18,6 +18,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import PdfView from "../components/PdfView";
 import IosHeader from '../components/IosHeader';
 import useUser from '../utils/useUser';
+import colorPalette from '../utils/colors';
 
 const Dtes = () =>{
 
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
   textHeaderContainer:{
     width:'50%',
     height:'50%',
-    backgroundColor:'rgb(234, 103, 46)',
+    backgroundColor:colorPalette.rgbColor,
     alignItems:'center',
     justifyContent:'center'
   },

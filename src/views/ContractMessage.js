@@ -23,13 +23,14 @@ const ContractMessage = () => {
       if(users == null){
         Actions.login();
         setLoading(false);
-      }else if(users.contact_name == null){
-        Actions.firstTimeForm();
-      }else if(users.confirm_contract == null){
-        Actions.contract();
+      // }else if(users.contact_name == null){
+      //   Actions.firstTimeForm();
+      // }else if(users.confirm_contract == null){
+      //   Actions.contract();
       }else{
         setUser(users);
         setLoading(false);
+				Actions.home();
       }
     });
 	});

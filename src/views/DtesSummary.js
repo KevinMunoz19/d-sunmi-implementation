@@ -24,6 +24,8 @@ import useUser from '../utils/useUser';
 import DatePicker from 'react-native-date-picker';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
+import colorPalette from '../utils/colors';
+
 
 const Dtes = () =>{
 
@@ -238,7 +240,7 @@ const Dtes = () =>{
 
 
 								<View style={styles.containert}>
-					        <Table borderStyle={{borderWidth: 2, borderColor: '#e78b4d'}}>
+					        <Table borderStyle={{borderWidth: 2, borderColor: colorPalette.color}}>
 					          <Row data={['', 'Cantidad', 'Total']} style={styles.headt} textStyle={styles.textt}/>
 					          <Rows data={[
 							        ['Efectivo', `${count0}`, `Q. ${amount0}`],
@@ -355,7 +357,7 @@ const styles = StyleSheet.create({
     textHeaderContainer:{
         width:'60%',
         height:'50%',
-        backgroundColor:'rgb(234, 103, 46)',
+        backgroundColor:colorPalette.rgbColor,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -399,7 +401,7 @@ const styles = StyleSheet.create({
 		textHeaderContainerSub:{
         width:'30%',
         height:'80%',
-        backgroundColor:'rgb(234, 103, 46)',
+        backgroundColor:colorPalette.rgbColor,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -451,7 +453,7 @@ const styles = StyleSheet.create({
 		},
 	  headt: {
 			height: 30,
-			backgroundColor: '#f06f17'
+			backgroundColor:colorPalette.color
 		},
 	  textt: {
 			margin: 6
@@ -466,7 +468,7 @@ const styles = StyleSheet.create({
 		textHeaderContainerSubT:{
         width:'45%',
         height:'80%',
-        backgroundColor:'rgb(234, 103, 46)',
+        backgroundColor:colorPalette.rgbColor,
         alignItems:'center',
         justifyContent:'center'
     },

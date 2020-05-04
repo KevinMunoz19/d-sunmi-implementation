@@ -18,6 +18,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import {Actions} from 'react-native-router-flux';
 import useUser from './../utils/useUser';
 import useApi from './../utils/useApi';
+import colorPalette from '../utils/colors';
 const Login = () =>{
 
 	const [nit,setNit] = useState('');
@@ -172,7 +173,7 @@ const Login = () =>{
 
 				</View>
 				{(loading)&&(
-					<ActivityIndicator visible={false} size='large' color='#f06f17'/>
+					<ActivityIndicator visible={false} size='large' color={colorPalette.color}/>
 				)}
 				<View style={loginStyles.buttonContainer}>
 					<TouchableOpacity style={loginStyles.button} onPress={handlerSend}>
@@ -203,7 +204,7 @@ const loginStyles = StyleSheet.create({
 	},
 	headerContainer:{
 		flex:0.5,
-		backgroundColor:'rgb(234, 103, 46)'
+		backgroundColor:colorPalette.rgbColor
 	},
 	imageContainer:{
 		flex:2,
@@ -237,7 +238,7 @@ const loginStyles = StyleSheet.create({
 		textAlign:'center',
 		flexDirection:'row',
 		alignItems:'center',
-		borderBottomColor:'rgb(234, 103, 46)',
+		borderBottomColor:colorPalette.rgbColor,
 		borderBottomWidth:1,
 	},
 	inputContainerHalf:{
@@ -247,7 +248,7 @@ const loginStyles = StyleSheet.create({
 		textAlign:'center',
 		flexDirection:'row',
 		alignItems:'center',
-		borderBottomColor:'rgb(234, 103, 46)',
+		borderBottomColor:colorPalette.rgbColor,
 		borderBottomWidth:1,
 	},
 	input:{

@@ -17,6 +17,7 @@ import useProduct from '../utils/useProduct'
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {Actions} from 'react-native-router-flux';
 import IosHeader from '../components/IosHeader';
+import colorPalette from '../utils/colors';
 
 const Product = ({id,product,action,onSelect}) =>{
 	const {inputs,setInputs, handleInputChange, handleSubmit} = useProduct();
@@ -49,7 +50,7 @@ const Product = ({id,product,action,onSelect}) =>{
 					alignItems:'center'
 				}}>
 					<View style={{
-						backgroundColor:'rgb(234, 103, 46)',
+						backgroundColor:colorPalette.rgbColor,
 						width:'50%',
 						height:'50%',
 						justifyContent:'center',
@@ -103,7 +104,7 @@ const Product = ({id,product,action,onSelect}) =>{
 					<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
 						<Icon
 							name="edit"
-							color="#26A657"
+							color={colorPalette.color}
 							size={50}
 							style={styles.icon}
 						/>
@@ -125,11 +126,23 @@ const Product = ({id,product,action,onSelect}) =>{
 						<TouchableOpacity onPress={()=>handleSubmit({action:'create',onSelect:onSelect}) } style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
-							<Text >REGISTRAR</Text>
+							<Text >REGISTRAR y AGREGAR</Text>
+						</TouchableOpacity>
+					)}
+
+					{(onSelect!=null) &&(
+						<TouchableOpacity onPress={()=>handleSubmit({action:'unique',onSelect:onSelect}) } style={styles.actionButton}>
+							<Icon
+								name="add"
+								color={colorPalette.color}
+								size={50}
+								style={styles.icon}
+							/>
+							<Text >AGREGAR</Text>
 						</TouchableOpacity>
 					)}
 			</View>
@@ -154,8 +167,8 @@ const styles = StyleSheet.create({
 		marginTop:5,
     flexDirection:'row',
     backgroundColor:'white',
-    borderBottomColor:'#f06f17',
-    borderTopColor:'#f06f17',
+    borderBottomColor:colorPalette.color,
+    borderTopColor:colorPalette.color,
     borderBottomWidth:1,
     borderTopWidth:1,
     justifyContent:'center',

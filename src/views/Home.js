@@ -6,6 +6,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+// import Colors from './../utils/colors';
+import colorPalette from '../utils/colors';
 
 import {
 	Text,
@@ -19,6 +21,10 @@ import {
 }	from 'react-native';
 
 const Home = () => {
+
+  // const {Colors} = './../utils/colors';
+    // const {colorPalette} = '../utils/colors';
+
 
   const {logout} = useUser();
   const [menuVisible,setMenuVisible] = useState(false);
@@ -37,6 +43,8 @@ const Home = () => {
   const onMenu = ()=>{
     setMenuVisible(!menuVisible);
   }
+
+
 
   const onLogout = ()=>{
     setMenuVisible(false);
@@ -148,7 +156,7 @@ const styles = StyleSheet.create({
     width:'100%',
     height:'75%',
     flexDirection:'column',
-    backgroundColor:'rgb(234, 103, 46)',
+    backgroundColor:colorPalette.rgbColor,
     justifyContent: 'space-around'
   },
   menuLine:{
@@ -195,7 +203,7 @@ const styles = StyleSheet.create({
   },
   sectionTouch:{
     marginTop:'3%',
-    backgroundColor:'rgba(234, 103, 46, 0.5)',
+    backgroundColor:colorPalette.homeButtons,
     width:'100%',
     height:'15%',
 		//width: wp('100%'),

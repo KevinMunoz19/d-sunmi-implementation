@@ -5,7 +5,7 @@ import {Alert} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 const useProduct = (callback) => {
-	
+
 	const [inputs, setInputs] = useState({});
 
 	const {select,insert} = DB();
@@ -20,7 +20,6 @@ const useProduct = (callback) => {
 			inputs.code &&
 			inputs.price
 		) {
-
 			var fields = [
 				inputs.name,
 				inputs.code,
@@ -46,9 +45,25 @@ const useProduct = (callback) => {
 				messageVerb='ELIMINADO';
 				query = `DELETE from product where id = ?`,
 				fields = [inputs.id];
+			}else if(action == 'unique'){
+				fields = [inputs.id];
 			}
+
+
+
 			console.warn(query);
-			console.warn(fields)
+			console.warn(fields);
+
+
+			if(action == 'unique'){
+				var uniqueProduct = { price: inputs.price, code: "uniqueproduct", name: inputs.name, id: 150, quantity: inputs.quantity };
+				onSelect(uniqueProduct);
+			} else {
+
+
+
+
+
 			insert(query,fields,(result)=>{
 				Alert.alert(`Producto ${messageVerb} con exito`);
 				if(onSelect == null){
@@ -60,9 +75,17 @@ const useProduct = (callback) => {
 						onSelect(product[0]);
 					})
 				}
-				
-				
 			});
+
+
+
+
+
+
+				}
+
+
+
 		} else {
 			Alert.alert('Todos los campos son requeridos!');
 		}

@@ -20,10 +20,10 @@ const Init = () => {
 	    if(users == null){
 	      console.log('no user');
 	      setLoading(false);
-	    }else if(users.contact_name == null){
-	      Actions.firstTimeForm();
-	    }else if(users.confirm_contract == null){
-	      Actions.contract();
+	    // }else if(users.contact_name == null){
+	    //   Actions.firstTimeForm();
+	    // }else if(users.confirm_contract == null){
+	    //   Actions.contract();
 	    }else{
 	      Actions.home();
 	    }

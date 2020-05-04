@@ -46,6 +46,7 @@ const Sw = requireNativeComponent('Sw');
 const activityStarter = NativeModules.ActivityStarter;
 const eventEmitterModule = NativeModules.EventEmitter;
 const printer = NativeModules.PrintModule;
+import colorPalette from '../utils/colors';
 
 
 const Dte = () =>{
@@ -437,7 +438,7 @@ const Dte = () =>{
 						<TouchableOpacity  onPress={()=>createClient(false)} style={styles.createModalButton}>
 							<Icon
 								name="add-circle"
-                color="rgb(234, 103, 46)"
+                color={colorPalette.rgbColor}
                 size={50}
                 style={styles.icon}
 							/>
@@ -447,7 +448,7 @@ const Dte = () =>{
 						<TouchableOpacity  onPress={()=>setCreateClientModalVisible(false)} style={styles.actionButton}>
 							<Icon
 								name="arrow-back"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
@@ -470,7 +471,7 @@ const Dte = () =>{
 						<TouchableOpacity  onPress={()=>createProduct()} style={styles.createModalButton}>
 							<Icon
                 name="add-circle"
-                color="rgb(119,211,83)"
+                color={colorPalette.rgbColor}
                 size={50}
                 style={styles.icon}
               />
@@ -511,7 +512,7 @@ const Dte = () =>{
 								radio_props={radioProps}
 								formHorizontal={true}
 								initial={0}
-								buttonColor={'#f06f17'}
+								buttonColor={colorPalette.color}
 								onPress={(value) => {setCf(value)}}
 								/>
 						</View>
@@ -603,7 +604,7 @@ const Dte = () =>{
 								radio_props={radioPaymentType}
 								formHorizontal={true}
 								initial={0}
-								buttonColor={'#f06f17'}
+								buttonColor={colorPalette.color}
 								onPress={(value) => {setPayment(value)}}
 								/>
 						</View>
@@ -665,7 +666,7 @@ const Dte = () =>{
 							<Text>Agregar producto unico</Text>
 							<Icon
 								name="add-circle"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={30}
 								style={styles.addButtoIcon}
 							/>
@@ -710,7 +711,7 @@ const Dte = () =>{
 								style={styles.actionButton}>
 								<Icon
 									name="add"
-									color="#f06f17"
+									color={colorPalette.color}
 									size={50}
 									style={styles.icon}
 								/>
@@ -729,7 +730,7 @@ const Dte = () =>{
 								<Text>Agregar producto</Text>
 								<Icon
 									name="add-circle"
-									color="#f06f17"
+									color={colorPalette.color}
 									size={30}
 									style={styles.addButtoIcon}
 								/>
@@ -755,13 +756,13 @@ const Dte = () =>{
 					</View>
 
 					{ (loading) && (
-						<ActivityIndicator visible={false} size='large' color='#f06f17'/>
+						<ActivityIndicator visible={false} size='large' color={colorPalette.color}/>
 					)}
 					<View style={styles.generateBillButtonContainer}>
 						<TouchableOpacity onPress={onGenerate} style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
@@ -781,7 +782,7 @@ const Dte = () =>{
 							style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
@@ -796,7 +797,7 @@ const Dte = () =>{
 							style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
@@ -856,7 +857,7 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		height:'5%',
 		width:'100%',
-		backgroundColor:'#f06f17',
+		backgroundColor:colorPalette.color,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -945,8 +946,8 @@ const styles = StyleSheet.create({
 		marginTop:5,
     flexDirection:'row',
     backgroundColor:'white',
-    borderBottomColor:'#f06f17',
-    borderTopColor:'#f06f17',
+    borderBottomColor:colorPalette.color,
+    borderTopColor:colorPalette.color,
     borderBottomWidth:1,
     borderTopWidth:1,
     justifyContent:'center',

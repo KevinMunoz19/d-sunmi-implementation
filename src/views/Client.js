@@ -17,8 +17,11 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import useApi from '../utils/useApi';
 import {Actions} from 'react-native-router-flux';
 import IosHeader from '../components/IosHeader';
+import colorPalette from '../utils/colors';
+
 
 const Client = ({id,client,action,onSelect}) =>{
+	// const {Colors} = '../utils/colors';
 	const {inputs,setInputs, handleInputChange, handleSubmit} = useClientForm();
 	const {validateNit, getRequestor, getInfo} = useApi();
 	const [nit,setNit] = useState();
@@ -47,6 +50,8 @@ const Client = ({id,client,action,onSelect}) =>{
 		}else if (false){
 			handleInputChange('nit',nit);
 		}
+
+
 	}, [])
 
 	const changeNit = (nit) =>{
@@ -107,7 +112,7 @@ const Client = ({id,client,action,onSelect}) =>{
 						alignItems:'center'
 					}}>
 						<View style={{
-							backgroundColor:'rgb(234, 103, 46)',
+							backgroundColor:colorPalette.rgbColor,
 							width:'50%',
 							height:'50%',
 							justifyContent:'center',
@@ -177,7 +182,7 @@ const Client = ({id,client,action,onSelect}) =>{
 					}
 					</View>
 					{(loading)&&(
-						<ActivityIndicator visible={false} size='large' color='#f06f17'/>
+						<ActivityIndicator visible={false} size='large' color={colorPalette.color}/>
 					)}
 					<View style={styles.inputContainer}>
 						<Text>Nombre</Text>
@@ -239,7 +244,7 @@ const Client = ({id,client,action,onSelect}) =>{
 						<TouchableOpacity onPress={()=>handleSubmit({action:'edit'})} style={styles.actionButton}>
 							<Icon
 								name="edit"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
@@ -261,7 +266,7 @@ const Client = ({id,client,action,onSelect}) =>{
 						<TouchableOpacity onPress={()=>handleSubmit({action:'create',onSelect:onSelect})} style={styles.actionButton}>
 							<Icon
 								name="add"
-								color="#f06f17"
+								color={colorPalette.color}
 								size={50}
 								style={styles.icon}
 							/>
@@ -293,8 +298,8 @@ const styles = StyleSheet.create({
 		marginTop:5,
     flexDirection:'row',
     backgroundColor:'white',
-    borderBottomColor:'#f06f17',
-    borderTopColor:'#f06f17',
+    borderBottomColor:colorPalette.color,
+    borderTopColor:colorPalette.color,
     borderBottomWidth:1,
     borderTopWidth:1,
     justifyContent:'center',

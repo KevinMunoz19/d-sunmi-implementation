@@ -26,13 +26,17 @@ const Welcome = () => {
 		getUser((users)=>{
             if(users == null){
                 Actions.login();
-            }else if(users.contact_name == null){
-                setLoading(false);
-            }else if(users.confirm_contract == null){
-                Actions.contract();
-            }else{
-                Actions.home();
-            }
+						}else {
+							Actions.home();
+						}
+            // }else if(users.contact_name == null){
+            //     setLoading(false);
+            // }else if(users.confirm_contract == null){
+            //     Actions.contract();
+            // }else{
+                // Actions.home();
+            // }
+
         });
 	});
 

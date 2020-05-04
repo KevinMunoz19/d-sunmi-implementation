@@ -17,6 +17,7 @@ import ProductBox from '../components/ProductBox';
 import useProduct from '../utils/useProduct';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import IosHeader from '../components/IosHeader';
+import colorPalette from '../utils/colors';
 
 const Products = (props) =>{
 
@@ -68,7 +69,7 @@ const Products = (props) =>{
           <TouchableOpacity onPress={()=>handleSubmit({action:'create',onSelect:onSelect})} style={styles.createButton}>
             <Icon
               name="add-circle"
-              color="rgb(234, 103, 46)"
+              color={colorPalette.rgbColor}
               size={50}
               style={styles.icon}
             />
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   textHeaderContainer:{
     width:'50%',
     height:'50%',
-    backgroundColor:'rgb(234, 103, 46)',
+    backgroundColor:colorPalette.rgbColor,
     alignItems:'center',
     justifyContent:'center'
   },
