@@ -11,6 +11,7 @@ import {
   } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import colorPalette from '../utils/colors';
 
 const DteOptions = ({
     isVisible,
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     sectionTouch:{
         // marginLeft:'20%',
         marginTop:'6%',
-        backgroundColor:'rgba(234, 103, 46, 0.5)',
+        backgroundColor:colorPalette.homeButtons,
         width:'100%',
         // width:'60%',
         height:'12%',

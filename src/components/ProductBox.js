@@ -14,6 +14,7 @@ import {
 import {Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import InputModal from './InputModal.component.js';
+import colorPalette from '../utils/colors';
 
 const ProductBox = (props) =>{
 
@@ -116,7 +117,7 @@ const ProductBox = (props) =>{
                 <TouchableOpacity onPress={()=>onAction(product)} style={styles.actionColumn}>
                     <Icon
                         name="edit"
-                        color="rgb(234, 103, 46)"
+                        color={colorPalette.rgbColor}
                         size={50}
                         style={styles.icon}
 				    />
@@ -126,7 +127,7 @@ const ProductBox = (props) =>{
                 <TouchableOpacity onPress={()=>onProductSelect()} style={styles.actionColumn}>
                     <Icon
                         name="check"
-                        color="rgb(234, 103, 46)"
+                        color={colorPalette.rgbColor}
                         size={50}
                         style={styles.icon}
 				    />
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // padding:5,
         borderTopWidth:1,
-        borderTopColor:'rgb(234, 103, 46)',
+        borderTopColor:colorPalette.rgbColor,
         marginTop:10,
         alignItems: 'center'
     },

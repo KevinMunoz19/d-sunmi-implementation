@@ -28,6 +28,8 @@ import { validateEmail } from '../utils/emailValidator';
 import DialogInput from 'react-native-dialog-input';
 
 import fb from 'rn-fetch-blob'
+import colorPalette from '../utils/colors';
+
 const printer = NativeModules.PrintModule;
 
 const DteBox = ({dte,setPdfSource}) =>{
@@ -366,7 +368,7 @@ const DteBox = ({dte,setPdfSource}) =>{
                     style={styles.icon}
                 />
                 {(loading)&&(
-                    <ActivityIndicator visible={false} size='large' color='#f06f17'/>
+                    <ActivityIndicator visible={false} size='large' color={colorPalette.color}/>
                 )}
             </TouchableOpacity>
         </View>
@@ -382,7 +384,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // padding:5,
         borderTopWidth:1,
-        borderTopColor:'rgb(234, 103, 46)',
+        borderTopColor:colorPalette.rgbColor,
         marginTop:10,
         alignItems: 'center'
     },
