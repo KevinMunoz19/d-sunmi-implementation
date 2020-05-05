@@ -574,7 +574,7 @@ const Dte = () =>{
 								radio_props={radioIVA}
 								formHorizontal={true}
 								initial={0}
-								buttonColor={'#f06f17'}
+								buttonColor={'#26A657'}
 								onPress={(value) => {setIva(value)}}
 							/> */}
 						{/* <TextInput
@@ -852,12 +852,15 @@ const styles = StyleSheet.create({
 	fontSize: {
 		fontSize: 10
 	},
+
 	sectionHeader:{
 		flex: 1,
 		flexDirection:'row',
 		height:'5%',
 		width:'100%',
-		backgroundColor:colorPalette.color,
+		// backgroundColor:'#26A657',
+		// backgroundColor:'#26A657',
+		backgroundColor:colorPalette.rgbColor,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},

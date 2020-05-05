@@ -10,6 +10,7 @@ import {
 	ActivityIndicator
 }	from 'react-native';
 import useUser from './../utils/useUser';
+import colorPalette from '../utils/colors';
 
 const Init = () => {
   const [loading,setLoading] = useState(true);
@@ -34,7 +35,7 @@ const Init = () => {
     <View style={styles.container}>
     	{loading && (
 	      <View style={styles.loaderContainer}>
-	        <ActivityIndicator visible={false} size='large' color='#f06f17'/>
+	        <ActivityIndicator visible={false} size='large' color={colorPalette.color}/>
 	        <Text>Cargando...</Text>
 	      </View>
       )}
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   sendButton:{
 		//backgroundColor:'rgba(119,211,83,0.5)',
-		backgroundColor:'rgba(234, 103, 46, 0.5)',
+		backgroundColor:colorPalette.homeButtons,
 		width:'100%',
 		height:'20%',
     textAlign: 'center',

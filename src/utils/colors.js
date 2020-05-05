@@ -1,11 +1,11 @@
 const Colors = {
 
 
-  // // Docutec Palette
-  // homeButtons: 'rgba(234, 103, 46, 0.5)',
-  // rgbColor: 'rgb(234, 103, 46)',
-  // hexColor: '#f06f17',
-  // color:'#f06f17',
+    // // Docutec Palette
+    // homeButtons: 'rgba(234, 103, 46, 0.5)',
+    // rgbColor: 'rgb(234, 103, 46)',
+    // hexColor: '#f06f17',
+    // color:'#f06f17',
 
 
 

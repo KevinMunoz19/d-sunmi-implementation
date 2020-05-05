@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet }	from 'react-native';
+import colorPalette from '../utils/colors';
 
 const SectionDivider = ({sectionName,width}) => {
     return(
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection:'row',
 		height:'5%',
-        backgroundColor:'rgb(234, 103, 46)',
+    backgroundColor:colorPalette.rgbColor,
 		justifyContent: 'center',
 		alignItems: 'center'
     },
