@@ -16,7 +16,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {Scene, Router} from 'react-native-router-flux';
+import { Scene, Router, Stack, Tabs } from 'react-native-router-flux';
 // import views
 import Init from './src/views/Init';
 import Welcome from './src/views/Welcome';
@@ -37,28 +37,45 @@ import InfoUser from './src/views/infoUser';
 const App = () => {
   return (
     <Router>
-    	<Scene key="root">
-        <Scene key="init" component={Init} hideNavBar={true} title="Inicio"/>
-        <Scene key="welcome" component={Welcome} hideNavBar={true} title="Bienvenida"/>
-        <Scene key="contractMessage" component={ContractMessage} hideNavBar={true} title="Contrato verificado"/>
-        <Scene key="dte" component={Dte} hideNavBar={true} title="Dte"/>
-        <Scene key="firstTimeForm" component={FirstTimeForm} hideNavBar={true} title="Formulario"/>
-        <Scene key="contract" component={Contract} hideNavBar={true} title="Contrato"/>
-        <Scene key="home"  component={Home} hideNavBar={true} title="Home"/>
-        <Scene key="login" component={Login} hideNavBar={true} title="Login"/>
-        <Scene key="clients" component={Clients} hideNavBar={true} title="Client List"/>
-        <Scene key="client" component={Client} hideNavBar={true} title="Client"/>
-        <Scene key="products" component={Products} hideNavBar={true} title="Product List"/>
-        <Scene key="product" component={Product} hideNavBar={true} title="Product"/>
-        <Scene key="dtes" component={Dtes} hideNavBar={true} title="Dtes"/>
-        <Scene key="dtessummary" component={DtesSummary} hideNavBar={true} title="DtesSummary"/>
-        <Scene key="infouser" component={InfoUser} hideNavBar={true} title="InfoUser"/>
+    <Stack>
+    <Scene key="init" component={Init} hideNavBar={true} title="Inicio"/>
+    <Scene key="welcome" component={Welcome} hideNavBar={true} title="Bienvenida"/>
+    <Scene key="contractMessage" component={ContractMessage} hideNavBar={true} title="Contrato verificado"/>
+
+    <Scene key="firstTimeForm" component={FirstTimeForm} hideNavBar={true} title="Formulario"/>
+    <Scene key="contract" component={Contract} hideNavBar={true} title="Contrato"/>
+    <Scene key="client" component={Client} hideNavBar={true} title="Client"/>
+    <Scene key="product" component={Product} hideNavBar={true} title="Product"/>
+    <Scene key="dtessummary" component={DtesSummary} hideNavBar={true} title="DtesSummary"/>
+    <Scene key="infouser" component={InfoUser} hideNavBar={true} title="InfoUser"/>
+
+    <Scene key="login" component={Login} hideNavBar={true} title="Login"/>
+    	<Scene key="root" hideNavBar>
+        <Scene key='Tabbar' tabs={true} tabBarStyle={styles.tabBar} default='Main' tabBarPosition="bottom">
+          <Scene key="home"  component={Home} hideNavBar={true} title="Home"/>
+
+          <Scene key="dte" component={Dte} hideNavBar={true} title="Dte"/>
+          <Scene key="clients" component={Clients} hideNavBar={true} title="Client List"/>
+
+          <Scene key="products" component={Products} hideNavBar={true} title="Product List"/>
+
+          <Scene key="dtes" component={Dtes} hideNavBar={true} title="Dtes"/>
+
+        </Scene>
     	</Scene>
+    </Stack>
     </Router>
   );
 };
 
 const styles = StyleSheet.create({
+  tabBar: {
+    height: 50,
+    borderTopColor: 'darkgrey',
+    borderTopWidth: 1,
+    opacity: 0.98,
+    justifyContent:'space-between'
+  }
   // scrollView: {
   //   backgroundColor: Colors.lighter,
   // },

@@ -658,6 +658,8 @@ const Dte = () =>{
 						<View style={{alignItems:'center'}}>
 
 
+						{/*
+
 						{!visibleUniqueProduct &&
 						<TouchableOpacity
 							style={styles.addProductContainer}
@@ -718,6 +720,8 @@ const Dte = () =>{
 								<Text >Agregar</Text>
 							</TouchableOpacity>
 						}
+
+						*/}
 
 
 

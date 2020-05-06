@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\Digifact003\\github\\dsi\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\492266ee8bb5b4c036723b105eaa091a\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\cca94ecd01c2e5d58f2c50070d5ef872\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\kevin\\.gradle\\caches\\transforms-2\\files-2.1\\da036d8bfee70a6a1c4357fe57bcdc4d\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Digifact003\\.gradle\\caches\\transforms-2\\files-2.1\\bce2ee9d2cffcd0452ebec1d5520ec2b\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

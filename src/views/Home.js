@@ -91,7 +91,7 @@ const Home = () => {
       <View style={styles.header}>
         <Image
           style={styles.logo}
-          source={require('../img/docutec_logo.jpeg')}
+          source={require('../img/LogoDocutecDigifact3.png')}
         />
         <TouchableOpacity onPress={onMenu}>
           <Icon
@@ -194,7 +194,8 @@ const styles = StyleSheet.create({
   },
   logo:{
     width: '70%',
-    height: '90%'
+    height: '90%',
+    marginLeft: '5%'
     //width: wp('30%'),
     //height: hp('20%'),
   },
