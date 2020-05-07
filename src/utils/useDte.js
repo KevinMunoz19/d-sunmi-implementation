@@ -313,12 +313,14 @@ const useDte = (props) => {
       var taxAmount = (iva * 0.01) * taxableAmount;
       var totalItemAmount = product.price * product.quantity;
 
+      var productType = product.type.trim();
+
       var productName = product.name;
       totalAmount += totalItemAmount;
       totalTaxAmount += taxAmount;
       itemsString = itemsString+
         `
-        <dte:Item NumeroLinea="${i+1}" BienOServicio="B">
+        <dte:Item NumeroLinea="${i+1}" BienOServicio="${productType}">
           <dte:Cantidad>${product.quantity}</dte:Cantidad>
           <dte:UnidadMedida>CA</dte:UnidadMedida>
           <dte:Descripcion>${productName.trim()}</dte:Descripcion>

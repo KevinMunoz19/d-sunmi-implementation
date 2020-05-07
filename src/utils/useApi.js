@@ -421,6 +421,171 @@ const useApi = ()=>{
       })
   }
 
+
+  const addProduct = (nit,name,price,type,res,rej)=>{
+
+    console.log("entrada a addProduct");
+
+    if (type == "B") {
+      var fullType = "BIEN";
+    } else {
+      var fullType = "SERVICIO";
+    }
+
+    loginOld({username:null,password:null},()=>{
+      fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+      // fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+        method:'POST',
+        body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                  <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                    <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                    <Transaction>EXEC_STORED_PROC</Transaction>
+                    <Country>GT</Country>
+                    <Entity>000000123456</Entity>
+                    <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                    <UserName>GT.000000123456.MARIESLOSPOSTMAS</UserName>
+                     <Data1>UpsertProductsAndServices</Data1>
+                    <Data2>GT|${nit}|${name}|${price}|0|UNI|5|000|00000|juan|0|0|${fullType}</Data2>
+                    <Data3></Data3>
+                  </RequestTransaction>
+                </soap:Body>
+              </soap:Envelope>`,
+        headers: {
+          'Content-Type': 'text/xml',
+        }
+      }).then(response => response.text())
+      .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+      .then(data => {
+        console.log(data.getElementsByTagName("Result")[0].firstChild.data);
+        if( data.getElementsByTagName("Result")[0].firstChild.data === 'true') {
+          res("Producto agregado con exito");
+        }else{
+          rej('No se pudo agregar el producto');
+        }
+      })
+      .catch(err=>{
+        console.log(err);
+        rej('Error agregando productos')
+        console.log("body sent")
+        console.log(body)
+      })
+    })
+  }
+
+
+  const deleteProduct = (nit,name,res,rej)=>{
+
+    console.log("entrada a deleteProduct");
+
+    loginOld({username:null,password:null},()=>{
+      fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+      // fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+        method:'POST',
+        body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                  <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                    <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                    <Transaction>EXEC_STORED_PROC</Transaction>
+                    <Country>GT</Country>
+                    <Entity>000000123456</Entity>
+                    <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                    <UserName>GT.000000123456.MARIESLOSPOSTMAS</UserName>
+                     <Data1>DeleteProductsAndServices</Data1>
+                    <Data2>GT|${nit}|${name}</Data2>
+                    <Data3></Data3>
+                  </RequestTransaction>
+                </soap:Body>
+              </soap:Envelope>`,
+        headers: {
+          'Content-Type': 'text/xml',
+        }
+      }).then(response => response.text())
+      .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+      .then(data => {
+        console.log(data.getElementsByTagName("Result")[0].firstChild.data);
+        if( data.getElementsByTagName("Result")[0].firstChild.data === 'true') {
+          res("Producto borrado con exito");
+        }else{
+          rej('No se pudo borrar el producto');
+        }
+      })
+      .catch(err=>{
+        console.log(err);
+        rej('Error borrando productos')
+        console.log("body sent")
+        console.log(body)
+      })
+    })
+  }
+
+  const getAllProducts = (nit,name,price,type,rej)=>{
+
+    console.log("entrada a getAllProducts");
+
+    loginOld({username:null,password:null},()=>{
+      fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+      // fetch(`https://felgttestaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+        method:'POST',
+        body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                  <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                    <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                    <Transaction>EXEC_STORED_PROC</Transaction>
+                    <Country>GT</Country>
+                    <Entity>000000123456</Entity>
+                    <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                    <UserName>GT.000000123456.MARIESLOSPOSTMAS</UserName>
+                    <Data1>GetAllProductsAndServices</Data1>
+                    <Data2>GT|${nit}</Data2>
+                    <Data3></Data3>
+                  </RequestTransaction>
+                </soap:Body>
+              </soap:Envelope>`,
+        headers: {
+          'Content-Type': 'text/xml',
+        }
+      }).then(response => response.text())
+      .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+      .then(data => {
+        if( data.getElementsByTagName("ResponseData1")[0].firstChild.data > 0) {
+          //res("Se Encontraron Productos Registrados");
+          var nombres = '';
+          var precios = '';
+          var tipos = '';
+          let x = data.getElementsByTagName("T");
+
+          for (i = 0; i < x.length; i++) {
+            let nom = x[i].getElementsByTagName("D")[0].childNodes[0].nodeValue;
+            let pre = x[i].getElementsByTagName("LP")[0].childNodes[0].nodeValue;
+            let tip = x[i].getElementsByTagName("U")[0].childNodes[0].nodeValue;
+            nombres = nombres+`${nom},`;
+            precios = precios+`${pre},`;
+            tipos = tipos+`${tip},`;
+          }
+          console.log("nombres")
+          console.log(nombres);
+          console.log("tipos")
+          console.log(tipos);
+          console.log("precios")
+          console.log(precios);
+
+          name(nombres.substring(0,nombres.length -1));
+          type(tipos.substring(0,tipos.length -1));
+          price(precios.substring(0,precios.length -1));
+
+        }else{
+          // rej('No se encuentran productos registrados');
+        }
+      })
+      .catch(err=>{
+
+        rej(500);
+
+      })
+    })
+  }
+
   function PadLeft(value, length) {
 		return (value.toString().length < length) ? PadLeft("0" + value, length) :
 		value;
@@ -437,6 +602,9 @@ const useApi = ()=>{
    cancelBill,
    getInfo,
    sendemailBill,
+   addProduct,
+   deleteProduct,
+   getAllProducts,
 	};
 }
 

@@ -142,8 +142,7 @@ const Dte = () =>{
 			setNumEstablecimiento(0);
 			setUser(userInfo);
 			setNitTemporal(userInfo.string_nit.replace(/0+(?!$)/,''));
-			console.log("token usuario")
-			console.log(userInfo.token)
+
 		})
 	},[])
 
@@ -270,10 +269,11 @@ const Dte = () =>{
 		// 	}
 		// });
 
+		//
+		// console.log("numero de establecimiento seleccionado");
+		// console.log(estNumber);
+		// console.log(typeof estNumber);
 
-		console.log("numero de establecimiento seleccionado");
-		console.log(estNumber);
-		console.log(typeof estNumber);
 	}
 
 	const onUniqueProduct = ()=> {
@@ -281,27 +281,26 @@ const Dte = () =>{
 		setVisibleUniqueProduct(true);
 	}
 
-	const onUniqueProductAdd = ()=> {
-		console.log("Entrada a onUniqueProductAdd")
-		setVisibleUniqueProduct(false);
-		addUP();
-	}
-
-	function addUP() {
-		if (cantidadUniqueProduct <= 0.0 || precioUniqueProduct <= 0.0 || nombreUniqueProduct.trim() == ""){
-			Alert.alert('Verifica los datos! Todos los datos son requeridos');
-		} else {
-			var uniqueProduct = { price: precioUniqueProduct, code: "uniqueproduct", name: nombreUniqueProduct, id: 150, quantity: cantidadUniqueProduct };
-			console.log("Precio DB");
-			console.log(uniqueProduct);
-			setProducts([...products,uniqueProduct]);
-		}
-
-		setCantidadUniqueProduct(0);
-		setPrecioUniqueProduct(0);
-		setNombreUniqueProduct("");
-
-	}
+	// const onUniqueProductAdd = ()=> {
+	// 	console.log("Entrada a onUniqueProductAdd")
+	// 	setVisibleUniqueProduct(false);
+	// 	addUP();
+	// }
+	//
+	// function addUP() {
+	// 	if (cantidadUniqueProduct <= 0.0 || precioUniqueProduct <= 0.0 || nombreUniqueProduct.trim() == ""){
+	// 		Alert.alert('Verifica los datos! Todos los datos son requeridos');
+	// 	} else {
+	// 		var uniqueProduct = { price: precioUniqueProduct, code: "uniqueproduct", name: nombreUniqueProduct, id: 150, quantity: cantidadUniqueProduct };
+	// 		console.log("Precio DB");
+	// 		console.log(uniqueProduct);
+	// 		setProducts([...products,uniqueProduct]);
+	// 	}
+	//
+	// 	setCantidadUniqueProduct(0);
+	// 	setPrecioUniqueProduct(0);
+	// 	setNombreUniqueProduct("");
+	// }
 
 	const onProductRemove = (productToRemove)=>{
 		setProducts(products.filter(product=> (product.id != productToRemove.id && product.quantity != productToRemove.quantity)));

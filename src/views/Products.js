@@ -19,11 +19,25 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import IosHeader from '../components/IosHeader';
 import colorPalette from '../utils/colors';
 
+
+import useApi from '../utils/useApi';
+import useUser from '../utils/useUser';
+
 const Products = (props) =>{
 
   const [productList,setProductList] = useState([]);
-  const {select} = DB();
+  const {select,insert} = DB();
   const {action,onSelect} = props;
+
+	const {getUser} = useUser();
+	const [user,setUser] = useState();
+	const {getAllProducts} = useApi();
+	const [nitTemporal,setNitTemporal] = useState('');
+
+const [nombresString,setNombresString] = useState('');
+const [preciosString,setPreciosString] = useState('');
+const [tiposString,setTiposString] = useState('');
+
 
 
   useEffect(()=>{
@@ -33,9 +47,77 @@ const Products = (props) =>{
     })
 	},[])
 
+	useEffect(()=>{
+		getUser((userInfo)=>{
+			setUser(userInfo);
+			setNitTemporal(userInfo.string_nit);
+		})
+	},[])
+
+	useEffect(()=>{
+		getAllProducts(nitTemporal, (name)=>{
+			console.log("nombres")
+			console.log(name)
+			setNombresString(name);
+		},(pre)=>{
+			console.log("precios")
+			console.log(pre)
+			setPreciosString(pre);
+		},
+		(ti)=>{
+			console.log("tipos")
+			console.log(ti)
+			setTiposString(ti);
+		},
+		(err)=>{
+			if(err==200){
+				Alert.alert('Error de conexion en obtener productos');
+			}else{
+				Alert.alert(err);
+			}
+		});
+
+	},[nitTemporal])
+
   const handleSubmit = (action)=>{
     Actions.product({action:'create'});
   }
+
+
+	const refreshList = () => {
+		console.log("entrada a refreshList");
+
+		var nameArray = nombresString.split(',')
+		var priceArray = preciosString.split(',')
+		var typeArray = tiposString.split(',')
+
+		var nameTemp = nameArray[0];
+		var priceTemp = parseFloat(priceArray[0].toString());
+		var typeTemp = typeArray[0];
+
+		console.log("nombre")
+		console.log(typeof nameTemp)
+		console.log(nameTemp)
+		console.log("precio")
+		console.log(typeof priceTemp)
+		console.log(priceTemp)
+		console.log("tipo")
+		console.log(typeof typeTemp)
+		console.log(typeTemp)
+
+		var query =`INSERT INTO product(name,code,price,type)
+		VALUES(?,?,?,?)`;
+    insert(query,[nameTemp,'nlkdnsa',priceTemp,typeTemp],(result)=>{
+      console.log('Actualizacion de Productos Exitosa');
+    },(err)=>{
+      console.log('ocurrio un error actualizando los productos', err);
+    })
+
+
+	}
+
+
+
 	return(
   	<View style={styles.container}>
 	    {(onSelect==null) && (
@@ -64,6 +146,23 @@ const Products = (props) =>{
           )}
         </ScrollView>
       </View>
+
+
+
+			<View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={refreshList} style={styles.createButton}>
+            <Icon
+              name="restore"
+              color={colorPalette.rgbColor}
+              size={50}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+      </View>
+
+
+
+
       <View style={styles.buttonContainer}>
         {(action == 'manage') && (
           <TouchableOpacity onPress={()=>handleSubmit({action:'create',onSelect:onSelect})} style={styles.createButton}>

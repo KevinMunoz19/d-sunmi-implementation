@@ -1496,6 +1496,7 @@ drawable src_img_fel
 drawable src_img_homebackground
 drawable src_img_initbackground
 drawable src_img_logo
+drawable src_img_logoddnew
 drawable src_img_logodocutecdigifact3
 drawable test_custom_background
 drawable tooltip_frame_dark
