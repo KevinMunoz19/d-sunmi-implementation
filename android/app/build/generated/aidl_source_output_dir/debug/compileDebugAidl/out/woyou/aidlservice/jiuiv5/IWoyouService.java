@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\Users\\Digifact003\\github\\dsi\\android\\app\\src\\main\\aidl\\woyou\\aidlservice\\jiuiv5\\IWoyouService.aidl
+ * Original file: C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\src\\main\\aidl\\woyou\\aidlservice\\jiuiv5\\IWoyouService.aidl
  */
 package woyou.aidlservice.jiuiv5;
 public interface IWoyouService extends android.os.IInterface

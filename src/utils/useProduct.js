@@ -18,25 +18,27 @@ const useProduct = (callback) => {
 		console.warn(inputs)
 		if (inputs.name &&
 			inputs.code &&
-			inputs.price
+			inputs.price &&
+			inputs.type
 		) {
 			var fields = [
 				inputs.name,
 				inputs.code,
-				inputs.price
+				inputs.price,
+				inputs.type
 			]
 			var query =``;
 			var messageVerb='';
 			if(action == 'create'){
 				messageVerb='CREADO';
 				query = `
-				INSERT INTO product(name,code,price)
-				VALUES(?,?,?)
+				INSERT INTO product(name,code,price,type)
+				VALUES(?,?,?,?)
 				`;
 			}else if (action == 'edit'){
 				messageVerb='Actualizado';
 				query =`
-					UPDATE product set name=?,code=?,price=?
+					UPDATE product set name=?,code=?,price=?,type=?
 					WHERE id = ?;
 				`;
 				fields.push(inputs.id);
@@ -56,7 +58,7 @@ const useProduct = (callback) => {
 
 
 			if(action == 'unique'){
-				var uniqueProduct = { price: inputs.price, code: "uniqueproduct", name: inputs.name, id: 150, quantity: inputs.quantity };
+				var uniqueProduct = { price: inputs.price, code: "uniqueproduct", name: inputs.name, id: 150, quantity: inputs.quantity, type: inputs.type };
 				onSelect(uniqueProduct);
 			} else {
 

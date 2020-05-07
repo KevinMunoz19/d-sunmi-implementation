@@ -91,7 +91,7 @@ const Home = () => {
       <View style={styles.header}>
         <Image
           style={styles.logo}
-          source={require('../img/LogoDocutecDigifact3.png')}
+          source={require('../img/logoDDNew.png')}
         />
         <TouchableOpacity onPress={onMenu}>
           <Icon

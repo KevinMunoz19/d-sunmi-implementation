@@ -10,7 +10,8 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 	ImageBackground,
-	BackHandler
+	BackHandler,
+	Picker
 }	from 'react-native';
 
 import useProduct from '../utils/useProduct'
@@ -32,7 +33,7 @@ const Product = ({id,product,action,onSelect}) =>{
 		console.log(action);
 		if(action!='create'){
 			console.warn(product);
-			setInputs({name:product.name,code:product.code,price:product.price,id:product.id});
+			setInputs({name:product.name,code:product.code,price:product.price,id:product.id,type:product.type});
 		}
 		if(onSelect!=null)handleInputChange('quantity',1);
 		handleInputChange('code',(Math.random()*100000).toFixed(0));
@@ -89,6 +90,35 @@ const Product = ({id,product,action,onSelect}) =>{
 						keyboardType = 'decimal-pad'
 					/>
 				</View>
+
+
+
+
+<View style={styles.inputContainer}>
+<Text>Tipo</Text>
+
+
+					<View style={[styles.inputContainerPicker, styles.inputPicker]}>
+						<Picker
+							selectedValue={inputs.type}
+							style={styles.selectInputPicker}
+							placeholder="Tipo"
+							onValueChange={(itemValue, itemIndex) =>
+								handleInputChange('type',itemValue)
+							}
+						>
+							<Picker.Item label="Tipo" value={null} disabled={true} />
+							<Picker.Item label="Bien" value="B" />
+							<Picker.Item label="Servicio" value="S" />
+
+						</Picker>
+					</View>
+
+
+</View>
+
+
+
 				{(onSelect!=null) &&(
 					<View style={styles.inputContainer}>
 						<Text>Cantidad</Text>
@@ -153,6 +183,16 @@ const Product = ({id,product,action,onSelect}) =>{
 }
 
 const styles = StyleSheet.create({
+	inputContainerPicker:{
+    flex: 1,
+  },
+	inputPicker: {
+		borderBottomColor:'#828B95',
+		borderBottomWidth:1
+  },
+  selectInputPicker: {
+    fontSize: 10
+  },
     inputContainer:{
 		paddingTop:'4%',
 		paddingLeft:'9%',
