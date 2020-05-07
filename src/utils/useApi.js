@@ -586,6 +586,52 @@ const useApi = ()=>{
     })
   }
 
+
+
+  const forgotPassword = (username,res,rej)=>{
+    console.log("entrada a forgotPassword");
+    loginOld({username:null,password:null},()=>{
+      fetch(`https://felgtaws.digifact.com.gt/mx.com.fact.wsfront/factwsfront.asmx`,{
+        method:'POST',
+        body:`<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                  <RequestTransaction xmlns="http://www.fact.com.mx/schema/ws">
+                    <Requestor>D06A8F37-2D87-43D2-B977-04D503532786</Requestor>
+                    <Transaction>PASSWORD_FORGOT</Transaction>
+                    <Country>GT</Country>
+                    <Entity>000000123456</Entity>
+                    <User>D06A8F37-2D87-43D2-B977-04D503532786</User>
+                    <UserName>${username}</UserName>
+                     <Data1></Data1>
+                    <Data2></Data2>
+                    <Data3></Data3>
+                  </RequestTransaction>
+                </soap:Body>
+              </soap:Envelope>`,
+        headers: {
+          'Content-Type': 'text/xml',
+        }
+      }).then(response => response.text())
+      .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
+      .then(data => {
+        if( data.getElementsByTagName("Result")[0].firstChild.data === 'true') {
+          res("La clave temporal ha sido enviada por correo electronico");
+        }else{
+          rej('Verifique el usuario y nit ingresado');
+        }
+      })
+      .catch(err=>{
+        console.log(err);
+        rej('Error recuperando clave')
+      })
+    })
+  }
+
+
+
+
+
+
   function PadLeft(value, length) {
 		return (value.toString().length < length) ? PadLeft("0" + value, length) :
 		value;
@@ -605,6 +651,7 @@ const useApi = ()=>{
    addProduct,
    deleteProduct,
    getAllProducts,
+   forgotPassword,
 	};
 }
 

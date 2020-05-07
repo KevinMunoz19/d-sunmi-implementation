@@ -59,7 +59,7 @@ const Home = () => {
           <View style={styles.menuHeaderContainer}>
             <Image
               style={styles.menuLogo}
-              source={require('../img/docutec_logo.jpeg')}
+              source={require('../img/logoDDNew.png')}
             />
             <TouchableOpacity style={styles.primaryGray} onPress={()=>{setMenuVisible(false)}}>
               <Icon

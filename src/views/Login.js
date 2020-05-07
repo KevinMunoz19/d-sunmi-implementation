@@ -25,7 +25,7 @@ const Login = () =>{
 	const [username,setUsername] = useState('');
 	const [password,setPassword] = useState('');
 	const {setUser,getUser} = useUser();
-	const {login} = useApi();
+	const {login, forgotPassword} = useApi();
 	const [loading,setLoading] = useState(false);
 	const [vis, setVis] = useState(true);
 
@@ -100,13 +100,33 @@ const Login = () =>{
 	}
 
 
+
+	function tempPassword(){
+
+		if (nit.trim().length > 0 && username.trim().length > 0){
+			var userNameXML = `GT.${PadLeft(nit,12)}.${username}`;
+		} else {
+			Alert.alert('Ingresar Nit y Usuario');
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
 	return(
 		<ScrollView style={{backgroundColor:'white',flex:1}}>
 			<View style={loginStyles.primaryContainer}>
 				<View style={loginStyles.headerContainer}>
 				</View>
 				<View style={loginStyles.imageContainer}>
-					<Image source={require('../img/docutec_logo.jpeg')} style={loginStyles.logo}/>
+					<Image source={require('../img/logoDDNew.png')} style={loginStyles.logo}/>
 				</View>
 				<View style={loginStyles.formContainer}>
 					<View style={loginStyles.inputContainer}>
@@ -217,6 +237,7 @@ const loginStyles = StyleSheet.create({
 		//height:'20%',
 		width: wp('70%'),
 		height: hp('15%'),
+		marginLeft: '5%',
 	},
 	formContainer:{
 		flex:3,
