@@ -108,8 +108,8 @@ const Product = ({id,product,action,onSelect}) =>{
 							}
 						>
 							<Picker.Item label="Tipo" value={null} disabled={true} />
-							<Picker.Item label="Bien" value="B" />
-							<Picker.Item label="Servicio" value="S" />
+							<Picker.Item label="Bien" value="BIEN" />
+							<Picker.Item label="Servicio" value="SERVICIO" />
 
 						</Picker>
 					</View>

@@ -426,10 +426,12 @@ const useApi = ()=>{
 
     console.log("entrada a addProduct");
 
-    if (type == "B") {
+    if (type == "BIEN") {
       var fullType = "BIEN";
-    } else {
+    } else if (type == "SERVICIO") {
       var fullType = "SERVICIO";
+    } else {
+      var fullType = "BIEN";
     }
 
     loginOld({username:null,password:null},()=>{
