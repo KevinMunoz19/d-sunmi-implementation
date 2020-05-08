@@ -306,9 +306,21 @@ const useDte = (props) => {
       var taxShortName = 'CERO';
       var taxCodeNumber = 2;
     }
+
+
+
+
     products.forEach((product,i)=>{
       //buscar tipo de bien o servicio
       // buscar tipos de medidas
+      if (product.type.trim() == "BIEN") {
+        var productTypeLetter = "B"
+      } else if(product.type.trim() == "SERVICIO") {
+        var productTypeLetter = "S"
+      } else {
+        var productTypeLetter = "B"
+      }
+      
       var taxableAmount = iva == 0?(product.price * product.quantity) : (product.price / ((iva * 0.01) + 1)) * product.quantity;
       var taxAmount = (iva * 0.01) * taxableAmount;
       var totalItemAmount = product.price * product.quantity;
@@ -320,7 +332,7 @@ const useDte = (props) => {
       totalTaxAmount += taxAmount;
       itemsString = itemsString+
         `
-        <dte:Item NumeroLinea="${i+1}" BienOServicio="${productType}">
+        <dte:Item NumeroLinea="${i+1}" BienOServicio="${productTypeLetter}">
           <dte:Cantidad>${product.quantity}</dte:Cantidad>
           <dte:UnidadMedida>CA</dte:UnidadMedida>
           <dte:Descripcion>${productName.trim()}</dte:Descripcion>

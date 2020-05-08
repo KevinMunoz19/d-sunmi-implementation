@@ -101,14 +101,14 @@ const Login = () =>{
 
 
 
-	function tempPassword(){
-
-		if (nit.trim().length > 0 && username.trim().length > 0){
-			var userNameXML = `GT.${PadLeft(nit,12)}.${username}`;
-		} else {
-			Alert.alert('Ingresar Nit y Usuario');
-		}
-	}
+	// function tempPassword(){
+	//
+	// 	if (nit.trim().length > 0 && username.trim().length > 0){
+	// 		var userNameXML = `GT.${PadLeft(nit,12)}.${username}`;
+	// 	} else {
+	// 		Alert.alert('Ingresar Nit y Usuario');
+	// 	}
+	// }
 
 
 

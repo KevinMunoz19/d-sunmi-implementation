@@ -459,7 +459,7 @@ const useApi = ()=>{
       }).then(response => response.text())
       .then(str => new DOMParser().parseFromString(str, "text/xml").documentElement)
       .then(data => {
-        console.log(data.getElementsByTagName("Result")[0].firstChild.data);
+
         if( data.getElementsByTagName("Result")[0].firstChild.data === 'true') {
           res("Producto agregado con exito");
         }else{
@@ -469,8 +469,6 @@ const useApi = ()=>{
       .catch(err=>{
         console.log(err);
         rej('Error agregando productos')
-        console.log("body sent")
-        console.log(body)
       })
     })
   }
@@ -560,10 +558,10 @@ const useApi = ()=>{
           for (i = 0; i < x.length; i++) {
             let nom = x[i].getElementsByTagName("D")[0].childNodes[0].nodeValue;
             let pre = x[i].getElementsByTagName("LP")[0].childNodes[0].nodeValue;
-            let tip = x[i].getElementsByTagName("U")[0].childNodes[0].nodeValue;
-            nombres = nombres+`${nom},`;
-            precios = precios+`${pre},`;
-            tipos = tipos+`${tip},`;
+            let tip = x[i].getElementsByTagName("CTG")[0].childNodes[0].nodeValue;
+            nombres = nombres+`${nom}|`;
+            precios = precios+`${pre}|`;
+            tipos = tipos+`${tip}|`;
           }
           console.log("nombres")
           console.log(nombres);

@@ -38,6 +38,8 @@ const [nombresString,setNombresString] = useState('');
 const [preciosString,setPreciosString] = useState('');
 const [tiposString,setTiposString] = useState('');
 
+const [refreshFlag,setRefreshFlag] = useState(false);
+
 
 
   useEffect(()=>{
@@ -45,7 +47,8 @@ const [tiposString,setTiposString] = useState('');
     select(query,[],(products)=>{
       setProductList(products);
     })
-	},[])
+		setRefreshFlag(false);
+	},[refreshFlag])
 
 	useEffect(()=>{
 		getUser((userInfo)=>{
@@ -87,31 +90,46 @@ const [tiposString,setTiposString] = useState('');
 	const refreshList = () => {
 		console.log("entrada a refreshList");
 
-		var nameArray = nombresString.split(',')
-		var priceArray = preciosString.split(',')
-		var typeArray = tiposString.split(',')
-
-		var nameTemp = nameArray[0];
-		var priceTemp = parseFloat(priceArray[0].toString());
-		var typeTemp = typeArray[0];
-
-		console.log("nombre")
-		console.log(typeof nameTemp)
-		console.log(nameTemp)
-		console.log("precio")
-		console.log(typeof priceTemp)
-		console.log(priceTemp)
-		console.log("tipo")
-		console.log(typeof typeTemp)
-		console.log(typeTemp)
-
-		var query =`INSERT INTO product(name,code,price,type)
-		VALUES(?,?,?,?)`;
-    insert(query,[nameTemp,'nlkdnsa',priceTemp,typeTemp],(result)=>{
-      console.log('Actualizacion de Productos Exitosa');
+		var query =`DELETE from product`;
+    insert(query,[],(result)=>{
+      console.log('Tabla de Productos Borrada con Exito');
     },(err)=>{
-      console.log('ocurrio un error actualizando los productos', err);
+      console.log('ocurrio un error borrando los productos', err);
     })
+
+		var nameArray = nombresString.split('|')
+		var priceArray = preciosString.split('|')
+		var typeArray = tiposString.split('|')
+
+
+
+		// console.log("nombre")
+		// console.log(typeof nameTemp)
+		// console.log(nameTemp)
+		// console.log("precio")
+		// console.log(typeof priceTemp)
+		// console.log(priceTemp)
+		// console.log("tipo")
+		// console.log(typeof typeTemp)
+		// console.log(typeTemp)
+
+		for (i = 0; i < nameArray.length; i++) {
+			var nameTemp = nameArray[i];
+			var priceTemp = parseFloat(priceArray[i].toString());
+			var typeTemp = typeArray[i];
+
+			var codeTemp = (Math.random()*100000).toFixed(0);
+
+			var query =`INSERT INTO product(name,code,price,type)
+			VALUES(?,?,?,?)`;
+	    insert(query,[nameTemp,codeTemp,priceTemp,typeTemp],(result)=>{
+	      console.log('Actualizacion de Productos Exitosa');
+	    },(err)=>{
+	      console.log('ocurrio un error actualizando los productos', err);
+	    })
+		}
+
+		setRefreshFlag(true);
 
 
 	}
