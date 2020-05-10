@@ -73,11 +73,7 @@ const [refreshFlag,setRefreshFlag] = useState(false);
 			setTiposString(ti);
 		},
 		(err)=>{
-			if(err==200){
-				Alert.alert('Error de conexion en obtener productos');
-			}else{
-				Alert.alert(err);
-			}
+				Alert.alert(`Error de la peticion obtener productos -> ${err}`);
 		});
 
 	},[nitTemporal])

@@ -175,11 +175,7 @@ const Dte = () =>{
 			setDireccionComercial(dirc.toString())
 		},
 		(err)=>{
-			if(err==200){
-				Alert.alert('Error de conexion');
-			}else{
 				Alert.alert(err);
-			}
 		});
 	},[nitTemporal])
 

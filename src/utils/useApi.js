@@ -415,8 +415,7 @@ const useApi = ()=>{
           }
         })
         .catch(err=>{
-          console.log(err);
-          rej(500);
+          console.log(`getInfo error`,err);
         })
       })
   }
@@ -513,8 +512,7 @@ const useApi = ()=>{
       .catch(err=>{
         console.log(err);
         rej('Error borrando productos')
-        console.log("body sent")
-        console.log(body)
+
       })
     })
   }
@@ -579,8 +577,7 @@ const useApi = ()=>{
         }
       })
       .catch(err=>{
-
-        rej(500);
+        rej(err);
 
       })
     })

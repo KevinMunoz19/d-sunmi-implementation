@@ -126,7 +126,7 @@ const Login = () =>{
 				<View style={loginStyles.headerContainer}>
 				</View>
 				<View style={loginStyles.imageContainer}>
-					<Image source={require('../img/logoDDNew.png')} style={loginStyles.logo}/>
+					<Image source={require('../img/Powered_by.jpg')} style={loginStyles.logo}/>
 				</View>
 				<View style={loginStyles.formContainer}>
 					<View style={loginStyles.inputContainer}>
@@ -201,15 +201,7 @@ const Login = () =>{
 					</TouchableOpacity>
 				</View>
 
-				<View style={loginStyles.headerContainer}>
-					<View style={loginStyles.textHeaderContainer}>
-						<Text style={loginStyles.textHeader}>Powered By</Text>
-					</View>
-				</View>
 
-				<View style={loginStyles.imageContainerSub}>
-					<Image source={require('../img/logo.png')} style={loginStyles.logoSub}/>
-				</View>
 
 
 
