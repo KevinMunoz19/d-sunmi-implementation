@@ -10,8 +10,8 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import com.digifactbeta.BuildConfig;
-import com.digifactbeta.R;
+import com.digifact.BuildConfig;
+import com.digifact.R;
 
 // @react-native-community/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;

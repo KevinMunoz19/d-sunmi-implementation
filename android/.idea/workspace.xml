@@ -41,8 +41,8 @@
     </option>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\Users\kevin\github\d-sunmi-implementation\android\app\releasedigifact.keystore" />
-    <option name="KEY_ALIAS" value="digifact" />
+    <option name="KEY_STORE_PATH" value="C:\Users\Digifact003\github\dsi\android\app\my-release-key.keystore" />
+    <option name="KEY_ALIAS" value="digifactRelease" />
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
@@ -57,7 +57,7 @@
     <property name="DEBUGGABLE_PROCESS" value="com.digifactbeta" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="VS34199B60839" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-03-04T18:32:26.873Z" />
-    <property name="ExportApk.ApkPath" value="C:\Users\kevin\github\d-sunmi-implementation\android\app\release" />
+    <property name="ExportApk.ApkPath" value="C:\Users\Digifact003\github\dsi\android\app\release" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
@@ -65,7 +65,7 @@
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java/com/digifactbeta" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/my-release-key.keystore" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">

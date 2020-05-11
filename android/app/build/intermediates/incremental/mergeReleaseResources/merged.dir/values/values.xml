@@ -808,7 +808,7 @@
     <string name="action_settings">Settings</string>
     <string name="alert_description" translatable="false">Alert</string>
     <string name="anulacion">Anulacion</string>
-    <string name="app_name">Docutec</string>
+    <string name="app_name">Digifact</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string name="catalyst_copy_button" project="catalyst" translatable="false">Copy\n</string>

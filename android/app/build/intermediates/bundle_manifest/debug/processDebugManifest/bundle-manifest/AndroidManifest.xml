@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.digifactbeta"
+    package="com.digifact"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" /> <!-- permisos agregados manual -->
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Required to access Google Play Licensing -->
@@ -30,7 +29,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.digifactbeta.MainApplication"
+        android:name="com.digifact.MainApplication"
         android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -39,11 +38,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
-        <activity android:name="com.digifactbeta.ExampleActivity" />
+        <activity android:name="com.digifact.ExampleActivity" />
         <activity
-            android:name="com.digifactbeta.MainActivity"
+            android:name="com.digifact.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="Docutec"
+            android:label="Digifact"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,7 +65,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "example://gizmos” -->
                 <data
-                    android:host="digifactbeta"
+                    android:host="digifact"
                     android:scheme="app" />
             </intent-filter>
         </activity>
@@ -74,7 +73,7 @@
 
         <provider
             android:name="com.RNFetchBlob.Utils.FileProvider"
-            android:authorities="com.digifactbeta.provider"
+            android:authorities="com.digifact.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -83,7 +82,7 @@
         </provider>
         <provider
             android:name="com.imagepicker.FileProvider"
-            android:authorities="com.digifactbeta.provider"
+            android:authorities="com.digifact.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -92,7 +91,7 @@
         </provider>
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-            android:authorities="com.digifactbeta.lifecycle-process"
+            android:authorities="com.digifact.lifecycle-process"
             android:exported="false"
             android:multiprocess="true" />
     </application>

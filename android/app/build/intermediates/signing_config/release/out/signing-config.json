@@ -1,1 +1,1 @@
-{"mName":"debug","mStoreFile":"C:\\Users\\kevin\\github\\d-sunmi-implementation\\android\\app\\debug.keystore","mStorePassword":"android","mKeyAlias":"androiddebugkey","mKeyPassword":"android","mStoreType":"jks","mV1SigningEnabled":true,"mV2SigningEnabled":true}
+{"mName":"externalOverride","mStoreFile":"C:\\Users\\Digifact003\\github\\dsi\\android\\app\\my-release-key.keystore","mStorePassword":"digifact","mKeyAlias":"digifactRelease","mKeyPassword":"digifact","mStoreType":"jks","mV1SigningEnabled":true,"mV2SigningEnabled":true}

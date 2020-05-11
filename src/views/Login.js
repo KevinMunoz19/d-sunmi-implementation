@@ -101,14 +101,25 @@ const Login = () =>{
 
 
 
-	// function tempPassword(){
-	//
-	// 	if (nit.trim().length > 0 && username.trim().length > 0){
-	// 		var userNameXML = `GT.${PadLeft(nit,12)}.${username}`;
-	// 	} else {
-	// 		Alert.alert('Ingresar Nit y Usuario');
-	// 	}
-	// }
+
+
+	function tempPassword(){
+		function PadLeft(value, length) {
+			return (value.toString().length < length) ? PadLeft("0" + value, length) : value;
+		}
+
+		if (nit.trim().length > 0 && username.trim().length > 0){
+			var userNameXML = `GT.${PadLeft(nit.trim(),12)}.${username.trim()}`;
+			forgotPassword( userNameXML ,(response)=>{
+				Alert.alert('Su clave temporal ha sio enviada con exito');
+			},
+			(err)=>{
+					Alert.alert(err);
+			});
+		} else {
+			Alert.alert('Ingresar Nit y Usuario');
+		}
+	}
 
 
 
@@ -126,7 +137,7 @@ const Login = () =>{
 				<View style={loginStyles.headerContainer}>
 				</View>
 				<View style={loginStyles.imageContainer}>
-					<Image source={require('../img/Powered_by.jpg')} style={loginStyles.logo}/>
+					<Image source={require('../img/logo.png')} style={loginStyles.logo}/>
 				</View>
 				<View style={loginStyles.formContainer}>
 					<View style={loginStyles.inputContainer}>
@@ -198,6 +209,12 @@ const Login = () =>{
 				<View style={loginStyles.buttonContainer}>
 					<TouchableOpacity style={loginStyles.button} onPress={handlerSend}>
 						<Text style={loginStyles.buttonText}>INICIAR SESION</Text>
+					</TouchableOpacity>
+				</View>
+
+				<View style={loginStyles.buttonContainer}>
+					<TouchableOpacity style={loginStyles.buttonTemp} onPress={tempPassword}>
+						<Text style={loginStyles.buttonTextTemp}>RECUPERAR CONTRASEÑA</Text>
 					</TouchableOpacity>
 				</View>
 
@@ -286,6 +303,18 @@ const loginStyles = StyleSheet.create({
 	buttonText:{
 		color:'white',
 		fontSize:20,
+	},buttonTemp:{
+		width:'50%',
+		height:'90%',
+		// width:'60%',
+		// height:'30%',
+		backgroundColor:'#828B95',
+		alignItems:'center',
+		justifyContent:'center'
+	},
+	buttonTextTemp:{
+		color:'white',
+		fontSize:10,
 	},
 	textHeader:{
     color:'black',

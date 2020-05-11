@@ -59,7 +59,7 @@ const Home = () => {
           <View style={styles.menuHeaderContainer}>
             <Image
               style={styles.menuLogo}
-              source={require('../img/Powered_by.jpg')}
+              source={require('../img/logo.png')}
             />
             <TouchableOpacity style={styles.primaryGray} onPress={()=>{setMenuVisible(false)}}>
               <Icon
@@ -91,7 +91,7 @@ const Home = () => {
       <View style={styles.header}>
         <Image
           style={styles.logo}
-          source={require('../img/Powered_by.jpg')}
+          source={require('../img/logo.png')}
         />
         <TouchableOpacity onPress={onMenu}>
           <Icon
